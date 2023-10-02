@@ -20,3 +20,8 @@ Route::get('/', function () {
 Route::get('/plattegrond', function () {
     return view('plattegrond');
 });
+
+Route::get('/werkplek', function () {
+    return view('werkplek');
+});
+
