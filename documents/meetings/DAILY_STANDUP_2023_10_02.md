@@ -2,6 +2,7 @@
 
 Meeting time: 8 minuten
 Aanwezigen: Seppe, Tom, Matt, Wesley, Nathan, Roel
+Geleid door: Marnik & Sens
 
 ## Verloop
 * 60 second rundown van vorige week
