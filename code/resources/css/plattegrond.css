@@ -1,10 +1,11 @@
 main {
-    background-color: rgb(169,209,142);
+    
     padding:30px;
 }
 
 #svgcontainer {
     margin-left: auto;
     margin-right: auto;
-    width: 855;
+    width: 851; 
+    background-color: rgb(169,209,142);
 }
