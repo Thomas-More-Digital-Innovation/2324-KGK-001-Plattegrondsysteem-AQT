@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>plattegrond</title>
+    <link rel="stylesheet" href="{{ asset('css/plattegrond.css') }}">
 </head>
 <body>
 
@@ -55,6 +56,6 @@
         </div>
         
     </main>
-
+    <script src="{{ asset('js/plattegrond.js') }}"></script>
 </body>
 </html>
