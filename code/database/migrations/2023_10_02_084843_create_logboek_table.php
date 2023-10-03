@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->foreign('userid')
                ->references('id')
-               ->on('user');
+               ->on('users');
 
             $table->foreign('werkplekid')
                ->references('id')
