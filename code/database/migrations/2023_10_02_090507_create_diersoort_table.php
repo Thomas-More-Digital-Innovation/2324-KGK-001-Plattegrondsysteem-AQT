@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('latinname')->nullable(false);
-            $table->binary('foto');
-            $table->binary('file');
+            $table->binary('foto')->nullable(false);
+            $table->binary('file')->nullable(false);
          });
     }
 
