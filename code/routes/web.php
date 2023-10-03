@@ -29,3 +29,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/plattegrond', function () {
+   return view('plattegrond');
+});
+
+Route::get('/nav', function () {
+   return view('nav');
+});
