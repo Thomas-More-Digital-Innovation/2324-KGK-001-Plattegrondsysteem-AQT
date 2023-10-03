@@ -15,18 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('type')->nullable(false);
-            $table->foreignId('dierid')->nullable(false);
-            $table->foreignId('diersoortid')->nullable(false);
-            $table->binary('file')->nullable(false);
+            $table->binary('file')->nullable(true);
             $table->string('icon')->nullable(false);
-
-            $table->foreign('dierid')
-               ->references('id')
-               ->on('dier');
-
-            $table->foreign('diersoortid')
-               ->references('id')
-               ->on('diersoort');
         });
     }
 
