@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Index;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::get('/plattegrond', function () {
 Route::get('/nav', function () {
    return view('nav');
 });
+
+
+Route::get('/index', Index::class);
