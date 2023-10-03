@@ -1,7 +1,59 @@
-body {
-    background-color: black;
+div {
+    width: 120px;
+    background-color: #016064;
 }
 
-h1 {
-    color: hotpink;
+.nav {
+    color: #fff;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
 }
+
+.left {
+    bottom: 0;
+    left: 0;
+}
+
+.right {
+    border-bottom-left-radius: 25px;
+    bottom: 0;
+    right: 0;
+    height: 450px;
+}
+.left li {
+    padding: 40px;
+}
+.right li {
+    padding: 20px;
+}
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.nav li p {
+    text-align: center;
+    margin: auto;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
