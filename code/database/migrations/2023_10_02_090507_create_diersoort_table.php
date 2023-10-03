@@ -15,14 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('latinname')->nullable(false);
-            $table->double('mingroote')->nullable(false);
-            $table->double('maxgroote')->nullable(false);
-            $table->string('herkomst')->nullable(false);
-            $table->double('mintemp')->nullable(false);
-            $table->double('maxtemp')->nullable(false);
-            $table->double('minluchtvochtigheid')->nullable(false);
-            $table->double('maxluchtvochtigheid')->nullable(false);
-            $table->string('bijzonderheden');
             $table->binary('foto');
          });
     }
