@@ -20,6 +20,17 @@ class UserSeeder extends Seeder
          'username' => "jpeeters",
          'email' => "jpeeters@email.com",
          'password' => Hash::make('jpeeters'),
+         'roleid' => "2",
+      ]);
+
+      DB::table('users')->insert([
+         'firstname' => "Admin",
+         'lastname' => "Admin",
+         'username' => "admin",
+         'email' => "admin@email.com",
+         'password' => Hash::make('adminadmin'),
+         'roleid' => "4",
+
       ]);
    }
 }
