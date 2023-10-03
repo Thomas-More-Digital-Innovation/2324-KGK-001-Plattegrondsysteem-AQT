@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('dierid')->nullable(false);
             $table->foreignId('protocoldetailid')->nullable(false);
             $table->foreignId('diersoortid')->nullable(false);
+            $table->primary(['dierid', 'protocoldetailid','diersoortid']);
 
             $table->foreign('dierid')
             ->references('id')
