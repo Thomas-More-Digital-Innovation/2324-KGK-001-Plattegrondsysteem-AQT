@@ -9,7 +9,14 @@ module.exports = {
       "./resources/**/*.vue",
    ],
    theme: {
-      extend: {},
+      extend: {
+         colors: {
+            'nav': {
+               DEFAULT: '#016064',
+               'hover': '#02989d'
+            },
+         }
+      },
    },
    plugins: [forms],
 }

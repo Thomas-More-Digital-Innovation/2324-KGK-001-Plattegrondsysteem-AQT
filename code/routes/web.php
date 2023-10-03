@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   return view('welcome');
 });
 
 
@@ -31,15 +31,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-
-Route::get('/plattegrond', function () {
-   return view('plattegrond');
-});
-
-Route::get('/nav', function () {
-   return view('nav');
-});
-
-
-Route::get('/index', Index::class);
