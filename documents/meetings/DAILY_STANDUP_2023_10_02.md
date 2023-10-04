@@ -1,4 +1,4 @@
-# Daily Standup 3 Oktober 2023 @ 13u00
+# Daily Standup 2 Oktober 2023 @ 13u00
 
 Meeting time: 8 minuten
 Aanwezigen: Seppe, Tom, Matt, Wesley, Nathan, Roel
