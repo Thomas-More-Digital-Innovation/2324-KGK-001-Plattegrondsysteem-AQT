@@ -11,8 +11,18 @@ class werkplekSeeder extends Seeder
     public function run(): void
     {
         DB::table('werkplek')->insert([
-            'name' => 'werkplek 1',
-            'active' => 1,
+            [
+                'name' => 'wp1',
+                'active' => 1,
+            ],
+            [
+                'name' => 'wp2',
+                'active' => 1,
+            ],
+            [
+                'name' => 'wp3',
+                'active' => 1,
+            ],
         ]);
     }
 }
