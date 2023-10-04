@@ -48,4 +48,5 @@ Route::get('werkplek', function () {
     return view('werkplek', ['id' => $id]); // geeft id mee aan de view
 });
 
+
 require __DIR__.'/auth.php';
