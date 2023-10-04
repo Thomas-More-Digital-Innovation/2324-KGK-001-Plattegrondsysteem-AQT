@@ -21,8 +21,8 @@ Route::get('/', function () {
    return view('auth.login');
 });
 
-Route::get('/dierefiche', function(){
-    return view('dierefiche');
+Route::get('/dierfiche', function(){
+    return view('dierfiche');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
