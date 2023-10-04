@@ -33,4 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('werkplek', function () {
+    $id = request('id'); // vraagt id op
+    return view('werkplek', ['id' => $id]); // geeft id mee aan de view
+});
+
 require __DIR__.'/auth.php';
