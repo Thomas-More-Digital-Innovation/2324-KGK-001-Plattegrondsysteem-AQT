@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             InventarisSeeder::class,
             DiersoortSeeder::class, 
             DierSeeder::class,
+            ProtocolDetailSeeder::class
         ]);
     }
 }

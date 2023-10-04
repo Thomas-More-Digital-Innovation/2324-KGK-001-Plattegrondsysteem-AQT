@@ -5,7 +5,7 @@
 </head>
 <body>
    @include('components.nav.nav')
-   <div class="px-40">
+   <div class="pl-40">
       @yield('content')
    </div>
 </body>

@@ -21,6 +21,9 @@ Route::get('/', function () {
    return view('welcome');
 });
 
+Route::get('/dierefiche', function(){
+    return view('dierefiche');
+});
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
