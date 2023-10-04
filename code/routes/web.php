@@ -21,9 +21,11 @@ Route::get('/', function () {
    return view('auth.login');
 });
 
-Route::get('/dierefiche', function(){
-    return view('dierefiche');
+Route::get('dierefiche', function () {
+    $id = request('id'); // Retrieve the 'id' query parameter
+    return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
 });
+
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
@@ -37,5 +39,6 @@ Route::get('werkplek', function () {
     $id = request('id'); // vraagt id op
     return view('werkplek', ['id' => $id]); // geeft id mee aan de view
 });
+
 
 require __DIR__.'/auth.php';
