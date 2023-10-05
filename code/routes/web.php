@@ -22,9 +22,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('dierefiche', function () {
+Route::get('dierfiche', function () {
     $id = request('id'); // Retrieve the 'id' query parameter
-    return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
+    return view('dierfiche', ['id' => $id]); // Pass the 'id' to the view
 });
 
 
