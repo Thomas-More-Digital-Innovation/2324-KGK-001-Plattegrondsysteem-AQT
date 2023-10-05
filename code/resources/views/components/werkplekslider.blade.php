@@ -5,7 +5,7 @@ $clickedName = $id;
 
 $werkplek = DB::table('werkplek')->where('name', $clickedName)->first();
 $werkplekId = $werkplek->id;
-
+    
 $dierSoortList = DB::table('dier')
     ->join('diersoort', 'dier.diersoortid', '=', 'diersoort.id')
     ->where('dier.werkplekid', $werkplekId)
@@ -22,7 +22,7 @@ foreach ($dierSoortList as $dierSoort) {
     echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "'>";
     echo '<h2 class="text-lg font-semibold mb-2">' . $dierSoortName . '</h2>';
     echo '<p class="text-gray-600 mb-2">Latin Name: ' . $dierSoortLatinName . '</p>';
-
+phpinfo();
     $imageResource = imagecreatefromstring($imageData);
 
     if ($imageResource !== false) {
@@ -34,5 +34,3 @@ foreach ($dierSoortList as $dierSoort) {
     echo '</div>';
 }
 echo '</div>';
-
-
