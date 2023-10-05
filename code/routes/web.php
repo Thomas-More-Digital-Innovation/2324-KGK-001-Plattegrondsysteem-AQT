@@ -36,6 +36,8 @@ Route::get('/voedsel', function(){ // voederrichtlijnen pagina 2
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
+Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
+
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::middleware('auth')->group(function () {
