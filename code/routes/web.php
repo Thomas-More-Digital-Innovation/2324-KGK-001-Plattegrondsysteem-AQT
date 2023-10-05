@@ -21,9 +21,12 @@ Route::get('/', function () {
    return view('auth.login');
 });
 
-Route::get('/dierfiche', function(){
-    return view('dierfiche');
+
+Route::get('dierefiche', function () {
+    $id = request('id'); // Retrieve the 'id' query parameter
+    return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
 });
+
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
@@ -32,5 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('werkplek', function () {
+    $id = request('id'); // vraagt id op
+    return view('werkplek', ['id' => $id]); // geeft id mee aan de view
+});
+
 
 require __DIR__.'/auth.php';
