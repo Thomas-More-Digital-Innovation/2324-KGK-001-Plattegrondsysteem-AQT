@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function account(){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
 
@@ -24,5 +24,9 @@ class HomeController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    public function index(){
+        return view('home');
     }
 }

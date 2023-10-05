@@ -28,6 +28,8 @@ Route::get('dierefiche', function () {
 });
 
 
+Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
+
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::middleware('auth')->group(function () {
