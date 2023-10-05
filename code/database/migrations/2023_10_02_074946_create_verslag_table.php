@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('verslag', function (Blueprint $table) {
             $table->id();
-            $table->binary('file')->nullable(false);
+            $table->string('file')->nullable(false);
             $table->foreignId('userid')->nullable(false);
 
             $table->foreign('userid')
