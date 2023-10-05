@@ -14,11 +14,11 @@ class HomeController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
 
-            if($roleID==2){
-                return view('dashboard');
+            if($roleID==4){
+                return view('AdminDashboard');
             }
-            else if($roleID==4){
-                return view('adminDashboard');
+            else if($roleID==2){
+                return view('dashboard');
             }
             else{
                 return redirect()->back();
