@@ -21,6 +21,7 @@ Route::get('/', function () {
    return view('auth.login');
 });
 
+
 Route::get('dierefiche', function () {
     $id = request('id'); // Retrieve the 'id' query parameter
     return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
