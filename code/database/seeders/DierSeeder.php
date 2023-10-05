@@ -10,11 +10,16 @@ class DierSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('dier')->insert([
+        DB::table('dier')->insert([[
             'werkplekid' => 1,
             'diersoortid' => 1,
             'quarantaine' => 0,
-            'inventarisid' => 1,
+            'inventarisid' => 1], [
+            'werkplekid' => 1,
+            'diersoortid' => 1,
+            'quarantaine' => 0,
+            'inventarisid' => 1
+            ]
         ]);
     }
 }
