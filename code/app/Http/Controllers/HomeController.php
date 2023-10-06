@@ -8,6 +8,8 @@ use app\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     public function account(){
@@ -15,7 +17,9 @@ class HomeController extends Controller
             $roleID=Auth()->user()->roleid;
 
             if($roleID==4){
-                return view('AdminDashboard');
+                $users = DB::table('users')->get();
+
+                return view('AdminDashboard', ['users' => $users]);
             }
             else if($roleID==2){
                 return view('dashboard');
