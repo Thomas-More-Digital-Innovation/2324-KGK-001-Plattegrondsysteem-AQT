@@ -17,22 +17,22 @@ class VoedingsrichtlijnenSeeder extends Seeder
          [
             'name' => "Diepvriesvoer",
             'icon' => "ph:snowflake-bold",
-            'color' => '#009FE3',
+            'color' => '009FE3',
          ],
          [
             'name' => "Groenvoer",
             'icon' => "fa-solid:leaf",
-            'color' => '#33A117',
+            'color' => '33A117',
          ],
          [
             'name' => "Fruit",
             'icon' => "fa-solid:apple-alt",
-            'color' => '#EA5353',
+            'color' => 'EA5353',
          ],
          [
             'name' => "Voedseldieren",
             'icon' => "zondicons:bug",
-            'color' => '#EA5353',
+            'color' => 'EA5353',
          ]
       ]);
    }

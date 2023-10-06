@@ -57,5 +57,19 @@ Route::get('werkplek', function () {
     return view('werkplek', ['id' => $id]); // geeft id mee aan de view
 });
 
+Route::get('protocoltype', function() {
+   $id = request('id');
+   $title = request('t');
+   $color = request('c');
+   return view('components.pages.protocollentypehome', ['id' => $id, 'title' => $title, 'color' => $color]);
+});
+
+Route::get('protocolinfo', function() {
+   $id = request('id');
+   $title = request('t');
+   $color = request('c');
+   return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
+});
+
 
 require __DIR__.'/auth.php';
