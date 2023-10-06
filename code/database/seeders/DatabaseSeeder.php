@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
             DierSeeder::class,
             ProtocoltypeSeeder::class,
             ProtocolDetailSeeder::class,
-            DierProtocolSeeder::class
+            DierProtocolSeeder::class,
+            VoedingsrichtlijnenSeeder::class,
+            VoedingstypeSeeder::class
         ]);
     }
 }
