@@ -22,9 +22,6 @@ foreach ($dierSoortList as $dierSoort) {
     echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "'>";
     echo '<h2 class="text-lg font-semibold mb-2">' . $dierSoortName . '</h2>';
     echo '<p class="text-gray-600 mb-2">Latin Name: ' . $dierSoortLatinName . '</p>';
-   echo '<script>console.log("dsada")</script>';
-   print($imagePath);
-   echo '<script>console.log("'.$imagePath.'"")</script>';
     if ($imagePath !== false) {
         echo '<div class="mb-2"><img src="'.$imagePath.'" class="w-full h-auto rounded-lg" alt="' . $dierSoortName . ' Image" /></div>';
     } else {
