@@ -56,27 +56,27 @@ class ProtocolDetailSeeder extends Seeder
          ],
          [
             'name' => 'Buitenkant poetsen',
-            'type' => 'Aquarium',
+            'protocoltypeid' => '2',
             'icon' => 'mdi:cleaning'
          ],
          [
             'name' => 'Plantenmeststoffen toevoegen',
-            'type' => 'Aquarium',
+            'protocoltypeid' => '2',
             'icon' => 'game-icons:plants-and-animals'
          ],
          [
             'name' => 'Diepvriesvoer geven',
-            'type' => 'Aquarium',
+            'protocoltypeid' => '2',
             'icon' => 'arcticons:freezer'
          ],
          [
             'name' => 'Droogvoer geven',
-            'type' => 'Aquarium',
+            'protocoltypeid' => '2',
             'icon' => 'mdi:fish-food'
          ],
          [
             'name' => 'Water verversen',
-            'type' => 'Aquarium',
+            'protocoltypeid' => '2',
             'icon' => 'entypo:water'
          ],
       ]);
