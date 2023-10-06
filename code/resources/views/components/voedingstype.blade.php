@@ -1,11 +1,13 @@
 <?php
 
+$idtrim = trim($id, 'vt');
+
 $voedingstype = DB::table('voedingstype')
-    ->where('voedingstype.voedingsrichtlijnid', "=", 1) //id binnenhalen 
+    ->where('voedingstype.voedingsrichtlijnid', "=", $idtrim) //id binnenhalen 
     ->get();
 
 $voedingsname = DB::table('voedingsrichtlijnen')
-    ->where('id', 1)
+    ->where('id', $idtrim)
     ->first(); // Use first() to get the first (and only) record
 
 echo "<h1 style='background-color: $voedingsname->color'>$voedingsname->name</h1>";
