@@ -16,8 +16,8 @@ class DiersoortSeeder extends Seeder
         DB::table('diersoort')->insert([
             'name' => 'slang',
             'latinname' => 'slangus',
-            'foto' => '../images/koningspython.jpg',
-            'file' => '../images/koningspython.jpg',
+            'foto' => 'images/koningspython.jpg',
+            'file' => 'images/koningspython.jpg',
         ]);
     }
 }
