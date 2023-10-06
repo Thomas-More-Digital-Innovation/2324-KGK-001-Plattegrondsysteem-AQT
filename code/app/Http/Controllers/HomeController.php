@@ -10,19 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function account(){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
 
-            if($roleID==2){
-                return view('dashboard');
+            if($roleID==4){
+                return view('AdminDashboard');
             }
-            else if($roleID==4){
-                return view('adminDashboard');
+            else if($roleID==2){
+                return view('dashboard');
             }
             else{
                 return redirect()->back();
             }
         }
+    }
+
+    public function index(){
+        return view('home');
     }
 }

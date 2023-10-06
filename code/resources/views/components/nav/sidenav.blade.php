@@ -1,7 +1,7 @@
 <nav class="fixed flex bg-nav w-40 h-3/6 top-0 right-0 text-white justify-center rounded-bl-3xl">
    <ul class="flex flex-col list-none grow">
       <li class="flex grow">
-         <a href="#" class="flex grow hover:bg-nav-hover">
+         <a href="{{ route('account') }}" class="flex grow hover:bg-nav-hover">
             <div class="flex flex-col grow justify-center items-center">
                <iconify-icon icon="mdi:account-box" height="70"></iconify-icon>
                Account

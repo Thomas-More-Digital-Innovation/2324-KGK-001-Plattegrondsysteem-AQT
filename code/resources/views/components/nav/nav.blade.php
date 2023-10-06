@@ -17,20 +17,20 @@
          {{-- </a> --}}
       </li>
       <li class="flex grow">
-         {{-- <a href="{{ route('protocollen') }}" class="flex grow hover:bg-nav-hover"> --}}
+         <a href="{{ route('protocollen') }}" class="flex grow hover:bg-nav-hover">
             <div class="flex flex-col grow justify-center items-center">
                <iconify-icon icon="mingcute:paper-line" height="70"></iconify-icon>
                Protocollen
             </div>
-         {{-- </a> --}}
+         </a>
       </li>
       <li class="flex grow">
-         {{-- <a href="{{ route('voederrichtlijnen') }}" class="flex grow hover:bg-nav-hover"> --}}
+         <a href="{{ route('voederrichtlijnen') }}" class="flex grow hover:bg-nav-hover">
             <div class="flex flex-col grow justify-center items-center">
                <iconify-icon icon="icon-park-twotone:circles-and-triangles" height="70"></iconify-icon>
                Voederrichtlijnen
             </div>
-         {{-- </a> --}}
+         </a>
       </li>
       <li class="flex grow">
          {{-- <a href="{{ route('fiche') }}" class="flex grow hover:bg-nav-hover"> --}}

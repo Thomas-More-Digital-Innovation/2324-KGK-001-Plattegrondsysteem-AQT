@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('icon')->nullable(false);
+            $table->string('color')->nullable(false);
         });
     }
 

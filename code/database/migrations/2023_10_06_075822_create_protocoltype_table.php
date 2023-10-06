@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('protocoldetail', function (Blueprint $table) {
+        Schema::create('protocoltype', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->string('type')->nullable(false);
-            $table->binary('file')->nullable(true);
             $table->string('icon')->nullable(false);
+            $table->string('color')->nullable(false);
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('protocoldetail');
+        Schema::dropIfExists('protocoltype');
     }
 };

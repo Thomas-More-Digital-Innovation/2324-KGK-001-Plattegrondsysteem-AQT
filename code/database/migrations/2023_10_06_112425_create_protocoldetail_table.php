@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('diersoort', function (Blueprint $table) {
+        Schema::create('protocoldetail', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->string('latinname')->nullable(false);
-            $table->string('foto')->nullable(false);
-            $table->string('file')->nullable(false);
-         });
+            $table->foreignId('protocoltypeid')->nullable(false);
+            $table->string('file')->nullable(true);
+            $table->string('icon')->nullable(false);
+
+            $table->foreign('protocoltypeid')
+               ->references('id')
+               ->on('protocoltype');
+        });
+        
     }
 
     /**
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('diersoort');
+        Schema::dropIfExists('protocoldetail');
     }
 };

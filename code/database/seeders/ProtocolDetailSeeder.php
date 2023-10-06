@@ -13,43 +13,72 @@ class ProtocolDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('protocoldetail')->insert([
+      DB::table('protocoldetail')->insert([
+         [
             'name' => 'Bodembedding  zeven',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mdi:snake'
-        ]);
-
-        DB::table('protocoldetail')->insert([
+         ],
+         [
             'name' => 'Braamblad bijvullen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'ph:leaf-bold'
-        ]);
-        DB::table('protocoldetail')->insert([
+         ],
+         [
             'name' => 'Diepvriesspiering voederen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'streamline:interface-weather-snow-flake-winter-freeze-snow-freezing-ice-cold-weather-snowflake'
-        
-        ]);
-        DB::table('protocoldetail')->insert([
+         ],
+         [
             'name' => 'Gras bijvullen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mingcute:grass-line'
-        ]);
-        DB::table('protocoldetail')->insert([
+         ],
+         [
             'name' => 'Groenvoer & fruit voederbak bijvullen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'carbon:fruit-bowl'
-        ]);
-        DB::table('protocoldetail')->insert([
+         ],
+         [
             'name' => 'Insecten voederen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mdi:insect'
-        ]);
-        DB::table('protocoldetail')->insert([
+         ],
+         [
             'name' => 'Klimop voederen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mingcute:leaf-3-line'
-
-        ]);
-    }
+         ],
+         [
+            'name' => 'Binnenkant poetsen',
+            'protocoltypeid' => '2',
+            'icon' => 'mdi:cleaning'
+         ],
+         [
+            'name' => 'Buitenkant poetsen',
+            'protocoltypeid' => '2',
+            'icon' => 'mdi:cleaning'
+         ],
+         [
+            'name' => 'Plantenmeststoffen toevoegen',
+            'protocoltypeid' => '2',
+            'icon' => 'game-icons:plants-and-animals'
+         ],
+         [
+            'name' => 'Diepvriesvoer geven',
+            'protocoltypeid' => '2',
+            'icon' => 'arcticons:freezer'
+         ],
+         [
+            'name' => 'Droogvoer geven',
+            'protocoltypeid' => '2',
+            'icon' => 'mdi:fish-food'
+         ],
+         [
+            'name' => 'Water verversen',
+            'protocoltypeid' => '2',
+            'icon' => 'entypo:water'
+         ],
+      ]);
+   }
 }
