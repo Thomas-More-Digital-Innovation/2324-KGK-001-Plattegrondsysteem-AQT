@@ -21,5 +21,12 @@ class DierSeeder extends Seeder
             'inventarisid' => 1
             ]
         ]);
+
+        DB::table('dier')->insert([[
+            'werkplekid' => 1,
+            'diersoortid' => 2,
+            'quarantaine' => 0,
+            'inventarisid' => 2]
+        ]);
     }
 }

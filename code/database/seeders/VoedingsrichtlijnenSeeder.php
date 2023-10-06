@@ -16,19 +16,23 @@ class VoedingsrichtlijnenSeeder extends Seeder
         DB::table('voedingsrichtlijnen')->insert([
          [
             'name' => "Diepvriesvoer",
-            'icon' => "diepvriesvoer.png"
+            'icon' => "ph:snowflake-bold",
+            'color' => '#009FE3',
          ],
          [
             'name' => "Groenvoer",
-            'icon' => "groenvoer.png"
+            'icon' => "fa-solid:leaf",
+            'color' => '#33A117',
          ],
          [
             'name' => "Fruit",
-            'icon' => "fruit.png"
+            'icon' => "fa-solid:apple-alt",
+            'color' => '#EA5353',
          ],
          [
             'name' => "Voedseldieren",
-            'icon' => "voedseldieren.png"
+            'icon' => "zondicons:bug",
+            'color' => '#EA5353',
          ]
       ]);
    }

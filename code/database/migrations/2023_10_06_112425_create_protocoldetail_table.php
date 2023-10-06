@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('voedingsrichtlijnen', function (Blueprint $table) {
+        Schema::create('protocoldetail', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
+            $table->foreignId('protocoltypeid')->nullable(false);
+            $table->string('file')->nullable(true);
             $table->string('icon')->nullable(false);
-            $table->string('color')->nullable(false);
+
+            $table->foreign('protocoltypeid')
+               ->references('id')
+               ->on('protocoltype');
         });
+        
     }
 
     /**
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('voedingsrichtlijnen');
+        Schema::dropIfExists('protocoldetail');
     }
 };

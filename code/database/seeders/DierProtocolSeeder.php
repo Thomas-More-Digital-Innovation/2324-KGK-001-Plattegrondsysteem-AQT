@@ -49,7 +49,37 @@ class DierProtocolSeeder extends Seeder
             'dierid' => '1',
             'protocoldetailid' => '7',
             'diersoortid' => '1'
-         ]
+         ],
+         [
+            'dierid' => '2',
+            'protocoldetailid' => '8',
+            'diersoortid' => '2'
+         ],
+         [
+            'dierid' => '2',
+            'protocoldetailid' => '9',
+            'diersoortid' => '2'
+         ],
+         [
+            'dierid' => '2',
+            'protocoldetailid' => '10',
+            'diersoortid' => '2'
+         ],
+         [
+            'dierid' => '2',
+            'protocoldetailid' => '11',
+            'diersoortid' => '2'
+         ],
+         [
+            'dierid' => '2',
+            'protocoldetailid' => '12',
+            'diersoortid' => '2'
+         ],
+         [
+            'dierid' => '2',
+            'protocoldetailid' => '13',
+            'diersoortid' => '2'
+         ],
       ]);
    }
 }

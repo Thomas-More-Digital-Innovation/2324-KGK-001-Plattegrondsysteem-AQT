@@ -2,9 +2,21 @@
 $currentDate = date('Y-m-d');
 $dayOfWeek = date('l', strtotime($currentDate));
 $count = 0;
-$protocolnames= DB::table('protocoldetail')->get();
-?>
 
+$idtrim = trim($id, 'ds');
+
+$protocolnames = DB::table('protocoldetail')
+    ->join('dierprotocol', 'protocoldetail.id', '=', 'dierprotocol.protocoldetailid')
+    ->join('dier', 'dierprotocol.dierid', '=', 'dier.id')
+    ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
+    ->select('protocoldetail.name')
+    ->where('dierprotocol.diersoortid', '=', $idtrim)
+    ->get();
+
+
+
+    $roleid =Auth()->user()->roleid;
+?>
 
 <div class="flex justify-end h-screen m-5">
     <div class="flex flex-col items-center">
@@ -64,6 +76,9 @@ $protocolnames= DB::table('protocoldetail')->get();
                         rows="2"
                         class="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none focus:shadow-outline"
                         placeholder="Enter your comment"
+                        @if ($roleid !== 4)
+                            readonly
+                        @endif
                     ></textarea>
                 </div>
                 <div class="w-full mt-1">
@@ -82,3 +97,4 @@ $protocolnames= DB::table('protocoldetail')->get();
         </form>
     </div>
 </div>
+
