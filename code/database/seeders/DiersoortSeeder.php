@@ -12,14 +12,14 @@ class DiersoortSeeder extends Seeder
 {
     public function run(): void
     {
-        $imagePath = public_path('images/koningspython.jpg');
-        $imageData = file_get_contents($imagePath);
+        $imagePath = public_path('code/public/css/werkplek.css code/public/images/koningspython.jpg');
+      //   $imageData = file_get_contents($imagePath);
 
         DB::table('diersoort')->insert([
             'name' => 'slang',
             'latinname' => 'slangus',
-            'foto' => $imageData,
-            'file' => $imageData,
+            'foto' => $imagePath,
+            'file' => $imagePath,
         ]);
     }
 }

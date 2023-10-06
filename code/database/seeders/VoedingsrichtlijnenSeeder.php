@@ -14,23 +14,22 @@ class VoedingsrichtlijnenSeeder extends Seeder
     public function run(): void
     {
         DB::table('voedingsrichtlijnen')->insert([
+         [
             'name' => "Diepvriesvoer",
             'icon' => "diepvriesvoer.png"
-        ]);
-
-        DB::table('voedingsrichtlijnen')->insert([
+         ],
+         [
             'name' => "Groenvoer",
             'icon' => "groenvoer.png"
-        ]);
-
-        DB::table('voedingsrichtlijnen')->insert([
+         ],
+         [
             'name' => "Fruit",
             'icon' => "fruit.png"
-        ]);
-
-        DB::table('voedingsrichtlijnen')->insert([
+         ],
+         [
             'name' => "Voedseldieren",
             'icon' => "voedseldieren.png"
-        ]);
-    }
+         ]
+      ]);
+   }
 }
