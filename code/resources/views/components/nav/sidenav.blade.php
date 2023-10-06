@@ -1,3 +1,8 @@
+<?php
+$roleid =Auth()->user()->roleid;
+?>
+
+
 <nav class="fixed flex bg-nav w-40 h-3/6 top-0 right-0 text-white justify-center rounded-bl-3xl">
    <ul class="flex flex-col list-none grow">
       <li class="flex grow">
@@ -16,14 +21,17 @@
             </div>
          </a>
       </li>
-      <li class="flex grow">
+      <?php 
+      if($roleid==4){
+      echo 
+      '<li class="flex grow">
          <a href="#" class="flex grow hover:bg-nav-hover rounded-bl-3xl">
             <div class="flex flex-col grow justify-center items-center">
                <iconify-icon icon="material-symbols:admin-panel-settings-outline-rounded" height="70"></iconify-icon>
                Admin
             </div>
          </a>
-      </li>
+      </li>';}?>
    </ul>
    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       {{ csrf_field() }}
