@@ -16,5 +16,8 @@ class InventarisSeeder extends Seeder
         DB::table('inventaris')->insert([
             'werkplekid' => 1
         ]);
+        DB::table('inventaris')->insert([
+            'werkplekid' => 1
+        ]);
     }
 }
