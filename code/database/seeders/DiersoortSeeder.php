@@ -19,5 +19,11 @@ class DiersoortSeeder extends Seeder
             'foto' => 'images/koningspython.jpg',
             'file' => 'images/koningspython.jpg',
         ]);
+        DB::table('diersoort')->insert([
+            'name' => 'Vis',
+            'latinname' => 'Viezevis',
+            'foto' => $imageData,
+            'file' => $imageData,
+        ]);
     }
 }
