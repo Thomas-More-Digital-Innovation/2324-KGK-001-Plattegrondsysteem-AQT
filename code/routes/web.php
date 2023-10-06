@@ -22,27 +22,29 @@ Route::get('/', function () {
 });
 
 
-Route::get('dierefiche', function () {
+Route::get('dierfiche', function () {
     $id = request('id'); // Retrieve the 'id' query parameter
-    return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
+    return view('dierfiche', ['id' => $id]); // Pass the 'id' to the view
 });
 
 Route::get('protocollen', function () {
-   return view('components.pages.protocollenhome');
-})->name('protocollen');
+    return view('components.pages.protocollenhome');
+ })->name('protocollen');
 
-Route::get('voederrichtlijnen', function(){ // voederrichtlijnen pagina 1
+Route::get('/voederrichtlijnen', function(){ // voederrichtlijnen pagina 1
     return view('voederrichtlijnen');
 })->name('voederrichtlijnen');
 
-Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
+Route::get('/voedsel', function(){ // voederrichtlijnen pagina 2
     $id = request('id');
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
-Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
+Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 
-Route::get('home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
+Route::post('addUser', [HomeController::class, 'addUser']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
