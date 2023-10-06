@@ -13,42 +13,72 @@ class ProtocolDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('protocoldetail')->insert([
+      DB::table('protocoldetail')->insert([
          [
             'name' => 'Bodembedding  zeven',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mdi:snake'
          ],
          [
             'name' => 'Braamblad bijvullen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'ph:leaf-bold'
          ],
          [
             'name' => 'Diepvriesspiering voederen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'streamline:interface-weather-snow-flake-winter-freeze-snow-freezing-ice-cold-weather-snowflake'
          ],
          [
             'name' => 'Gras bijvullen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mingcute:grass-line'
          ],
          [
             'name' => 'Groenvoer & fruit voederbak bijvullen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'carbon:fruit-bowl'
          ],
          [
             'name' => 'Insecten voederen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mdi:insect'
          ],
          [
             'name' => 'Klimop voederen',
-            'type' => 'Terrarium',
+            'protocoltypeid' => '1',
             'icon' => 'mingcute:leaf-3-line'
-         ]
+         ],
+         [
+            'name' => 'Binnenkant poetsen',
+            'protocoltypeid' => '2',
+            'icon' => 'mdi:cleaning'
+         ],
+         [
+            'name' => 'Buitenkant poetsen',
+            'type' => 'Aquarium',
+            'icon' => 'mdi:cleaning'
+         ],
+         [
+            'name' => 'Plantenmeststoffen toevoegen',
+            'type' => 'Aquarium',
+            'icon' => 'game-icons:plants-and-animals'
+         ],
+         [
+            'name' => 'Diepvriesvoer geven',
+            'type' => 'Aquarium',
+            'icon' => 'arcticons:freezer'
+         ],
+         [
+            'name' => 'Droogvoer geven',
+            'type' => 'Aquarium',
+            'icon' => 'mdi:fish-food'
+         ],
+         [
+            'name' => 'Water verversen',
+            'type' => 'Aquarium',
+            'icon' => 'entypo:water'
+         ],
       ]);
-    }
+   }
 }
