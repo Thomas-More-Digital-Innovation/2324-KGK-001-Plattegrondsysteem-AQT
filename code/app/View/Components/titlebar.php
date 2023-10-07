@@ -14,6 +14,7 @@ class titlebar extends Component
    public function __construct(
       public string $title,
       public string $color,
+      public bool $back = false,
    ) {}
 
     /**
