@@ -48,7 +48,8 @@ Route::get('deleteuser/{id}', [HomeController::class, 'deleteUser']);
 
 Route::get('edituser/{id}', [HomeController::class, 'editUser']);
 Route::put('updateuser/{id}', [HomeController::class, 'updateUser']);
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
+Route::get('home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 
 Route::middleware('auth')->group(function () {
