@@ -1,3 +1,5 @@
+@vite(['resources/js/voedselsoorten.js'])
+
 <?php
 $voedingstype = DB::table('voedingsrichtlijnen')->get();
 
@@ -6,6 +8,7 @@ foreach ($voedingstype as $type) {
     $voedingstypeid = $type->id;
     $voedingstypenaam = $type->name;
     $voedingstypeicon = $type->icon;
+    $voedingstypecolor = $type->color;
 
     echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='vt" . $voedingstypeid . "'>";
     echo '<h2 class="text-lg font-semibold mb-2">' . $voedingstypenaam . '</h2>';
@@ -18,6 +21,7 @@ foreach ($voedingstype as $type) {
     echo '<p>voedingstypeid: ' . $voedingstypeid . '</p>';
     echo '<p>naam: ' . $voedingstypenaam . '</p>';
     echo '<p>icon: ' . $voedingstypeicon . '</p>';
+    echo '<p>color: ' . $voedingstypecolor . '</p>';
 
     echo '</div>';
 }

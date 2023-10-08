@@ -1,5 +1,5 @@
- @extends('layout')
+@extends('layout')
 @section('title', 'Voederrichtlijnen')
 @section('content')
-   @include('components.voedselsoorten')
+   @include('components.voedingstype')
 @endsection
