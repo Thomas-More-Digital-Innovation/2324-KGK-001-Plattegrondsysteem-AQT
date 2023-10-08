@@ -42,9 +42,11 @@ Route::get('/voedsel', function(){ // voederrichtlijnen pagina 2
 
 Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 
+Route::post('addUser', [HomeController::class, 'addUser']);
+
+Route::get('delete/{id}', [HomeController::class, 'deleteUser']);
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
-Route::post('addUser', [HomeController::class, 'addUser']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

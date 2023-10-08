@@ -51,6 +51,13 @@
                                     }
                                 ?>
                                 </td>
+                                <td>
+                                    <a href="">aanpassen</a>
+                                </td>
+                                <td>
+                                    <a href="{{url('delete/'.$data->id)}}">verwijderen</a>
+                                </td>
+
                             </tr>
                         @endforeach
                     </table>

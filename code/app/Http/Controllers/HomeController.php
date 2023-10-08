@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use app\Models\User;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
+
+
 
 use Illuminate\Support\Facades\Hash;
 
@@ -47,6 +49,12 @@ class HomeController extends Controller
 
         return back();
         
+    }
+
+    public function deleteUser($id){
+        $user = User::find($id);
+        $user->delete();
+        return back();
     }
 
     public function index(){
