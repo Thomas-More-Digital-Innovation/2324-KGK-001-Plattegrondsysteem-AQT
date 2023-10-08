@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
-
-
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -26,10 +24,10 @@ class HomeController extends Controller
                 return view('AdminDashboard', ['users' => $users]);
             }
             else if($roleID==2){
-                return view('dashboard');
+                return redirect('/profile');
             }
             else{
-                return redirect()->back();
+                return back();
             }
         }
     }
@@ -55,6 +53,22 @@ class HomeController extends Controller
         $user = User::find($id);
         $user->delete();
         return back();
+    }
+
+    public function editUser($id){
+        $user = User::find($id);
+
+        return view('editUser', compact('user'));
+    }
+
+    public function updateUser(Request $request, $id){
+        $user = User::find($id);
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->username = $request->input('username');
+        $user->roleid = $request->input('role');
+        $user->update();
+        return redirect('/account');
     }
 
     public function index(){

@@ -44,7 +44,10 @@ Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->
 
 Route::post('addUser', [HomeController::class, 'addUser']);
 
-Route::get('delete/{id}', [HomeController::class, 'deleteUser']);
+Route::get('deleteuser/{id}', [HomeController::class, 'deleteUser']);
+
+Route::get('edituser/{id}', [HomeController::class, 'editUser']);
+Route::put('updateuser/{id}', [HomeController::class, 'updateUser']);
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 

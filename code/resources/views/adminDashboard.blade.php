@@ -16,7 +16,7 @@
                         <label for="lastname">Last name:</label><br>
                         <input type="text" id="lastname" name="lastname" placeholder="Doe" class="text-black" required><br><br>
 
-                        <input type="radio" id="student" name="role" value="2">
+                        <input type="radio" id="student" name="role" value="2" required>
                         <label for="student">student</label><br>
                         <input type="radio" id="dierenarts" name="role" value="3">
                         <label for="dierenarts">dierenarts</label><br>
@@ -52,10 +52,10 @@
                                 ?>
                                 </td>
                                 <td>
-                                    <a href="">aanpassen</a>
+                                    <a href="{{url('edituser/'.$data->id)}}">aanpassen</a>
                                 </td>
                                 <td>
-                                    <a href="{{url('delete/'.$data->id)}}">verwijderen</a>
+                                    <a href="{{url('deleteuser/'.$data->id)}}">verwijderen</a>
                                 </td>
 
                             </tr>
