@@ -89,6 +89,10 @@ Route::get('protocolinfo', function() {
    return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
 });
 
+Route::get('inventaris', function(){ // pagina inventaris
+    return view('inventaris');
+})->name('inventaris');
+
 Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
 
 Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
