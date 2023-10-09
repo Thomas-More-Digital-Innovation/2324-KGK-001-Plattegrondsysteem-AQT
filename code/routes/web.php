@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\voedselsoortenController;
+use App\Http\Controllers\voederrichtlijnenController;
 
 use App\Http\Controllers\DiersoortController;
 
@@ -40,6 +42,24 @@ Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
     $id = request('id');
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
+
+Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
+
+Route::post('addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
+
+Route::get('deletevoedselsoort/{id}', [voedselsoortenController::class, 'deletevoedselSoort']);
+
+Route::get('editvoedselsoort/{id}', [voedselsoortenController::class, 'editvoedselSoort']);
+Route::put('updatevoedselsoort/{id}', [voedselsoortenController::class, 'updatevoedselSoort']);
+
+Route::get('voedingsrichtlijnenadmin', [voederrichtlijnenController::class , 'voederrichtlijnen'])->middleware('auth')->name('voederrichtlijnenadmin');
+
+Route::post('addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoederrichtlijn']);
+
+Route::get('deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
+
+Route::get('editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
+Route::put('updatevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'updateVoederrichtlijn']);
 
 Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');
@@ -78,6 +98,10 @@ Route::get('protocolinfo', function() {
    $color = request('c');
    return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
 });
+
+Route::get('inventaris', function(){ // pagina inventaris
+    return view('inventaris');
+})->name('inventaris');\
 
 // -- admin section --
 // admin homepage

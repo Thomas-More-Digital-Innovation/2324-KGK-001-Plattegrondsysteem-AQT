@@ -9,12 +9,12 @@
          </a> 
       </li>
       <li class="flex grow">
-         {{-- <a href="{{ route('inventaris') }}" class="flex grow hover:bg-nav-hover"> --}}
+            <a href="{{ route('inventaris') }}" class="flex grow hover:bg-nav-hover"> 
             <div class="flex flex-col grow justify-center items-center">
                <iconify-icon icon="clarity:clipboard-line" height="70"></iconify-icon>
                Inventaris
             </div>
-         {{-- </a> --}}
+         </a> 
       </li>
       <li class="flex grow">
          <a href="{{ route('protocollen') }}" class="flex grow hover:bg-nav-hover">

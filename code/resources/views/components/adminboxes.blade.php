@@ -33,8 +33,13 @@
          ],
          [
             'name' => 'Voederrichtlijnen',
-            'url' => '/admin',
+            'url' => route('voederrichtlijnenadmin'),
             'icon'=> 'mdi:fish-food',
+         ],
+         [
+            'name' => 'voedselsoorten',
+            'url' => route('voedselsoorten'),
+            'icon' => 'game-icons:steak',
          ],
          [
             'name' => 'Medischefiche',
