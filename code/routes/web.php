@@ -22,25 +22,25 @@ Route::get('/', function () {
 });
 
 
-Route::get('dierfiche', function () {
+Route::get('dierefiche', function () {
     $id = request('id'); // Retrieve the 'id' query parameter
-    return view('dierfiche', ['id' => $id]); // Pass the 'id' to the view
+    return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
 });
 
 Route::get('protocollen', function () {
     return view('components.pages.protocollenhome');
  })->name('protocollen');
 
-Route::get('/voederrichtlijnen', function(){ // voederrichtlijnen pagina 1
+Route::get('voederrichtlijnen', function(){ // voederrichtlijnen pagina 1
     return view('voederrichtlijnen');
 })->name('voederrichtlijnen');
 
-Route::get('/voedsel', function(){ // voederrichtlijnen pagina 2
+Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
     $id = request('id');
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
-Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
+Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 
 Route::post('addUser', [HomeController::class, 'addUser']);
 
