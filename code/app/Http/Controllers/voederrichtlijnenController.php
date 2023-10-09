@@ -8,17 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
-class voedselsoortenController extends Controller
+class voederrichtlijnenController extends Controller
 {
-    public function voedselSoorten(){
+    public function voederrichtlijnen(){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsType = DB::table('voedingstype')->get();
                 $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
-                return view('voedselSoorten', 
-                ['voedingsType' => $voedingsType,
-                'voedingsRichtlijnen' => $voedingsRichtlijnen]);
+                return view('voedingsrichtlijnenAdmin', 
+                ['voedingsRichtlijnen' => $voedingsRichtlijnen]);
             }
             else{
                 abort(401);
@@ -26,13 +24,12 @@ class voedselsoortenController extends Controller
         }
     }
 
-    public function addvoedselSoort(Request $request){
+    public function addVoederrichtlijn(Request $request){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $query = DB::table('voedingstype')->insert([
+                $query = DB::table('voedingsrichtlijnen')->insert([
                     'name'=>$request->input('name'),
-                    'voedingsrichtlijnid'=>$request->input('voeding'),
                     'icon'=>$request->input('icon'),
                     'color'=>$request->input('color'),
                 ]);
@@ -43,12 +40,12 @@ class voedselsoortenController extends Controller
             }
         }
     }
-    public function deletevoedselSoort($id){
+    public function deleteVoederrichtlijn($id){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsoort = DB::table('voedingstype')->where('id', $id);
-                $voedingsoort->delete();
+                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->where('id', $id);
+                $voedingsRichtlijnen->delete();
                 return back();
             }
             else{
@@ -56,32 +53,28 @@ class voedselsoortenController extends Controller
             }
         }
     }
-    public function editvoedselSoort($id){
+    public function editVoederrichtlijn($id){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsoort = DB::table('voedingstype')->where('id', $id)->first();
-                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
-                return view('editVoedselsoorten',
-                ['voedingsRichtlijnen' => $voedingsRichtlijnen], compact('voedingsoort'));
+                $voedingsRichtlijn = DB::table('voedingsrichtlijnen')->where('id', $id)->first();
+                return view('editVoedingsrichtlijnen', compact('voedingsRichtlijn'));
             }
             else{
                 abort(401);
             }
         }
     }
-    public function updatevoedselSoort(Request $request, $id){
+    public function updateVoederrichtlijn(Request $request, $id){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-
-                $query = DB::table('voedingstype')->where('id', $id)->update([
+                $query = DB::table('voedingsrichtlijnen')->where('id', $id)->update([
                     'name'=>$request->input('name'),
-                    'voedingsrichtlijnid'=>$request->input('voeding'),
                     'icon'=>$request->input('icon'),
+                    'color'=>$request->input('color'),
                 ]);
-
-                return redirect('/voedselsoorten');
+                return redirect('/voedingsrichtlijnenadmin');
             }
             else{
                 abort(401);

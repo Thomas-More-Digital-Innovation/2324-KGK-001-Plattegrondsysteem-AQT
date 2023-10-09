@@ -33,7 +33,7 @@
          ],
          [
             'name' => 'Voederrichtlijnen',
-            'url' => '/admin',
+            'url' => route('voederrichtlijnenadmin'),
             'icon'=> 'mdi:fish-food',
          ],
          [
