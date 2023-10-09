@@ -17,67 +17,80 @@ class ProtocolDetailSeeder extends Seeder
          [
             'name' => 'Bodembedding  zeven',
             'protocoltypeid' => '1',
-            'icon' => 'mdi:snake'
+            'icon' => 'mdi:snake',
+            'file' => '',
          ],
          [
             'name' => 'Braamblad bijvullen',
             'protocoltypeid' => '1',
-            'icon' => 'ph:leaf-bold'
+            'icon' => 'ph:leaf-bold',
+            'file' => '',
          ],
          [
             'name' => 'Diepvriesspiering voederen',
             'protocoltypeid' => '1',
-            'icon' => 'streamline:interface-weather-snow-flake-winter-freeze-snow-freezing-ice-cold-weather-snowflake'
+            'icon' => 'streamline:interface-weather-snow-flake-winter-freeze-snow-freezing-ice-cold-weather-snowflake',
+            'file' => '',
          ],
          [
             'name' => 'Gras bijvullen',
             'protocoltypeid' => '1',
-            'icon' => 'mingcute:grass-line'
+            'icon' => 'mingcute:grass-line',
+            'file' => '',
          ],
          [
             'name' => 'Groenvoer & fruit voederbak bijvullen',
             'protocoltypeid' => '1',
-            'icon' => 'carbon:fruit-bowl'
+            'icon' => 'carbon:fruit-bowl',
+            'file' => '',
          ],
          [
             'name' => 'Insecten voederen',
             'protocoltypeid' => '1',
-            'icon' => 'mdi:insect'
+            'icon' => 'mdi:insect',
+            'file' => '',
          ],
          [
             'name' => 'Klimop voederen',
             'protocoltypeid' => '1',
-            'icon' => 'mingcute:leaf-3-line'
+            'icon' => 'mingcute:leaf-3-line',
+            'file' => '',
          ],
          [
             'name' => 'Binnenkant poetsen',
             'protocoltypeid' => '2',
-            'icon' => 'mdi:cleaning'
+            'file' => 'files/Aquariumruiten binnenkant poetsen.pdf',
+            'icon' => 'mdi:cleaning',
          ],
          [
             'name' => 'Buitenkant poetsen',
             'protocoltypeid' => '2',
-            'icon' => 'mdi:cleaning'
+            'file' => 'files/Aquariumruiten buitenkant poetsen.pdf',
+            'icon' => 'mdi:cleaning',
          ],
          [
             'name' => 'Plantenmeststoffen toevoegen',
             'protocoltypeid' => '2',
-            'icon' => 'game-icons:plants-and-animals'
+            'file' => 'files/Plantenmeststoffen toevoegen aquarium.pdf',
+            'icon' => 'game-icons:plants-and-animals',
          ],
          [
             'name' => 'Diepvriesvoer geven',
             'protocoltypeid' => '2',
-            'icon' => 'arcticons:freezer'
+            'file' => 'files/Vissen diepvriesvoer geven.pdf',
+            'icon' => 'arcticons:freezer',
          ],
          [
             'name' => 'Droogvoer geven',
             'protocoltypeid' => '2',
-            'icon' => 'mdi:fish-food'
+            'file' => 'files/Vissen droogvoer geven.pdf',
+            'icon' => 'mdi:fish-food',
          ],
          [
             'name' => 'Water verversen',
             'protocoltypeid' => '2',
-            'icon' => 'entypo:water'
+            'file' => 'files/Water verversen aquarium.pdf',
+            'icon' => 'entypo:water',
          ],
       ]);
    }

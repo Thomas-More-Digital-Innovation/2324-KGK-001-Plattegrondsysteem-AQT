@@ -18,17 +18,17 @@ class ProtocoltypeSeeder extends Seeder
          [
                'name' => 'Terrarium',
                'icon' => 'fluent-emoji-high-contrast:lizard',
-               'color' => '#88FF94',
+               'color' => '88FF94',
          ],
          [
                'name' => 'Aquarium',
                'icon' => 'game-icons:aquarium',
-               'color' => '#B9D5FF',
+               'color' => 'B9D5FF',
          ],
          [
                'name' => 'Lokaal',
                'icon' => 'mdi:google-classroom',
-               'color' => '#FFD592',
+               'color' => 'FFD592',
          ]
       ]);
     }
