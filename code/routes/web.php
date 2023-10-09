@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Index;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VoedselsoortenController;
+
+use App\Http\Controllers\DiersoortController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,5 +84,17 @@ Route::get('protocolinfo', function() {
 });
 
 Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
+
+Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
+
+Route::get('/dierensoorten/create', function () {
+    return view('diersoort-input');
+ });
+
+Route::get('/dierensoorten', [DiersoortController::class, 'index']);
+
+Route::get('/dierensoorten/{id}/edit', [DiersoortController::class, 'edit']);
+Route::put('/dierensoorten/{id}', [DiersoortController::class, 'update']);
+Route::delete('/dierensoorten/{id}', [DiersoortController::class, 'destroy']);
 
 require __DIR__.'/auth.php';
