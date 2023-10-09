@@ -33,7 +33,7 @@
                     {{$data->color}}
                 </td>
                 <td>
-                    <a href="{{url('editvoedingsricthtlijn/'.$data->id)}}">aanpassen</a>
+                    <a href="{{url('editvoedingsrichtlijn/'.$data->id)}}">aanpassen</a>
                 </td>
                 <td>
                     <a href="{{url('deletevoedingsrichtlijn/'.$data->id)}}">verwijderen</a>

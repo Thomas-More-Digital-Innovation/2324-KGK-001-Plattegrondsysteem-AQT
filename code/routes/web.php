@@ -58,6 +58,9 @@ Route::post('addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoe
 
 Route::get('deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
 
+Route::get('editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
+Route::put('updatevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'updateVoederrichtlijn']);
+
 Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');
 
