@@ -16,5 +16,11 @@ class LampSeeder extends Seeder
         DB::table('lamp')->insert([
             'name' => 'Lucky Reptile 50W spot'
         ]);
+        DB::table('lamp')->insert([
+            'name' => 'lamp UV'
+        ]);
+        DB::table('lamp')->insert([
+            'name' => 'IR lamp'
+        ]);
     }
 }
