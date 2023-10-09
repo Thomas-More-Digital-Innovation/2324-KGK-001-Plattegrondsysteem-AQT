@@ -14,10 +14,10 @@ class DiersoortSeeder extends Seeder
     {
 
         DB::table('diersoort')->insert([
-            'name' => 'slang',
-            'latinname' => 'slangus',
+            'name' => 'Koningspython',
+            'latinname' => 'Python regius',
             'foto' => 'images/koningspython.jpg',
-            'file' => 'images/koningspython.jpg',
+            'file' => 'files/Koningspython.pdf',
         ]);
         DB::table('diersoort')->insert([
             'name' => 'Vis',
