@@ -20,5 +20,20 @@ class LampkantSeeder extends Seeder
             'lampid' => 2,
             'position' => 'rechts'
         ]);
+        DB::table('lampkant')->insert([
+            'inventarisid' => 2,
+            'lampid' => 3,
+            'position' => 'links'
+        ]);
+        DB::table('lampkant')->insert([
+            'inventarisid' => 2,
+            'lampid' => 4,
+            'position' => 'links'
+        ]);
+        DB::table('lampkant')->insert([
+            'inventarisid' => 2,
+            'lampid' => 1,
+            'position' => 'rechts'
+        ]);
     }
 }
