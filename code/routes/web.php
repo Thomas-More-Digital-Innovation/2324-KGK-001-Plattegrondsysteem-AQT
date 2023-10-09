@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Index;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\VoedselsoortenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
     $id = request('id');
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
+
+Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth');
+Route::post('addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
 
 Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');

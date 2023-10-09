@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\DB;
+
+class voedselsoortenController extends Controller
+{
+    public function voedselSoorten(){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $voedingsType = DB::table('voedingstype')->get();
+                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
+                return view('voedselSoorten', 
+                ['voedingsType' => $voedingsType,
+                'voedingsRichtlijnen' => $voedingsRichtlijnen]);
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function addvoedselSoort(Request $request){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $query = DB::table('voedingstype')->insert([
+                    'name'=>$request->input('name'),
+                    'voedingsrichtlijnid'=>$request->input('voeding'),
+                    'icon'=>$request->input('icon'),
+                ]);
+                return back();
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+}
