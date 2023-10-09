@@ -42,4 +42,49 @@ class voedselsoortenController extends Controller
             }
         }
     }
+    public function deletevoedselSoort($id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $voedingsoort = DB::table('voedingstype')->where('id', $id);
+                $voedingsoort->delete();
+                return back();
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+    public function editvoedselSoort($id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $voedingsoort = DB::table('voedingstype')->where('id', $id)->first();
+                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
+                return view('editVoedselsoorten',
+                ['voedingsRichtlijnen' => $voedingsRichtlijnen], compact('voedingsoort'));
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+    public function updatevoedselSoort(Request $request, $id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+
+                $query = DB::table('voedingstype')->where('id', $id)->update([
+                    'name'=>$request->input('name'),
+                    'voedingsrichtlijnid'=>$request->input('voeding'),
+                    'icon'=>$request->input('icon'),
+                ]);
+
+                return redirect('/voedselsoorten');
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
 }

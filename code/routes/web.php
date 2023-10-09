@@ -42,8 +42,14 @@ Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
-Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth');
+Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
+
 Route::post('addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
+
+Route::get('deletevoedselsoort/{id}', [voedselsoortenController::class, 'deletevoedselSoort']);
+
+Route::get('editvoedselsoort/{id}', [voedselsoortenController::class, 'editvoedselSoort']);
+Route::put('updatevoedselsoort/{id}', [voedselsoortenController::class, 'updatevoedselSoort']);
 
 Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');

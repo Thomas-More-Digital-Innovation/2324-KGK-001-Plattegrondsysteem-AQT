@@ -31,10 +31,10 @@
                 </td>
                 <td>{{$data->icon}}</td>
                 <td>
-                    <a href="{{url('edituser/'.$data->id)}}">aanpassen</a>
+                    <a href="{{url('editvoedselsoort/'.$data->id)}}">aanpassen</a>
                 </td>
                 <td>
-                    <a href="{{url('deleteuser/'.$data->id)}}">verwijderen</a>
+                    <a href="{{url('deletevoedselsoort/'.$data->id)}}">verwijderen</a>
                 </td>
 
             </tr>

@@ -37,6 +37,11 @@
             'icon'=> 'mdi:fish-food',
          ],
          [
+            'name' => 'voedselsoorten',
+            'url' => route('voedselsoorten'),
+            'icon' => 'game-icons:steak',
+         ],
+         [
             'name' => 'Medischefiche',
             'url' => '/admin',
             'icon'=> 'game-icons:medicines',
