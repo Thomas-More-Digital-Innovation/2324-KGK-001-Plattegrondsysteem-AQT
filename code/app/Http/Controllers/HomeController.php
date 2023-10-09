@@ -55,10 +55,7 @@ class HomeController extends Controller
                 abort(401);
             }
 
-        }
-
-        
-        
+        }        
     }
 
     public function deleteUser($id){
@@ -101,7 +98,7 @@ class HomeController extends Controller
                 $user->username = $request->input('username');
                 $user->roleid = $request->input('role');
                 $user->update();
-                return redirect('/account');
+                return redirect('/students');
             }
             else{
                 abort(401);
