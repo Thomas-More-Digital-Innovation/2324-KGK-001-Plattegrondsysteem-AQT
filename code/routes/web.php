@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\VoedselsoortenController;
+use App\Http\Controllers\voedselsoortenController;
+use App\Http\Controllers\voederrichtlijnenController;
 
 use App\Http\Controllers\DiersoortController;
 
@@ -50,6 +51,12 @@ Route::get('deletevoedselsoort/{id}', [voedselsoortenController::class, 'deletev
 
 Route::get('editvoedselsoort/{id}', [voedselsoortenController::class, 'editvoedselSoort']);
 Route::put('updatevoedselsoort/{id}', [voedselsoortenController::class, 'updatevoedselSoort']);
+
+Route::get('voedingsrichtlijnenadmin', [voederrichtlijnenController::class , 'voederrichtlijnen'])->middleware('auth')->name('voederrichtlijnenadmin');
+
+Route::post('addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoederrichtlijn']);
+
+Route::get('deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
 
 Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');

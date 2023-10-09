@@ -34,6 +34,7 @@ class voedselsoortenController extends Controller
                     'name'=>$request->input('name'),
                     'voedingsrichtlijnid'=>$request->input('voeding'),
                     'icon'=>$request->input('icon'),
+                    'color'=>$request->input('color'),
                 ]);
                 return back();
             }
