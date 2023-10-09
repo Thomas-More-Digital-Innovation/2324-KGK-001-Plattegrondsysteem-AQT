@@ -7,7 +7,7 @@
             <div class="ring-2 ring-black w-72 h-72 flex justify-center items-center rounded-3xl" style="background-color:#{{$v->color}};">
                <iconify-icon icon="{{$v->icon}}" height="200"></iconify-icon>
             </div>
-            <h3 class="text-3xl text-center font-bold">{{$v->name}}</h3>
+            <h3 class="text-3xl text-center font-bold flex grow">{{$v->name}}</h3>
          </a>
          <?php 
       };

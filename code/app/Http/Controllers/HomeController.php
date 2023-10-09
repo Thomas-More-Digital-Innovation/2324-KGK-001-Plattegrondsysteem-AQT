@@ -16,21 +16,21 @@ class HomeController extends Controller
 {
     public function account(){
         if(Auth::id()){
-            $roleID=Auth()->user()->roleid;
-
-            if($roleID==4){
-                $users = DB::table('users')->get();
-
-                return view('AdminDashboard', ['users' => $users]);
-            }
-            else if($roleID==2){
-                return redirect('/profile');
-            }
-            else{
-                return back();
-            }
+            return redirect('/profile');
         }
     }
+      public function students(){
+         if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+               $users = DB::table('users')->get();
+               return view('AdminDashboard', ['users' => $users]);
+            }
+            else{
+               abort(401);
+            }
+         }
+      }
 
     public function addUser(Request $request){
 
@@ -112,4 +112,12 @@ class HomeController extends Controller
     public function index(){
         return view('home');
     }
+
+   public function adminhome(){
+      if(Auth::id()){
+         $roleID = Auth()->user()->roleid;
+         if($roleID==4){ return view('components.pages.adminhome'); }
+         else{ abort(401); }
+      }
+   }
 }

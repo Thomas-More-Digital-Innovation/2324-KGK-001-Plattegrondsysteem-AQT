@@ -14,24 +14,23 @@ $roleid =Auth()->user()->roleid;
          </a>
       </li>
       <li class="flex grow">
-         <a href="{{ route('logout') }}" class="flex grow hover:bg-nav-hover" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+         <a href="{{ route('logout') }}" class="flex grow hover:bg-nav-hover @if ($roleid!=4) rounded-bl-3xl @endif" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <div class="flex flex-col grow justify-center items-center">
                <iconify-icon icon="tabler:logout" height="70"></iconify-icon>
                Afmelden
             </div>
          </a>
       </li>
-      <?php 
-      if($roleid==4){
-      echo 
-      '<li class="flex grow">
-         <a href="#" class="flex grow hover:bg-nav-hover rounded-bl-3xl">
-            <div class="flex flex-col grow justify-center items-center">
-               <iconify-icon icon="material-symbols:admin-panel-settings-outline-rounded" height="70"></iconify-icon>
-               Admin
-            </div>
-         </a>
-      </li>';}?>
+         @if($roleid==4)
+            <li class="flex grow">
+               <a href="{{ route('admin') }}" class="flex grow hover:bg-nav-hover rounded-bl-3xl">
+                  <div class="flex flex-col grow justify-center items-center">
+                     <iconify-icon icon="material-symbols:admin-panel-settings-outline-rounded" height="70"></iconify-icon>
+                     Admin
+                  </div>
+               </a>
+            </li>
+         @endif
    </ul>
    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       {{ csrf_field() }}

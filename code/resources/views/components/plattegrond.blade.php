@@ -1,6 +1,6 @@
 
 @vite(['resources/js/plattegrond.js'])
-<div class="h-screen flex justify-center items-center">
+<div class="h-screen max-h-screen flex justify-center items-center">
    <svg width="850" height="840" viewBox="0 0 850 840" fill="none" xmlns="http://www.w3.org/2000/svg">
    <rect id="background" width="850" height="840" x="0" y="0" fill="#a9d18e"/>
    <rect id="cover" width="426" height="490" x="0" y="350" fill="white"/>
