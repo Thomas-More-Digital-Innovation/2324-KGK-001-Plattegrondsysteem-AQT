@@ -6,18 +6,15 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class InventarisSeeder extends Seeder
+class LampSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        DB::table('inventaris')->insert([
-            'werkplekid' => 1
+        DB::table('lamp')->insert([
+            'name' => 'Exoterra intense gloeilamp 25W'
         ]);
-        DB::table('inventaris')->insert([
-            'werkplekid' => 2
+        DB::table('lamp')->insert([
+            'name' => 'Lucky Reptile 50W spot'
         ]);
     }
 }
