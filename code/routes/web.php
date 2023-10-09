@@ -41,6 +41,7 @@ Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
 })->name('voedsel');
 
 Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
+Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');
 
 Route::post('addUser', [HomeController::class, 'addUser'])->middleware('auth');
 
@@ -77,5 +78,6 @@ Route::get('protocolinfo', function() {
    return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
 });
 
+Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
 
 require __DIR__.'/auth.php';
