@@ -10,9 +10,9 @@ $inventaris = DB::table('inventaris')
     ->get();
 
     // groepering van gejoinde data op basis van position & inventarisid
-    $groupedinventaris = $inventaris->mapToGroups(function ($item) {
-        return [$item->inventarisid => $item];
-    })->map(function ($group) {
+    $groupedinventaris = $inventaris->mapToGroups(function ($item) {          //map to groups is een collectiemethode van laravel zelf om data te gaan groeperen
+        return [$item->inventarisid => $item];                
+    })->map(function ($group) {                                               // met map kunnen we data verder groeperen        
         return $group->groupBy('position');
     });
 // items groeperen per werkplek
