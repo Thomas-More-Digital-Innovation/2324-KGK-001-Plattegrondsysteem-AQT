@@ -1,15 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Models\User;
-
+use App\Models\ProtocolType;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -19,8 +14,9 @@ class HomeController extends Controller
             return redirect('/profile');
         }
     }
-      public function students(){
-         if(Auth::id()){
+
+    public function students(){
+        if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                $users = DB::table('users')->get();
@@ -29,11 +25,10 @@ class HomeController extends Controller
             else{
                abort(401);
             }
-         }
-      }
+        }
+    }
 
     public function addUser(Request $request){
-
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
@@ -48,33 +43,26 @@ class HomeController extends Controller
                     'password'=> Hash::make('1234'),
                     'roleid'=>$request->input('role')
                 ]);
-
                 return back();
             }
             else{
                 abort(401);
             }
-
         }
-
-        
-        
     }
 
     public function deleteUser($id){
-
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 $user = User::find($id);
                 $user->delete();
-                return back();            
+                return back();
             }
             else{
                 abort(401);
             }
         }
-
     }
 
     public function editUser($id){
@@ -109,15 +97,93 @@ class HomeController extends Controller
         }
     }
 
+    // Home page?
     public function index(){
         return view('home');
     }
 
-   public function adminhome(){
-      if(Auth::id()){
-         $roleID = Auth()->user()->roleid;
-         if($roleID==4){ return view('components.pages.adminhome'); }
-         else{ abort(401); }
-      }
-   }
+    // Admin homepage
+    public function adminhome(){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){ return view('components.pages.adminhome'); }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    // admin protocollen
+    // view pages
+    public function protocoladmin(){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){
+                $protocollen = DB::table('protocoldetail')->get();
+                return view('components.pages.protocollenadmin', ['protocollen' => $protocollen]);
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function protocoledit($id){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){ return view('components.pages.protocollenedit', ['id' => $id]); }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    // data handlers
+    public function protocoladd(Request $request){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $name = $request->input('name');
+                $protocoltypeid = $request->input('protocoltypeid');
+                $icon = $request->input('icon');
+                $file = $request->input('file');
+                DB::table('protocoldetail')->insert([
+                    'name'=>$name,
+                    'protocoltypeid'=>$protocoltypeid,
+                    'icon'=>$icon,
+                    'file'=>$file
+                ]);
+                return back();
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function protocolupdate($id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                return redirect('/account');
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    // public function protocoldelete($id){
+    //     if(Auth::id()){
+    //         $roleID=Auth()->user()->roleid;
+    //         if($roleID==4){
+    //             $protocol = ProtocolType::find($id);
+    //             $protocol->delete();
+    //             return back();
+    //         }
+    //         else{
+    //             abort(401);
+    //         }
+    //     }
+    // }
 }

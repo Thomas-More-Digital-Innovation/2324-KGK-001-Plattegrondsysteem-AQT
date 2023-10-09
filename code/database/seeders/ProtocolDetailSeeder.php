@@ -11,8 +11,8 @@ class ProtocolDetailSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
+   public function run(): void
+   {
       DB::table('protocoldetail')->insert([
          [
             'name' => 'Bodembedding  zeven',

@@ -79,7 +79,20 @@ Route::get('protocolinfo', function() {
    return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
 });
 
+// -- admin section --
+// admin homepage
 Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
+
+// admin protocollen
+// view pages
+Route::get('/admin/protocollen', [HomeController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
+Route::get('/admin/protocollen/edit/{id}', [HomeController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
+
+// data handlers
+Route::post('/admin/protocollen/add/', [HomeController::class, 'protocoladd'])->middleware('auth')->name('protocoladd');
+Route::get('/admin/protocollen/update/{id}', [HomeController::class, 'protocolupdate'])->middleware('auth')->name('protocolupdate');
+Route::get('/admin/protocollen/delete/{id}', [HomeController::class, 'protocoldelete'])->middleware('auth')->name('protocoldelete');
+
 
 Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
 
