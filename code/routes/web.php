@@ -111,12 +111,13 @@ Route::get('inventaris', function(){ // pagina inventaris
 // admin homepage
 Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
 
-Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
-
 // admin protocollen
 // view pages
 Route::get('/admin/protocollen', [ProtocollenController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
 Route::get('/admin/protocollen/edit/{id}', [ProtocollenController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
+
+//admin opvolging
+Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
 
 // admin werkplek
 Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
