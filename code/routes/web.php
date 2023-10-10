@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\voedselsoortenController;
 use App\Http\Controllers\voederrichtlijnenController;
+use App\Http\Controllers\WerkplaatsadminController;
+
 use App\Http\Controllers\DiersoortController;
 use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
@@ -115,6 +117,12 @@ Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middl
 // view pages
 Route::get('/admin/protocollen', [ProtocollenController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
 Route::get('/admin/protocollen/edit/{id}', [ProtocollenController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
+
+// admin werkplek
+Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
+Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin.index');
+Route::post('werkplaatsadmin/update', [WerkplaatsadminController::class, 'updateWorkplaceStatus'])->name('werkplaatsadmin.update');
+
 
 // data handlers
 Route::post('/admin/protocollen/add/', [ProtocollenController::class, 'protocoladd'])->middleware('auth')->name('protocoladd');

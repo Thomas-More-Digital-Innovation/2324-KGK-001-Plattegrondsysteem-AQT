@@ -23,7 +23,7 @@
          ],
          [
             'name' => 'Werkplaatsen',
-            'url' => '/admin',
+            'url' => route('werkplaatsadmin.index'),
             'icon'=> 'material-symbols:work-outline',
          ],
          [
