@@ -17,7 +17,8 @@ class ProtocollenController extends Controller
             $roleID = Auth()->user()->roleid;
             if($roleID==4){
                 $protocollen = DB::table('protocoldetail')->get();
-                return view('components.pages.protocollenadmin', ['protocollen' => $protocollen]);
+                $protocoltypes = DB::table('protocoltype')->get();
+                return view('components.pages.protocollenadmin', ['protocollen' => $protocollen, 'protocoltypes'=> $protocoltypes]);
             }
             else{
                 abort(401);
@@ -30,7 +31,8 @@ class ProtocollenController extends Controller
             $roleID = Auth()->user()->roleid;
             if($roleID==4){
                 $protocol = DB::table('protocoldetail')->where('id', $id)->first();
-                return view('components.pages.protocollenedit', compact('protocol'));
+                $protocoltypes = DB::table('protocoltype')->get();
+                return view('components.pages.protocollenedit', ['protocol' => $protocol, 'protocoltypes'=> $protocoltypes]);
             }
             else{
                 abort(401);
