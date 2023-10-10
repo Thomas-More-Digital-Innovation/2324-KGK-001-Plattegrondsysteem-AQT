@@ -10,6 +10,7 @@ use App\Http\Controllers\WerkplaatsadminController;
 
 use App\Http\Controllers\DiersoortController;
 use App\Http\Controllers\OpvolgingController;
+use App\Http\Controllers\ProtocollenController;
 
 
 /*
@@ -110,11 +111,12 @@ Route::get('inventaris', function(){ // pagina inventaris
 // admin homepage
 Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
 
+Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
+
 // admin protocollen
 // view pages
-Route::get('/admin/protocollen', [HomeController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
-Route::get('/admin/protocollen/edit/{id}', [HomeController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
-Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
+Route::get('/admin/protocollen', [ProtocollenController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
+Route::get('/admin/protocollen/edit/{id}', [ProtocollenController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
 
 // admin werkplek
 Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
@@ -123,9 +125,9 @@ Route::post('werkplaatsadmin/update', [WerkplaatsadminController::class, 'update
 
 
 // data handlers
-Route::post('/admin/protocollen/add/', [HomeController::class, 'protocoladd'])->middleware('auth')->name('protocoladd');
-Route::get('/admin/protocollen/update/{id}', [HomeController::class, 'protocolupdate'])->middleware('auth')->name('protocolupdate');
-Route::get('/admin/protocollen/delete/{id}', [HomeController::class, 'protocoldelete'])->middleware('auth')->name('protocoldelete');
+Route::post('/admin/protocollen/add/', [ProtocollenController::class, 'protocoladd'])->middleware('auth')->name('protocoladd');
+Route::put('/admin/protocollen/update/{id}', [ProtocollenController::class, 'protocolupdate'])->middleware('auth')->name('protocolupdate');
+Route::get('/admin/protocollen/delete/{id}', [ProtocollenController::class, 'protocoldelete'])->middleware('auth')->name('protocoldelete');
 
 
 Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
