@@ -79,14 +79,14 @@ Route::get('home', [HomeController::class, 'index'])->middleware('auth')->name('
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::get('werkplek', function () {
-    $id = request('id'); // vraagt id op
-    return view('werkplek', ['id' => $id]); // geeft id mee aan de view
+   $id = request('id'); // vraagt id op
+   return view('werkplek', ['id' => $id]); // geeft id mee aan de view
 });
 
 Route::get('protocoltype', function() {
@@ -104,7 +104,7 @@ Route::get('protocolinfo', function() {
 });
 
 Route::get('inventaris', function(){ // pagina inventaris
-    return view('inventaris');
+   return view('inventaris');
 })->name('inventaris');
 
 // -- admin section --
@@ -117,7 +117,9 @@ Route::get('/admin/protocollen', [ProtocollenController::class, 'protocoladmin']
 Route::get('/admin/protocollen/edit/{id}', [ProtocollenController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
 
 //admin opvolging
-Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
+Route::get('admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
+Route::post('admin/addopvolging', [OpvolgingController::class, 'addopvolging']);
+Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'deleteopvolging']);
 
 // admin werkplek
 Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
