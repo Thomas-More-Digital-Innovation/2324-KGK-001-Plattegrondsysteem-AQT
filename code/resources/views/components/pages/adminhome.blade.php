@@ -1,8 +1,3 @@
-<?php 
-// if (Admin::handle()) { 
-//    url()->previous();
-// };
-?>
 @extends('layout')
 @section('title', 'Admin')
 @section('content')
