@@ -101,7 +101,7 @@ Route::get('protocolinfo', function() {
 
 Route::get('inventaris', function(){ // pagina inventaris
     return view('inventaris');
-})->name('inventaris');\
+})->name('inventaris');
 
 // -- admin section --
 // admin homepage
