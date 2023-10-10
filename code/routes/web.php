@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 // redir to /profile? idk
 Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 
@@ -141,8 +142,6 @@ Route::post('/werkplaatsadmin/update', [WerkplaatsadminController::class, 'updat
 // admin - inventaris
 // view pages
 
-// data handlers
-
 
 // admin - voederrichtlijnen
 // view pages
@@ -175,7 +174,8 @@ Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'delete
 Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
 
 // data handlers
-
+Route::post('admin/addopvolging', [OpvolgingController::class, 'addopvolging']);
+Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'deleteopvolging']);
 
 // admin - logboek
 // view pages
