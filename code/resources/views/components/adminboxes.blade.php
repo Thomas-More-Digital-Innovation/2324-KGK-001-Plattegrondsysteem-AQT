@@ -48,7 +48,7 @@
          ], 
          [
             'name' => 'Opvolging',
-            'url' => '/admin',
+            'url' => route('opvolgingadmin'),
             'icon'=> 'mdi:todo-add',
          ],
          [

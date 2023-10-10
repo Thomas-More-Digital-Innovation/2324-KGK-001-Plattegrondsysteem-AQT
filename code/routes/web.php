@@ -7,7 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\voedselsoortenController;
 use App\Http\Controllers\voederrichtlijnenController;
 use App\Http\Controllers\WerkplaatsadminController;
+
 use App\Http\Controllers\DiersoortController;
+use App\Http\Controllers\OpvolgingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +114,7 @@ Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->n
 // view pages
 Route::get('/admin/protocollen', [HomeController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
 Route::get('/admin/protocollen/edit/{id}', [HomeController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
+Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
 
 // admin werkplek
 Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
