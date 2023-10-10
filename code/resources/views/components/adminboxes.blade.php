@@ -8,7 +8,7 @@
          ],
          [
             'name' => 'Protocollen',
-            'url' => '/admin',
+            'url' => route('protocoladmin'),
             'icon'=> 'solar:checklist-minimalistic-outline',
          ],
          [
