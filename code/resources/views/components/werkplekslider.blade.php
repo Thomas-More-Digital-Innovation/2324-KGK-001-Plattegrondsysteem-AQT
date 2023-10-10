@@ -3,6 +3,11 @@
 <?php
 $clickedName = $id;
 
+// Remove the "x" from $clickedName
+if (strpos($clickedName, "x") !== false) {
+    $clickedName = str_replace("x", "", $clickedName);
+}
+
 $werkplek = DB::table('werkplek')->where('name', $clickedName)->first();
 $werkplekId = $werkplek->id;
     
@@ -10,7 +15,6 @@ $dierSoortList = DB::table('dier')
     ->join('diersoort', 'dier.diersoortid', '=', 'diersoort.id')
     ->where('dier.werkplekid', $werkplekId)
     ->get();
-
 
 echo '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">';
 foreach ($dierSoortList as $dierSoort) {
