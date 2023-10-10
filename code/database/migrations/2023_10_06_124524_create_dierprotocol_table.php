@@ -12,14 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dierprotocol', function (Blueprint $table) {
-            $table->foreignId('dierid')->nullable(false);
             $table->foreignId('protocoldetailid')->nullable(false);
             $table->foreignId('diersoortid')->nullable(false);
-            $table->primary(['dierid', 'protocoldetailid','diersoortid']);
-
-            $table->foreign('dierid')
-            ->references('id')
-            ->on('dier');
+            $table->primary(['protocoldetailid','diersoortid']);
 
             $table->foreign('protocoldetailid')
             ->references('id')

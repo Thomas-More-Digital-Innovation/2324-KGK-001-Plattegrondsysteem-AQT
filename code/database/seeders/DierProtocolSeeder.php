@@ -16,67 +16,54 @@ class DierProtocolSeeder extends Seeder
     {
       DB::table('dierprotocol')->insert([
          [
-            'dierid' => '1',
             'protocoldetailid' => '1',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '1',
             'protocoldetailid' => '2',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '1',
             'protocoldetailid' => '3',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '1',
             'protocoldetailid' => '4',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '1',
             'protocoldetailid' => '5',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '1',
             'protocoldetailid' => '6',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '1',
             'protocoldetailid' => '7',
             'diersoortid' => '1'
          ],
          [
-            'dierid' => '2',
             'protocoldetailid' => '8',
             'diersoortid' => '2'
          ],
          [
-            'dierid' => '2',
             'protocoldetailid' => '9',
             'diersoortid' => '2'
          ],
          [
-            'dierid' => '2',
             'protocoldetailid' => '10',
             'diersoortid' => '2'
          ],
          [
-            'dierid' => '2',
             'protocoldetailid' => '11',
             'diersoortid' => '2'
          ],
          [
-            'dierid' => '2',
             'protocoldetailid' => '12',
             'diersoortid' => '2'
          ],
          [
-            'dierid' => '2',
             'protocoldetailid' => '13',
             'diersoortid' => '2'
          ],

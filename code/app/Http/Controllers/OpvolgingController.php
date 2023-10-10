@@ -15,7 +15,7 @@ class OpvolgingController extends Controller
    public function opvolging(){
       if(Auth::id()){
          $roleID=Auth()->user()->roleid;
-         if( $roleID==4 ) { return view('components.pages.opvolging'); }
+         if( $roleID==4 ) { return view('components.opvolging.opvolginghome'); }
          else { abort(401); }
       }
    }
