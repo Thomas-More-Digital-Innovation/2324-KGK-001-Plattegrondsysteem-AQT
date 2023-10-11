@@ -194,7 +194,7 @@ class HomeController extends Controller
             ->update(["comment"=>$id]);
             }
             else {DB::table("comment")
-                ->insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
+                ->>insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
             };
         return back();
     }

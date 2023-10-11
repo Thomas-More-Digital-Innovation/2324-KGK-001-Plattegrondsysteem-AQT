@@ -8,10 +8,11 @@
                     <input type="text" id="name" name="name" placeholder="Water Verversen" class="text-black" required><br>
                     <label for="protocoltype">Type:</label><br>
                     <select name="protocoltypeid" id="protocoltypeid" class="text-black" required>
-                        {{-- <option value="$protocoltypeid">$protocoltypename</option> --}}
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <?php
+                            foreach ($protocoltypes as $type){
+                                echo '<option value="'.$type->id.'">'.$type->name.'</option>';
+                            }
+                        ?>
                     </select><br>
                     <label for="icon">Icon:</label><br>
                     <input type="text" id="icon" name="icon" placeholder="iconify" class="text-black" required><br>
@@ -27,7 +28,12 @@
                     @foreach($protocollen as $protocol)
                         <tr class="pb-5">
                             <td>{{$protocol->name}}</td>
-                            <td>{{$protocol->protocoltypeid}}</td>
+                            <td>
+                                <?php
+                                    $protocoltype = DB::table('protocoltype')->where('id', $protocol->protocoltypeid)->first();
+                                    echo $protocoltype->name;
+                                ?>
+                            </td>
                             <td>{{$protocol->icon}}</td>
                             <td>{{$protocol->file}}</td>
                             <td>

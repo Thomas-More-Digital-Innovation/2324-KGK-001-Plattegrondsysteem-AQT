@@ -46,6 +46,18 @@ class werkplekSeeder extends Seeder
             [
             'name' => 'wp9',
             'active' => 1,
+            ],
+            [
+            'name' => 'wp10',
+            'active' => 1,
+            ],
+            [
+            'name' => 'bio1',
+            'active' => 1,
+            ],
+            [
+            'name' => 'bio2',
+            'active' => 1,
             ]
       ]);
    }
