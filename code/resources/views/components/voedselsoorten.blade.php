@@ -1,29 +1,15 @@
-@vite(['resources/js/voedselsoorten.js'])
-
-<?php
-$voedingstype = DB::table('voedingsrichtlijnen')->get();
-
-echo '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
-foreach ($voedingstype as $type) {
-    $voedingstypeid = $type->id;
-    $voedingstypenaam = $type->name;
-    $voedingstypeicon = $type->icon;
-    $voedingstypecolor = $type->color;
-
-    echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='vt" . $voedingstypeid . "'>";
-    echo '<h2 class="text-lg font-semibold mb-2">' . $voedingstypenaam . '</h2>';
-    if ($voedingstypeicon !== false) {
-        echo '<div class="mb-2"><img src="'.$voedingstypeicon.'" class="w-full h-auto rounded-lg" alt="' . $voedingstypenaam . ' Image" /></div>';
-    } else {
-        echo '<p class="text-red-500">Image: Unable to find image</p>';
-    }
-    // You can access other fields pke 'foto' and 'file' here as well
-    echo '<p>voedingstypeid: ' . $voedingstypeid . '</p>';
-    echo '<p>naam: ' . $voedingstypenaam . '</p>';
-    echo '<p>icon: ' . $voedingstypeicon . '</p>';
-    echo '<p>color: ' . $voedingstypecolor . '</p>';
-
-    echo '</div>';
-}
-echo '</div>';
-?>
+<div class="flex justify-center items-center flex-wrap h-screen pt-14">
+    <?php
+        $voedingstype = DB::table('voedingsrichtlijnen')->get();
+        foreach ($voedingstype as $type) {
+            ?>
+                <a href="/voedsel?id={{$type->id}}" class="hover:scale-105 transition duration-150 ease-out hover:ease-in my-5 mx-40 flex justify-center items-center flex-col">
+                    <div class="ring-2 ring-black w-72 h-72 flex justify-center items-center rounded-3xl" style="background-color:#{{$type->color}};">
+                        <iconify-icon icon="{{$type->icon}}" height="200" width="200"></iconify-icon>
+                    </div>
+                    <h3 class="text-3xl text-center font-bold flex grow">{{$type->name}}</h3>
+                </a>
+            <?php
+        }
+    ?>
+</div>
