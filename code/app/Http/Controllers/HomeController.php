@@ -202,6 +202,18 @@ class HomeController extends Controller
         return back();
     }
 
+    public function checkitemadd($id, $id2, $id3, $id4) {
+        $dierid = $id3;
+        $value = $id;
+        $type = $id2;
+        DB::table('checkitem')->insert([
+            'dierid'=>$dierid,
+            $type=>$value, 
+            'datetime'=>$id4
+        ]);
+        return back();
+    }
+
     // public function protocoldelete($id){
     //     if(Auth::id()){
     //         $roleID=Auth()->user()->roleid;

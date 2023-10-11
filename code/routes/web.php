@@ -78,6 +78,8 @@ Route::get('/voedsel', function(){
 
 Route::get('comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
 
+Route::get('checkitem/{id}/{id2}/{id3}/{id4}', [HomeController::class, 'checkitemadd']);
+
 Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
 
 // account - home
