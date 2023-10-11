@@ -47,17 +47,21 @@ class ProtocollenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $name = $request->input('name');
-                $protocoltypeid = $request->input('protocoltypeid');
-                $icon = $request->input('icon');
-                $file = $request->input('file');
-                DB::table('protocoldetail')->insert([
-                    'name'=>$name,
-                    'protocoltypeid'=>$protocoltypeid,
-                    'icon'=>$icon,
-                    'file'=>$file
-                ]);
-                return back();
+                try {
+                    $name = $request->input('name');
+                    $protocoltypeid = $request->input('protocoltypeid');
+                    $icon = $request->input('icon');
+                    $file = $request->input('file');
+                    DB::table('protocoldetail')->insert([
+                        'name'=>$name,
+                        'protocoltypeid'=>$protocoltypeid,
+                        'icon'=>$icon,
+                        'file'=>$file
+                    ]);
+                    return back();
+                } catch (QueryException $e) {
+                    return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                }
             }
             else{
                 abort(401);
@@ -69,13 +73,17 @@ class ProtocollenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $query = DB::table('protocoldetail')->where('id', $id)->update([
-                    'name'=>request('name'),
-                    'protocoltypeid'=>request('protocoltypeid'),
-                    'icon'=>request('icon'),
-                    'file'=>request('file')
-                ]);
-                return redirect('/admin/protocollen');
+                try {
+                    $query = DB::table('protocoldetail')->where('id', $id)->update([
+                        'name'=>request('name'),
+                        'protocoltypeid'=>request('protocoltypeid'),
+                        'icon'=>request('icon'),
+                        'file'=>request('file')
+                    ]);
+                    return redirect('/admin/protocollen');
+                } catch (QueryException $e) {
+                    return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                }
             }
             else{
                 abort(401);
