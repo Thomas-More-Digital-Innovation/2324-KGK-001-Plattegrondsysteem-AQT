@@ -173,6 +173,32 @@ class HomeController extends Controller
         }
     }
 
+    public function commentupdate($id, $id2, $id3) {
+        $bool = 0;
+        echo "<script>console.log('$id2')</script>";
+        if ($id2 == "Leerkracht") {
+            $bool = 1;
+        }
+        echo "<script>console.log('$bool')</script>";
+        if (DB::table('comment')
+            ->where([
+                ["leerkracht", "=", $bool],
+                ["dierid", "=", $id3]
+            ])
+            ->exists()){
+                DB::table('comment')
+            ->where([
+                ["leerkracht", "=", $bool],
+                ["dierid", "=", $id3]
+            ])
+            ->update(["comment"=>$id]);
+            }
+            else {DB::table("comment")
+                ->insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
+            };
+        return back();
+    }
+
     // public function protocoldelete($id){
     //     if(Auth::id()){
     //         $roleID=Auth()->user()->roleid;

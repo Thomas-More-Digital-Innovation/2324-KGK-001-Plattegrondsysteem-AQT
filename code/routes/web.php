@@ -43,6 +43,8 @@ Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
+Route::get('comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
+
 Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
 
 Route::post('addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
