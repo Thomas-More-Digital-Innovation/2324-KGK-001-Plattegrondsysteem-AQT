@@ -35,7 +35,6 @@
                     </div>
                 </div>
 
-
                 <button type="submit" class="mt-2 sm:col-span-4 rounded-md bg-nav px-3 py-2 text-sm font-semibold text-white shadow-sm">Aanmaken</button>
             </div>
         </div>

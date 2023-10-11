@@ -1,7 +1,6 @@
 @extends('layout')
 @section('title', 'Diersoort-input')
 @section('content')
-   
     <table>
         <thead>
             <tr>

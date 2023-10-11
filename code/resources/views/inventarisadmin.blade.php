@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'inventarisadmin')
 @section('content')
-<x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true/>
+<x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true link="/inventarisselect"/>
 
 <div class="w-3/4 mx-auto mb-8 pt-20"> 
     <!-- Form for creating a new inventaris -->
