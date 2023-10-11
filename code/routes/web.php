@@ -73,7 +73,9 @@ Route::get('/voedsel', function(){
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
-// medische fiche - home
+Route::get('comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
+
+Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
 
 // account - home
 Route::middleware('auth')->group(function () {

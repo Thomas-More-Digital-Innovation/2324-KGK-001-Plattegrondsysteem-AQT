@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             VoedingsrichtlijnenSeeder::class,
             VoedingstypeSeeder::class,
             LampSeeder::class,
-            LampkantSeeder::class
+            LampkantSeeder::class,
+            CommentSeeder::class
         ]);
     }
 }

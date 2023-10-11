@@ -112,4 +112,104 @@ class HomeController extends Controller
             }
         }
     }
+
+    // admin protocollen
+    // view pages
+    public function protocoladmin(){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){
+                $protocollen = DB::table('protocoldetail')->get();
+                return view('components.pages.protocollenadmin', ['protocollen' => $protocollen]);
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function protocoledit($id){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){ return view('components.pages.protocollenedit', ['id' => $id]); }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    // data handlers
+    public function protocoladd(Request $request){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $name = $request->input('name');
+                $protocoltypeid = $request->input('protocoltypeid');
+                $icon = $request->input('icon');
+                $file = $request->input('file');
+                DB::table('protocoldetail')->insert([
+                    'name'=>$name,
+                    'protocoltypeid'=>$protocoltypeid,
+                    'icon'=>$icon,
+                    'file'=>$file
+                ]);
+                return back();
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function protocolupdate($id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                return redirect('/account');
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function commentupdate($id, $id2, $id3) {
+        $bool = 0;
+        echo "<script>console.log('$id2')</script>";
+        if ($id2 == "Leerkracht") {
+            $bool = 1;
+        }
+        echo "<script>console.log('$bool')</script>";
+        if (DB::table('comment')
+            ->where([
+                ["leerkracht", "=", $bool],
+                ["dierid", "=", $id3]
+            ])
+            ->exists()){
+                DB::table('comment')
+            ->where([
+                ["leerkracht", "=", $bool],
+                ["dierid", "=", $id3]
+            ])
+            ->update(["comment"=>$id]);
+            }
+            else {DB::table("comment")
+                ->>insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
+            };
+        return back();
+    }
+
+    // public function protocoldelete($id){
+    //     if(Auth::id()){
+    //         $roleID=Auth()->user()->roleid;
+    //         if($roleID==4){
+    //             $protocol = ProtocolType::find($id);
+    //             $protocol->delete();
+    //             return back();
+    //         }
+    //         else{
+    //             abort(401);
+    //         }
+    //     }
+    // }
 }

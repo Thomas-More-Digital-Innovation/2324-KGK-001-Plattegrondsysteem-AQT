@@ -13,13 +13,9 @@ return new class extends Migration
     {
         Schema::create('comment', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userid')->nullable(false);
+            $table->boolean('leerkracht')->nullable(false);
             $table->foreignId('dierid')->nullable(false);
-            $table->foreignId('comment')->nullable(false);
-
-            $table->foreign('userid')
-               ->references('id')
-               ->on('werkplek');
+            $table->string('comment')->nullable(false);
 
             $table->foreign('dierid')
                ->references('id')
