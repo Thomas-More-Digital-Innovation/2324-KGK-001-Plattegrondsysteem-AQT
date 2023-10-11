@@ -13,12 +13,12 @@
          ],
          [
             'name' => 'Dier',
-            'url' => '/admin',
+            'url' => route('dier'),
             'icon'=> 'cil:animal',
          ],
          [
             'name' => 'Diersoort',
-            'url' => '/admin',
+            'url' => route('dierensoorten'),
             'icon'=> 'fluent-emoji-high-contrast:lizard',
          ],
          [
