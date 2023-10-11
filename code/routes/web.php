@@ -176,7 +176,7 @@ Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'delete
 Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
 
 // data handlers
-Route::post('admin/addopvolging', [OpvolgingController::class, 'addopvolging']);
+Route::post('admin/addeditopvolging', [OpvolgingController::class, 'addeditopvolging']);
 Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'deleteopvolging']);
 
 // admin - logboek
