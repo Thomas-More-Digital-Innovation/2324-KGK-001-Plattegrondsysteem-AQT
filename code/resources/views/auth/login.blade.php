@@ -14,12 +14,12 @@
         <form method="POST" action="{{ route('login') }}" class=" md:flex flex-col md:justify-center w-80">
             @csrf
 
-            <!-- Email Address -->
-            <label for="email" class="text-center">Email:</label>
-            <input id="email" type="email" name="email" :value="old('email')" 
+            <!-- username Address -->
+            <label for="username" class="text-center">Gebruikersnaam:</label>
+            <input id="username" type="text" name="username" :value="old('username')" 
             required autofocus autocomplete="username"
             class="text-center"/>
-            <!-- <input-error :messages="$errors->get('email')"/> -->
+            <!-- <input-error :messages="$errors->get('username')"/> -->
 
             <!-- Password -->
             <label for="password" class="text-center">Wachtwoord:</label>
