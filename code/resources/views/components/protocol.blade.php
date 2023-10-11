@@ -1,4 +1,6 @@
 @vite(['resources/js/opmerking.js'])
+@vite(['resources/js/biomedisch.js'])
+@vite(['resources/js/checklist.js'])
 
 <?php
 $currentDate = date('Y-m-d');
@@ -9,10 +11,10 @@ $idtrim = trim($id, 'ds');
 
 $protocolnames = DB::table('protocoldetail')
     ->join('dierprotocol', 'protocoldetail.id', '=', 'dierprotocol.protocoldetailid')
-    ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
-    ->select('protocoldetail.name')
     ->where('dierprotocol.diersoortid', '=', $idtrim)
     ->get();
+
+
 
 $roleid =Auth()->user()->roleid;
 
@@ -38,6 +40,20 @@ if (count($leerkrachtComment) != 0){
     $leerkrachtPlaceholder = $leerkrachtComment[0]->comment;
 }
 
+$checkitemgewicht = DB::table('checkitem')
+    ->where('dierid', '=', $idtrim)
+    ->where('gewicht', '!=', NULL)
+    ->orderBy('datetime', 'desc')
+    ->first();
+
+    
+$checkitemtemperatuur = DB::table('checkitem')
+    ->where('dierid', '=', $idtrim)
+    ->where('temperatuur', '!=', NULL)
+    ->orderBy('datetime', 'desc')
+    ->first();
+
+
 ?>
 
 <div class="flex justify-end h-screen m-5">
@@ -62,10 +78,10 @@ if (count($leerkrachtComment) != 0){
                         <tr class="text-center">
                             <td class="border-2"><?php echo $protocol->name; ?></td>
                             <td class="border-2">
-                                <input type="checkbox" name="checkbox1[]">
+                                <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}" name="checkboxvoormiddag{{$protocol->id}}" value="{{$protocol->id}}">
                             </td>
                             <td class="border-2">
-                                <input type="checkbox" name="checkbox2[]">
+                                <input type="checkbox" id="checkboxnamiddag{{$protocol->id}}" name="checkboxnamiddag{{$protocol->id}}" value="{{$protocol->id}}">
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -75,7 +91,7 @@ if (count($leerkrachtComment) != 0){
                                 Gewicht
                             </td>
                             <td class="border-2" colspan="2">
-                                <input type="text" name="Gewicht[]" placeholder="Gewicht">
+                                <input type="text" id="biomedisch-gewicht" name="gewicht" placeholder="<?php echo empty($checkitemgewicht->gewicht) ? 'gewicht' : $checkitemgewicht->gewicht; ?>" data-dierid = "{{$idtrim}}">
                             </td>
                         </tr>
                         <tr class="text-center">
@@ -83,12 +99,13 @@ if (count($leerkrachtComment) != 0){
                                 Temperatuur
                             </td>
                             <td class="border-2" colspan="2">
-                                <input type="text" name="Temperatuur[]" placeholder="Temperatuur">
+                                <input type="text" id="biomedisch-temperatuur" name="temperatuur" placeholder="<?php echo empty($checkitemtemperatuur->temperatuur) ? 'temperatuur' : $checkitemtemperatuur->temperatuur; ?>" data-dierid = "{{$idtrim}}">
                             </td>
                         </tr>
+                        
                     </tbody>
                 </table>
-                
+        
                 <!-- Comment fields under the table -->
                 <div class="w-full mt-1">
                     <label for="comment" class="block text-gray-700 font-bold">Opmerking leerkracht:</label>
