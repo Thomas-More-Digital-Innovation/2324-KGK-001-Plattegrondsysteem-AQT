@@ -49,12 +49,3 @@
         </div>
     </div>
 </div>
-<script>
-    function hideErrorMessage() {
-        var errorContainer = document.getElementById('error-container');
-        if (errorContainer) {
-            errorContainer.style.display = 'none';
-        }
-    }
-</script>
-
