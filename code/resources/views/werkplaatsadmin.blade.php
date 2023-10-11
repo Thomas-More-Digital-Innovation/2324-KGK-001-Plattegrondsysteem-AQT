@@ -1,11 +1,9 @@
 @extends('layout')
 @section('title', 'werkplaatsadmin')
 @section('content')
-<h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2 mb-4" style="background-color: #ff7ecc">
-   Inventaris
-</h1>
+<x-titlebar title="Admin: Werkplek" color="FF7E7E" back=true/>
 
-<div class="w-80 mx-auto mb-8">
+<div class="w-80 mx-auto mb-8 pt-20">
     <form method="POST" action="{{ route('werkplaatsadmin.update') }}">
         @csrf
         <table class="w-full border-collapse mb-4">
