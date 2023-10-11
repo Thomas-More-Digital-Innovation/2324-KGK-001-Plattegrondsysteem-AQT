@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Database\QueryException;
+
 class voederrichtlijnenController extends Controller
 {
     public function voederrichtlijnen(){
@@ -44,9 +46,17 @@ class voederrichtlijnenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->where('id', $id);
-                $voedingsRichtlijnen->delete();
-                return back();
+                try {
+                    $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->where('id', $id);
+                    $voedingsRichtlijnen->delete();
+                    return back();
+                } catch (QueryException $e) {
+                    if ($e->errorInfo[1] === 1451) { // check for specific error code
+                        return back()->with('error', 'Kan deze voederrichtlijn niet verwijderen omdat er nog voedselsoorten inzitten.');
+                    } else { // handle other
+                        return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                    }
+                }
             }
             else{
                 abort(401);

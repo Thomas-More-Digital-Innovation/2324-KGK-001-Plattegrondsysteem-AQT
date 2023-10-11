@@ -1,6 +1,6 @@
 @extends('layout')
-@section('title', 'Gebruikersbeheer')
+@section('title', 'Gebruikers: Admin')
 @section('content')
-    <x-titlebar title="Gebruikersbeheer" color="FFAD7E"/>
+    <x-titlebar title="Gebruikers: Admin" color="FF7E7E" back=true/>
     @include('components.userCrud')
 @endsection

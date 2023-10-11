@@ -1,6 +1,6 @@
 @extends('layout')
-@section('title', 'Voedselsoorten')
+@section('title', 'Voedselsoorten: Aanpassen')
 @section('content')
-    <x-titlebar title="Voedselsoort aanpassen" color="FFAD7E"/>
+    <x-titlebar title="Voedselsoorten: Aanpassen" color="FF7E7E" back=true/>
     @include('components.editVoedselsoorten')
 @endsection
