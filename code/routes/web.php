@@ -20,7 +20,7 @@ require __DIR__.'/auth.php';
 
 // assign root route to login page
 Route::get('/', function () {
-   return view('auth.login');
+    return view('auth.login');
 });
 
 // -- user section --
@@ -38,6 +38,7 @@ Route::get('/dierefiche', function () {
     $id = request('id');
     return view('dierefiche', ['id' => $id]);
 });
+Route::get('/comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
 
 // inventaris - home
 Route::get('/inventaris', function(){

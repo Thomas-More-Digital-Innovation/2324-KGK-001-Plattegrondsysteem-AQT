@@ -53,11 +53,11 @@ class werkplekSeeder extends Seeder
             ],
             [
             'name' => 'bio1',
-            'active' => 1,
+            'active' => 0,
             ],
             [
             'name' => 'bio2',
-            'active' => 1,
+            'active' => 0,
             ]
       ]);
    }
