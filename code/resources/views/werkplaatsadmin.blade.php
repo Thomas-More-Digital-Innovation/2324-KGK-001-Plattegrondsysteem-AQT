@@ -1,9 +1,10 @@
 @extends('layout')
 @section('title', 'Werkplaatsen: Admin')
 @section('content')
-<x-titlebar title="Werkplaatsen: Admin" color="FF7E7E" back=true/>
+<x-titlebar title="Admin: Werkplek" color="FF7E7E" back=true/>
 
-<div class="w-80 mx-auto mb-8 py-20">
+<div class="w-80 mx-auto mb-8 pt-20">
+
     <form method="POST" action="{{ route('werkplaatsadmin.update') }}">
         @csrf
         <table class="w-full border-collapse mb-4">

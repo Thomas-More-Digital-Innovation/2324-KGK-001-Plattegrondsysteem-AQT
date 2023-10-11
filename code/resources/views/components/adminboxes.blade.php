@@ -28,7 +28,7 @@
          ],
          [
             'name' => 'Inventaris',
-            'url' => '/admin',
+            'url' => route('inventarisselect'),
             'icon'=> 'material-symbols:inventory-2-outline',
          ],
          [
