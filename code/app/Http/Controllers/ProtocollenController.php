@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class ProtocollenController extends Controller
 {
@@ -85,9 +86,19 @@ class ProtocollenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $protocol = DB::table('protocoldetail')->where('id', $id);
-                $protocol->delete();
-                return back();
+                try {
+                    DB::table('protocoldetail')->where([['id', '=', $id]])->delete();
+                    return back();
+                } catch (QueryException $e) {
+                    if ($e->errorInfo[1] === 1451) {
+                        // Handle the foreign key constraint violation error here
+                        return back()->with('error', 'Kan dit protocol niet verwijderen omdat het nog in gebruik is.');
+                    } else {
+                        // Handle other database-related errors
+                        // You can log the error or display a generic error message
+                        return back()->with('error', 'An error occurred while processing your request.');
+                    }
+                }
             }
             else{
                 abort(401);
