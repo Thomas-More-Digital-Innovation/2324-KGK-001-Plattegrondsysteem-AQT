@@ -1,3 +1,5 @@
+@vite(['resources/js/opmerking.js'])
+
 <?php
 $currentDate = date('Y-m-d');
 $dayOfWeek = date('l', strtotime($currentDate));
@@ -7,15 +9,35 @@ $idtrim = trim($id, 'ds');
 
 $protocolnames = DB::table('protocoldetail')
     ->join('dierprotocol', 'protocoldetail.id', '=', 'dierprotocol.protocoldetailid')
-    ->join('dier', 'dierprotocol.dierid', '=', 'dier.id')
     ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
     ->select('protocoldetail.name')
     ->where('dierprotocol.diersoortid', '=', $idtrim)
     ->get();
 
+$roleid =Auth()->user()->roleid;
 
 
-    $roleid =Auth()->user()->roleid;
+$leerlingComment = DB::table('comment')
+    ->where('comment.dierid', '=', $idtrim)
+    ->where('comment.leerkracht', '=', '0')
+    ->get();
+
+$leerlingPlaceholder = "vul hier een opmerking in";
+if (count($leerlingComment) != 0){
+    $leerlingPlaceholder = $leerlingComment[0]->comment;
+}
+
+
+$leerkrachtComment = DB::table('comment')
+    ->where('comment.dierid', '=', $idtrim)
+    ->where('comment.leerkracht', '=', '1')
+    ->get();
+
+$leerkrachtPlaceholder = "vul hier een opmerking in";
+if (count($leerkrachtComment) != 0){
+    $leerkrachtPlaceholder = $leerkrachtComment[0]->comment;
+}
+
 ?>
 
 <div class="flex justify-end h-screen m-5">
@@ -69,30 +91,28 @@ $protocolnames = DB::table('protocoldetail')
                 
                 <!-- Comment fields under the table -->
                 <div class="w-full mt-1">
-                    <label for="comment" class="block text-gray-700 font-bold">Opmerking Docent:</label>
+                    <label for="comment" class="block text-gray-700 font-bold">Opmerking leerkracht:</label>
                     <textarea
-                        id="OpmerkingDocent"
-                        name="OpmerkingDocent"
+                        id="opmerking_Leerkracht"
+                        data-dierid = "{{$idtrim}}"
+                        name="opmerkingLeerkracht"
                         rows="2"
                         class="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                        placeholder="Enter your comment"
                         @if ($roleid !== 4)
                             readonly
                         @endif
-                    ></textarea>
+                    >{{$leerkrachtPlaceholder}}</textarea>
                 </div>
                 <div class="w-full mt-1">
-                    <label for="comment" class="block text-gray-700 font-bold">Opmerking Student:</label>
+                    <label for="comment" class="block text-gray-700 font-bold">Opmerking leerling:</label>
                     <textarea
-                        id="OpmerkingStudent"
-                        name="OpmerkingStudent"
+                        id="opmerking_Leerling" 
+                        data-dierid = "{{$idtrim}}"
+                        name="opmerkingLeerling"
                         rows="2"
                         class="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                        placeholder="Enter your comment"
-                    ></textarea>
+                    >{{$leerlingPlaceholder}}</textarea>
                 </div>
-                <!-- Submit button -->
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 mt-4 rounded">Submit</button>
             </div>
         </form>
     </div>

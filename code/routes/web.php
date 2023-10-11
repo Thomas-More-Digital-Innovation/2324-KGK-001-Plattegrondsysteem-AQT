@@ -76,7 +76,9 @@ Route::get('/voedsel', function(){
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
-// medische fiche - home
+Route::get('comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
+
+Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
 
 // account - home
 Route::middleware('auth')->group(function () {
@@ -197,7 +199,7 @@ Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'delete
 Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
 
 // data handlers
-Route::post('admin/addopvolging', [OpvolgingController::class, 'addopvolging']);
+Route::post('admin/addeditopvolging', [OpvolgingController::class, 'addeditopvolging']);
 Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'deleteopvolging']);
 
 // admin - logboek

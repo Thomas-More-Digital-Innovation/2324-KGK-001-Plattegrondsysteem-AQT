@@ -1,6 +1,6 @@
 @extends('layout')
-@section('title', 'Homepage')
+@section('title', 'Gebruikers: Aanpassen')
 @section('content')
-    <x-titlebar title="Gebruiker aanpassen" color="FFAD7E"/>
+    <x-titlebar title="Gebruikers: Aanpassen" color="FF7E7E" back=true/>
     @include('components.editUser')
 @endsection

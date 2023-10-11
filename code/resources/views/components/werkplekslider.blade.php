@@ -7,6 +7,10 @@ $clickedName = $id;
 if (strpos($clickedName, "x") !== false) {
     $clickedName = str_replace("x", "", $clickedName);
 }
+// Remove the "y" from $clickedName
+if (strpos($clickedName, "y") !== false) {
+    $clickedName = str_replace("y", "", $clickedName);
+}
 
 $werkplek = DB::table('werkplek')->where('name', $clickedName)->first();
 $werkplekId = $werkplek->id;
