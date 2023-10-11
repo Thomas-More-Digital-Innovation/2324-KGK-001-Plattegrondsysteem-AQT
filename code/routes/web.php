@@ -1,148 +1,186 @@
 <?php
-
-use App\Http\Controllers\ProfileController;
+// Import route handler
 use Illuminate\Support\Facades\Route;
 
+// Import controllers
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\voedselsoortenController;
 use App\Http\Controllers\voederrichtlijnenController;
 use App\Http\Controllers\WerkplaatsadminController;
-
 use App\Http\Controllers\DiersoortController;
 use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
 
+// required for login
+require __DIR__.'/auth.php';
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// assign root route to login page
 Route::get('/', function () {
    return view('auth.login');
 });
 
+// -- user section --
+// main page
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
-Route::get('dierefiche', function () {
-    $id = request('id'); // Retrieve the 'id' query parameter
-    return view('dierefiche', ['id' => $id]); // Pass the 'id' to the view
+// werkplek - home
+Route::get('/werkplek', function () {
+    $id = request('id'); // vraagt id op
+    return view('werkplek', ['id' => $id]); // geeft id mee aan de view
 });
 
-Route::get('protocollen', function () {
-    return view('components.pages.protocollenhome');
- })->name('protocollen');
+// dierenfiche & checklist
+Route::get('/dierefiche', function () {
+    $id = request('id');
+    return view('dierefiche', ['id' => $id]);
+});
 
-Route::get('voederrichtlijnen', function(){ // voederrichtlijnen pagina 1
+// inventaris - home
+Route::get('/inventaris', function(){
+    return view('inventaris');
+})->name('inventaris');
+
+// protocollen - home
+Route::get('/protocollen', function () {
+    return view('components.pages.protocollenhome');
+})->name('protocollen');
+
+// protocollen - type
+Route::get('/protocoltype', function() {
+    $id = request('id');
+    $title = request('t');
+    $color = request('c');
+    return view('components.pages.protocollentypehome', ['id' => $id, 'title' => $title, 'color' => $color]);
+});
+
+// protocollen - detail
+Route::get('/protocolinfo', function() {
+    $id = request('id');
+    $title = request('t');
+    $color = request('c');
+    return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
+});
+
+// voederrichtlijnen - home
+Route::get('/voederrichtlijnen', function(){
     return view('voederrichtlijnen');
 })->name('voederrichtlijnen');
 
-Route::get('voedsel', function(){ // voederrichtlijnen pagina 2
+// voederrichtlijnen - type
+Route::get('/voedsel', function(){
     $id = request('id');
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
-Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
+// medische fiche - home
 
-Route::post('addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
-
-Route::get('deletevoedselsoort/{id}', [voedselsoortenController::class, 'deletevoedselSoort']);
-
-Route::get('editvoedselsoort/{id}', [voedselsoortenController::class, 'editvoedselSoort']);
-Route::put('updatevoedselsoort/{id}', [voedselsoortenController::class, 'updatevoedselSoort']);
-
-Route::get('voedingsrichtlijnenadmin', [voederrichtlijnenController::class , 'voederrichtlijnen'])->middleware('auth')->name('voederrichtlijnenadmin');
-
-Route::post('addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoederrichtlijn']);
-
-Route::get('deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
-
-Route::get('editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
-Route::put('updatevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'updateVoederrichtlijn']);
-
-Route::get('account', [HomeController::class, 'account'])->middleware('auth')->name('account');
-Route::get('students', [HomeController::class, 'students'])->middleware('auth')->name('students');
-
-Route::post('addUser', [HomeController::class, 'addUser'])->middleware('auth');
-
-Route::get('deleteuser/{id}', [HomeController::class, 'deleteUser'])->middleware('auth');
-
-Route::get('edituser/{id}', [HomeController::class, 'editUser'])->middleware('auth');
-Route::put('updateuser/{id}', [HomeController::class, 'updateUser'])->middleware('auth');
-
-Route::get('home', [HomeController::class, 'index'])->middleware('auth')->name('home');
-
-
+// account - home
 Route::middleware('auth')->group(function () {
-   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('werkplek', function () {
-   $id = request('id'); // vraagt id op
-   return view('werkplek', ['id' => $id]); // geeft id mee aan de view
-});
+// redir to /profile? idk
+Route::get('/account', [HomeController::class, 'account'])->middleware('auth')->name('account');
 
-Route::get('protocoltype', function() {
-   $id = request('id');
-   $title = request('t');
-   $color = request('c');
-   return view('components.pages.protocollentypehome', ['id' => $id, 'title' => $title, 'color' => $color]);
-});
-
-Route::get('protocolinfo', function() {
-   $id = request('id');
-   $title = request('t');
-   $color = request('c');
-   return view('components.pages.protocolleninfohome', ['id' => $id, 'title' => $title, 'color' => $color]);
-});
-
-Route::get('inventaris', function(){ // pagina inventaris
-   return view('inventaris');
-})->name('inventaris');
+// afmelden
+// --> auth.php
 
 // -- admin section --
-// admin homepage
-Route::get('admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
+// admin - home
+Route::get('/admin', [HomeController::class, 'adminhome'])->middleware('auth')->name('admin');
 
-// admin protocollen
+// admin - studenten
+// view pages
+Route::get('/students', [HomeController::class, 'students'])->middleware('auth')->name('students');
+Route::get('/edituser/{id}', [HomeController::class, 'editUser'])->middleware('auth');
+
+// data handlers
+Route::post('/addUser', [HomeController::class, 'addUser'])->middleware('auth');
+Route::put('/updateuser/{id}', [HomeController::class, 'updateUser'])->middleware('auth');
+Route::get('/deleteuser/{id}', [HomeController::class, 'deleteUser'])->middleware('auth');
+
+// admin - protocollen
 // view pages
 Route::get('/admin/protocollen', [ProtocollenController::class, 'protocoladmin'])->middleware('auth')->name('protocoladmin');
 Route::get('/admin/protocollen/edit/{id}', [ProtocollenController::class, 'protocoledit'])->middleware('auth')->name('protocoledit');
-
-//admin opvolging
-Route::get('admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
-Route::post('admin/addopvolging', [OpvolgingController::class, 'addopvolging']);
-Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'deleteopvolging']);
-
-// admin werkplek
-Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
-Route::get('werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin.index');
-Route::post('werkplaatsadmin/update', [WerkplaatsadminController::class, 'updateWorkplaceStatus'])->name('werkplaatsadmin.update');
-
 
 // data handlers
 Route::post('/admin/protocollen/add/', [ProtocollenController::class, 'protocoladd'])->middleware('auth')->name('protocoladd');
 Route::put('/admin/protocollen/update/{id}', [ProtocollenController::class, 'protocolupdate'])->middleware('auth')->name('protocolupdate');
 Route::get('/admin/protocollen/delete/{id}', [ProtocollenController::class, 'protocoldelete'])->middleware('auth')->name('protocoldelete');
 
+// admin - dier
+// view pages
 
-Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
+// data handlers
 
+
+// admin - diersoort
+// view pages
+Route::get('/dierensoorten', [DiersoortController::class, 'index']);
 Route::get('/dierensoorten/create', function () {
     return view('diersoort-input');
- });
-
-Route::get('/dierensoorten', [DiersoortController::class, 'index']);
-
+});
 Route::get('/dierensoorten/{id}/edit', [DiersoortController::class, 'edit']);
+
+// data handlers
+Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
 Route::put('/dierensoorten/{id}', [DiersoortController::class, 'update']);
 Route::delete('/dierensoorten/{id}', [DiersoortController::class, 'destroy']);
 
-require __DIR__.'/auth.php';
+// admin - werkplaatsen
+// view pages
+Route::get('/werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
+Route::get('/werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin.index');
+
+// data handlers
+Route::post('/werkplaatsadmin/update', [WerkplaatsadminController::class, 'updateWorkplaceStatus'])->name('werkplaatsadmin.update');
+
+// admin - inventaris
+// view pages
+
+
+// admin - voederrichtlijnen
+// view pages
+Route::get('/voedingsrichtlijnenadmin', [voederrichtlijnenController::class , 'voederrichtlijnen'])->middleware('auth')->name('voederrichtlijnenadmin');
+Route::get('/editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
+
+// data handlers
+Route::post('/addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoederrichtlijn']);
+Route::put('/updatevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'updateVoederrichtlijn']);
+Route::get('/deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
+
+// admin - voedselsoorten
+// view pages
+Route::get('/voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
+Route::get('/editvoedselsoort/{id}', [voedselsoortenController::class, 'editvoedselSoort']);
+
+// data handlers
+Route::post('/addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
+Route::put('/updatevoedselsoort/{id}', [voedselsoortenController::class, 'updatevoedselSoort']);
+Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'deletevoedselSoort']);
+
+// admin - medische fiche
+// view pages
+
+// data handlers
+
+
+// admin - opvolging
+// view pages
+Route::get('/admin/opvolging', [OpvolgingController::class, 'opvolging'])->middleware('auth')->name('opvolgingadmin');
+
+// data handlers
+Route::post('admin/addopvolging', [OpvolgingController::class, 'addopvolging']);
+Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'deleteopvolging']);
+
+// admin - logboek
+// view pages
+
+// data handlers
+
+
+?>
