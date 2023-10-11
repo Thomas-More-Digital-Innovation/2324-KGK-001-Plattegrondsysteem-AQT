@@ -1,6 +1,7 @@
 @extends('layout')
-@section('title', 'Voedingsrichtlijnen')
+@section('title', 'Voedingsrichtlijnen: Admin')
 @section('content')
-    <x-titlebar title="Voedingsrichtlijnen beheren" color="FFAD7E"/>
-   @include('components.Voedingsrichtlijnen')
+    <x-titlebar title="Voedingsrichtlijnen: Admin" color="FF7E7E" back=true/>
+    <x-errorhandler />
+    @include('components.Voedingsrichtlijnen')
 @endsection

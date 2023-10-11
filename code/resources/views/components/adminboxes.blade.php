@@ -2,7 +2,7 @@
    <?php 
       $boxes = [
          [
-            'name' => 'Studenten',
+            'name' => 'Gebruikers',
             'url' => route('students'),
             'icon'=> 'mdi:user',
          ],
