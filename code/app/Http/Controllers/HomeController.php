@@ -32,14 +32,14 @@ class HomeController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $username = array($request->input('firstname'), $request->input('lastname'));
+                $username = array($request->input('firstname'), "." , $request->input('lastname'));
                 $email = array($request->input('firstname'),'.',$request->input('lastname'),'@email.com');
 
                 $query = DB::table('users')->insert([
                     'firstname'=>$request->input('firstname'),
                     'lastname'=>$request->input('lastname'),
-                    'username'=>join("", $username),
-                    'email'=>join("", $email),
+                    'username'=>str_replace(" ", "" ,join("", $username)),
+                    'email'=>str_replace(" ", "" ,join("", $email)),
                     'password'=> Hash::make('1234'),
                     'roleid'=>$request->input('role')
                 ]);
@@ -87,6 +87,9 @@ class HomeController extends Controller
                 $user->firstname = $request->input('firstname');
                 $user->lastname = $request->input('lastname');
                 $user->username = $request->input('username');
+                if($request->input('password') == true){
+                    $user->password = Hash::make('1234');
+                }
                 $user->roleid = $request->input('role');
                 $user->update();
                 return redirect('/students');
@@ -196,6 +199,18 @@ class HomeController extends Controller
             else {DB::table("comment")
                 ->insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
             };
+        return back();
+    }
+
+    public function checkitemadd($id, $id2, $id3, $id4) {
+        $dierid = $id3;
+        $value = $id;
+        $type = $id2;
+        DB::table('checkitem')->insert([
+            'dierid'=>$dierid,
+            $type=>$value, 
+            'datetime'=>$id4
+        ]);
         return back();
     }
 

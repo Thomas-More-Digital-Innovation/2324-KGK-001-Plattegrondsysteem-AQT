@@ -11,6 +11,11 @@
             <input type="text" id="username" name="username" placeholder="JohnDoe" value="{{$user->username}}" class="text-black" required>
 
             <div>
+                <input type="checkbox" name="password" id="password">
+                <label for="password">Wachtwoord reseten</label>
+            </div>
+            
+            <div>
                 <input type="radio" id="student" name="role" value="2" @if($user->roleid === 2) checked @endif required>
                 <label for="student">student</label>   
             </div>
@@ -18,6 +23,7 @@
                 <input type="radio" id="dierenarts" name="role" value="3" @if($user->roleid === 3) checked @endif>
                 <label for="dierenarts">dierenarts</label>
             </div>
+
 
             <div>
                 <input type="radio" id="leerkracht" name="role" value="4" @if($user->roleid === 4) checked @endif>

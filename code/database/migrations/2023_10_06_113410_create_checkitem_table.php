@@ -13,15 +13,20 @@ return new class extends Migration
     {
         Schema::create('checkitem', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('protocoldetailid')->nullable(false);
+            $table->foreignId('protocoldetailid')->nullable(true);
+            $table->foreignId('dierid')->nullable(false);
             $table->datetime('datetime')->nullable(false);
-            $table->boolean('checked');
-            $table->double('temperatuur');
-            $table->double('gewicht');
+            $table->boolean('checked')->nullable(true);
+            $table->double('temperatuur')->nullable(true);
+            $table->double('gewicht')->nullable(true);
 
             $table->foreign('protocoldetailid')
                ->references('id')
                ->on('protocoldetail');
+            
+            $table->foreign('dierid')
+               ->references('id')
+               ->on('dier');
         });
     }
 

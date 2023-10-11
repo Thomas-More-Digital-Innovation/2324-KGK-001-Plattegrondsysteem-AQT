@@ -11,6 +11,9 @@ use App\Http\Controllers\WerkplaatsadminController;
 use App\Http\Controllers\DiersoortController;
 use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
+use App\Http\Controllers\InventarisadminController;
+use App\Http\Controllers\LampController;
+
 
 // required for login
 require __DIR__.'/auth.php';
@@ -74,6 +77,12 @@ Route::get('/voedsel', function(){
     return view('voedsel', ['id' => $id]);
 })->name('voedsel');
 
+Route::get('comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
+
+Route::get('checkitem/{id}/{id2}/{id3}/{id4}', [HomeController::class, 'checkitemadd']);
+
+Route::get('voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
+
 // account - home
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -132,14 +141,34 @@ Route::delete('/dierensoorten/{id}', [DiersoortController::class, 'destroy']);
 
 // admin - werkplaatsen
 // view pages
-Route::get('/werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin');
 Route::get('/werkplaatsadmin', [WerkplaatsadminController::class, 'index'])->name('werkplaatsadmin.index');
 
 // data handlers
 Route::post('/werkplaatsadmin/update', [WerkplaatsadminController::class, 'updateWorkplaceStatus'])->name('werkplaatsadmin.update');
 
+// admin inventarisselect
+Route::get('/inventarisselect', function(){
+    return view('inventarisselect');
+})->name('inventarisselect');
+
+Route::get('/lampadmin', function(){
+    return view('lampadmin');
+})->name('lampadmin');
+
 // admin - inventaris
 // view pages
+Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
+
+// data handlers
+Route::post('/inventarisadmin/make', [InventarisadminController::class, 'makeInventaris'])->name('inventarisadmin.makeInventaris');
+Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->name('inventarisadmin.post');
+
+// admin - lamp
+Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin');
+
+// data handlers
+Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
+
 
 
 // admin - voederrichtlijnen

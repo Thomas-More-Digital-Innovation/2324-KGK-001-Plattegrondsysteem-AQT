@@ -20,8 +20,8 @@ class WerkplaatsadminController extends Controller
         }
     }
 
-    public function updateWorkplaceStatus(Request $request)
-    {
+    
+    public function updateWorkplaceStatus(Request $request) {
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
