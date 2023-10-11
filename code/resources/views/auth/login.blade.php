@@ -11,6 +11,13 @@
     <div class="grid place-items-center h-screen">
         <auth-session-status :status="session('status')" />
         <x-application-logo class="w-20 h-20 mx-auto"/>
+
+        @if ($errors->has('password'))
+            <div class="alert alert-danger">
+                {{ $errors->first('password') }}
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}" class=" md:flex flex-col md:justify-center w-80">
             @csrf
 
