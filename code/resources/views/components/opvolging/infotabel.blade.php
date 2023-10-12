@@ -18,8 +18,8 @@
                         <label for="protocolselect">Protocol <span class="text-red-500">*</span></label>
                         <select id="protocolselect" name="protocolselect" required class="cursor-pointer rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset hover:bg-black hover:bg-opacity-5 ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-nav">
                             <option value='default' disabled selected>Kies protocol</option>
-                            @foreach ($protocoldetail as $p)
-                            <option value={{$p->protocoldetailid}}>{{$p->name}}</option>
+                            @foreach ($protocols as $p)
+                            <option value={{$p->id}}>{{$p->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -28,10 +28,10 @@
                         <select id="diersoortselect" name="diersoortselect" required class="cursor-pointer grow rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset hover:bg-black hover:bg-opacity-5 ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-nav">
                             <option value='default' disabled selected>Kies diersoort</option>
                             {{$old = null}}
-                            @foreach ($diersoort as $d)
-                            @if ($d->diersoortid != $old)
-                                <option value={{$d->diersoortid}}>{{$d->name}}</option>
-                                {{$old = $d->diersoortid}}
+                            @foreach ($diersoorten as $d)
+                            @if ($d->id != $old)
+                                <option value={{$d->id}}>{{$d->name}}</option>
+                                {{$old = $d->id}}
                             @endif
                             @endforeach
                         </select>
