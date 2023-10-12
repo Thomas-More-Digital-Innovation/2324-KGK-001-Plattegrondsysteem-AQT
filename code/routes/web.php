@@ -164,6 +164,7 @@ Route::get('/lampadmin', function(){
 // admin - inventaris
 // view pages
 Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
+Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
 
 // data handlers
 Route::get('deleteinventaris/{id}', [InventarisadminController::class, 'deleteinventaris']);
@@ -172,6 +173,7 @@ Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->nam
 
 // admin - lamp
 Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin');
+
 
 // data handlers
 Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
