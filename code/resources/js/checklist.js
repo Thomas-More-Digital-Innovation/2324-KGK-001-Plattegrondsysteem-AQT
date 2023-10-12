@@ -4,9 +4,18 @@ const checklistItemsnm = document.querySelectorAll('input[type="checkbox"][name^
 checklistItemsvm.forEach(itemvm => {
     itemvm.addEventListener('click', function() {
         if (itemvm.checked) {
-            console.log('Checkbox is checked');
-            const protocolid = itemvm.getAttribute('id')
-            console.log(protocolid);
+            const checked = 1;
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 19).replace("T", " ");
+            const inputType = "checked";
+            const dierid = itemvm.getAttribute("data-dierid");
+            const protocol = itemvm.getAttribute('id');
+            const protocolid = protocol.replace(/checkboxvoormiddag/, '')
+            console.log("Checked :" + checked);
+            console.log("date " +formattedDate);
+            console.log("dierid " + dierid);
+            console.log("protocolid " + protocolid);
+            window.location.href = "checkboxitem/" + checked + "/" + inputType + "/" + dierid + "/" + formattedDate + "/" + protocolid; 
         };
     });
 });
@@ -14,9 +23,18 @@ checklistItemsvm.forEach(itemvm => {
 checklistItemsnm.forEach(itemnm => {
     itemnm.addEventListener('click', function() {
         if (itemnm.checked) {
-            console.log('Checkbox is checked');
-            const protocolid = itemnm.getAttribute('id')
+            const checked = 1;
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 19).replace("T", " ");
+            const inputType = "checked"
+            const dierid = itemnm.getAttribute("data-dierid");
+            const protocol = itemnm.getAttribute('id');
+            const protocolid = protocol.replace(/checkboxnamiddag/, '');
+            console.log(checked);
+            console.log(formattedDate);
+            console.log(dierid);
             console.log(protocolid);
+            window.location.href = "checkboxitem/" + checked + "/" + inputType + "/" + dierid + "/" + formattedDate + "/" + protocolid; 
         };
     });
 });

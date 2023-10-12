@@ -2,9 +2,11 @@
 @vite(['resources/js/biomedisch.js'])
 @vite(['resources/js/checklist.js'])
 
+
 <?php
+setlocale(LC_TIME, 'nl_NL');
 $currentDate = date('Y-m-d');
-$dayOfWeek = date('l', strtotime($currentDate));
+$dayOfWeek = strftime('%A', strtotime($currentDate)); 
 $count = 0;
 
 $idtrim = trim($id, 'ds');
@@ -54,6 +56,19 @@ $checkitemtemperatuur = DB::table('checkitem')
     ->first();
 
 
+$checkboxitemsvm = DB::table('checkitem')
+    ->where('dierid', '=', $idtrim)
+    ->where('checked', '!=', null)
+    ->whereRaw('DATE(datetime) = CURDATE()')
+    ->whereRaw('TIME(datetime) < "12:00:00"') // Voormiddag is voor 12:00 uur
+    ->get();
+
+$checkboxitemsnm = DB::table('checkitem')
+    ->where('dierid', '=', $idtrim)
+    ->where('checked', '!=', null)
+    ->whereRaw('DATE(datetime) = CURDATE()')
+    ->whereRaw('TIME(datetime) > "12:00:00"') // Namiddag is na 12:00 uur
+    ->get();
 ?>
 
 <div class="flex justify-end h-screen m-5">
@@ -75,16 +90,19 @@ $checkitemtemperatuur = DB::table('checkitem')
                     </thead>
                     <tbody>
                         <?php foreach ($protocolnames as $protocol): ?>
-                        <tr class="text-center">
+                            <tr class="text-center">
                             <td class="border-2"><?php echo $protocol->name; ?></td>
                             <td class="border-2">
-                                <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}" name="checkboxvoormiddag{{$protocol->id}}" value="{{$protocol->id}}">
+                            <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}" name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
+                        <?php if($checkboxitemsvm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
                             </td>
                             <td class="border-2">
-                                <input type="checkbox" id="checkboxnamiddag{{$protocol->id}}" name="checkboxnamiddag{{$protocol->id}}" value="{{$protocol->id}}">
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
+                                <input type="checkbox" id="checkboxnamiddag{{$protocol->id}}" name="checkboxnamiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
+                                    <?php if($checkboxitemsnm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
+                                </td>
+                                </tr>
+                            <?php endforeach; ?>
+
                         <!-- New rows for weight and temperature -->
                         <tr class="text-center">
                             <td class="border-2">
