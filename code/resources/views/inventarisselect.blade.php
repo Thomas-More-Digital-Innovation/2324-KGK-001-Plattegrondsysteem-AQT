@@ -7,12 +7,12 @@
     <?php 
     $boxes = [
        [
-          'name' => 'Inventaris Aanmaken',
+          'name' => 'Inventaris Beheren',
           'url' => route('inventarisadmin'),
           'icon'=> 'solar:checklist-minimalistic-outline',
        ],
        [
-          'name' => 'Lamp Aanmaken',
+          'name' => 'Lamp Beheren',
           'url' => route('lampadmin'),
           'icon'=> 'lucide:lamp-desk',
        ]

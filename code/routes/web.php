@@ -166,6 +166,7 @@ Route::get('/lampadmin', function(){
 Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
 
 // data handlers
+Route::get('deleteinventaris/{id}', [InventarisadminController::class, 'deleteinventaris']);
 Route::post('/inventarisadmin/make', [InventarisadminController::class, 'makeInventaris'])->name('inventarisadmin.makeInventaris');
 Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->name('inventarisadmin.post');
 
