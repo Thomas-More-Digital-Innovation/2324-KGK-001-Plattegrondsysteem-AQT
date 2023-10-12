@@ -35,6 +35,21 @@ class LampController extends Controller
             }
         }
     }
+
+    public function deleteLamp($id){
+        if (Auth::id()) {
+            $roleID = Auth::user()->roleid;
+            if ($roleID == 4) {
+                $lamp = DB::table('lamp')->where('id', $id);
+                $lamp->delete();
+
+                return back();
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
     
 }
 
