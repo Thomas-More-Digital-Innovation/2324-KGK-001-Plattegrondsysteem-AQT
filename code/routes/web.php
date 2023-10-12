@@ -9,6 +9,7 @@ use App\Http\Controllers\voedselsoortenController;
 use App\Http\Controllers\voederrichtlijnenController;
 use App\Http\Controllers\WerkplaatsadminController;
 use App\Http\Controllers\DiersoortController;
+use App\Http\Controllers\DierController;
 use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
 use App\Http\Controllers\InventarisadminController;
@@ -122,21 +123,26 @@ Route::get('/admin/protocollen/delete/{id}', [ProtocollenController::class, 'pro
 
 // admin - dier
 // view pages
+Route::get('/dier', [DierController::class, 'index'])->name('dier');
+Route::get('/dier/create', [DierController::class, 'viewinput']);
 
 // data handlers
-
+Route::post('/dier-submit', [DierController::class, 'diersubmit']);
+Route::delete('/dier-verwijderen/{id}', [DierController::class, 'dierverwijderen']);
+Route::get('/dier-edit/{id}', [DierController::class, 'diersoortedit']);
+Route::put('/dier-update/{id}', [DierController::class, 'dierupdate']);
 
 // admin - diersoort
 // view pages
-Route::get('/dierensoorten', [DiersoortController::class, 'index']);
+Route::get('/dierensoorten', [DiersoortController::class, 'index'])->name('dierensoorten');
 Route::get('/dierensoorten/create', function () {
     return view('diersoort-input');
 });
-Route::get('/dierensoorten/{id}/edit', [DiersoortController::class, 'edit']);
 
 // data handlers
 Route::post('/diersoort-submit', [DiersoortController::class, 'diersoortsubmit']);
-Route::put('/dierensoorten/{id}', [DiersoortController::class, 'update']);
+Route::get('/diersoort-edit/{id}', [DiersoortController::class, 'diersoortedit']);
+Route::put('/diersoort-update/{id}', [DiersoortController::class, 'diersoortupdate']);
 Route::delete('/dierensoorten/{id}', [DiersoortController::class, 'destroy']);
 
 // admin - werkplaatsen

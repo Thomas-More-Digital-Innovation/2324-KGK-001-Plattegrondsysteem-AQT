@@ -6,51 +6,146 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DiersoortController extends Controller
 {
     
     public function diersoortsubmit(Request $request)
     {
-        $name = $request->input('name');
-        $latinname = $request->input('latinname');
-        
-        $fotoname = $request->file('foto')->getClientOriginalName();
-        $foto = $request->file('foto')->storeAs('/images', $fotoname, 'public_uploads');
-        
-        $filename = $request->file('file')->getClientOriginalName();
-        $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
-    
-        DB::table('diersoort')->insert([
-            'name' => $name,
-            'latinname' => $latinname,
-            'foto' => $foto,
-            'file' => $file,
-        ]);
-    
-        return redirect('/dierensoorten');
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                
+                $name = $request->input('name');
+                $latinname = $request->input('latinname');
+                
+                $fotoname = $request->file('foto')->getClientOriginalName();
+                $foto = $request->file('foto')->storeAs('/images', $fotoname, 'public_uploads');
+                
+                $filename = $request->file('file')->getClientOriginalName();
+                $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+            
+                DB::table('diersoort')->insert([
+                    'name' => $name,
+                    'latinname' => $latinname,
+                    'foto' => $foto,
+                    'file' => $file,
+                ]);
+            
+                return redirect('dierensoorten');
+
+            }
+            else{
+                abort(401);
+            }
+        }
     }
     
     public function index()
     {
-        $dierensoorten = DB::table('diersoort')->get();
-        return view('dierensoorten', ['dierensoorten' => $dierensoorten]);
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                
+                $dierensoorten = DB::table('diersoort')->get();
+                return view('dierensoorten', ['dierensoorten' => $dierensoorten]);
+
+            }
+            else{
+                abort(401);
+            }
+        }
     }
 
     public function destroy($id)
     {
-        $used = DB::table('dier')->where('diersoortid', $id)->exists() || DB::table('dierprotocol')->where('diersoortid', $id)->exists();
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                
+                $usedDier = DB::table('dier')->where('diersoortid', $id)->exists();
+                $usedDierprotocol = DB::table('dierprotocol')->where('diersoortid', $id)->exists();
+        
+                if ($usedDier && $usedDierprotocol) {
+                    
+                    DB::table('dier')->where('diersoortid', $id)->delete();
+                    DB::table('dierprotocol')->where('diersoortid', $id)->delete();
+                    DB::table('diersoort')->where('id', $id)->delete();
+        
+                } elseif ($usedDier && $usedDierprotocol == False) {
+                    DB::table('dier')->where('diersoortid', $id)->delete();
+                    DB::table('diersoort')->where('id', $id)->delete();
+                } elseif ($usedDier  == False && $usedDierprotocol) {
+                    DB::table('diersoort')->where('id', $id)->delete();
+                    DB::table('dierprotocol')->where('diersoortid', $id)->delete();
+                } else {
+                    DB::table('diersoort')->where('id', $id)->delete();
+                }
+        
+                return redirect('dierensoorten');
 
-        if ($used) {
-            
-            DB::table('dier')->where('diersoortid', $id)->delete();
-            DB::table('dierprotocol')->where('diersoortid', $id)->delete();
-            DB::table('diersoort')->where('id', $id)->delete();
-
-        } else {
-            DB::table('diersoort')->where('id', $id)->delete();
+            }
+            else{
+                abort(401);
+            }
         }
+    }
 
-        return redirect('/dierensoorten');
+    public function diersoortedit($id)
+    {
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                
+                $diersoortEdit = DB::table('diersoort')->where('id', $id)->first();
+                return view('diersoort-edit', compact('diersoortEdit'));
+
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function diersoortupdate(Request $request, $id)
+    {
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                
+                $name = $request->input('name');
+                $latinname = $request->input('latinname');
+        
+                $foto = $request->input('fotoOld');
+                $file = $request->input('fileOld');
+                
+                if($request->hasFile('foto')){
+                    $fotoname = $request->file('foto')->getClientOriginalName();
+                    $foto = $request->file('foto')->storeAs('/images', $fotoname, 'public_uploads');          
+                }
+                
+                
+                if ($request->hasFile('file')){ 
+                    $filename = $request->file('file')->getClientOriginalName();
+                    $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+                }
+                
+                DB::table('diersoort') 
+                    ->where('id', $id)
+                    ->update([
+                        'name' => $name,
+                        'latinname' => $latinname,
+                        'foto' => $foto,
+                        'file' => $file,
+                    ]);
+        
+                return redirect('dierensoorten');
+
+            }
+            else{
+                abort(401);
+            }
+        }
     }
 }
