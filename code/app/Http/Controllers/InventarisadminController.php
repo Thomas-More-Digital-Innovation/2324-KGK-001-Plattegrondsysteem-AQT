@@ -90,4 +90,17 @@ public function makeInventaris(Request $request)
             }
         }
     }
+    public function deleteInventaris($id)
+    {
+        if (Auth::id()) {
+            $roleID = Auth::user()->roleid;
+            if ($roleID == 4) {
+                DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
+                DB::table('inventaris')->where('id', '=', $id)->delete();
+                return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
+            } else {
+                abort(401);
+            }
+        }
+    }
 }
