@@ -22,7 +22,7 @@
                     window.location.href = "werkplek?id=" + id;
                 });
             } else {
-                wp.setAttribute('fill', '#949494');
+                wp.setAttribute('fill', '#FF7E7E');
             };
         };
     });
