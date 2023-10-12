@@ -90,17 +90,21 @@ public function makeInventaris(Request $request)
             }
         }
     }
-    public function deleteInventaris($id)
-    {
-        if (Auth::id()) {
-            $roleID = Auth::user()->roleid;
-            if ($roleID == 4) {
-                DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
-                DB::table('inventaris')->where('id', '=', $id)->delete();
-                return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
+   public function deleteInventaris($id)
+   {
+      if (Auth::id()) {
+         $roleID = Auth::user()->roleid;
+         if ($roleID == 4) {
+            if (!DB::table('dier')->where('inventarisid', '=', $id)->exists()) {
+               DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
+               DB::table('inventaris')->where('id', '=', $id)->delete();
+               return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
             } else {
-                abort(401);
+               return back()->with('error', 'Inventaris kan niet worden verwijderd omdat er nog dieren aan gekoppeld zijn.');
             }
-        }
-    }
+         } else {
+            abort(401);
+         }
+      }
+   }
 }
