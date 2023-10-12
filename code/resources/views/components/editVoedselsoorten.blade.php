@@ -19,6 +19,5 @@
     </div>
     <div class="md:flex md:justify-center">
         <a href="{{url('voedselsoorten')}}">Annuleren</a>
-    </div>
-   
+    </div> 
 </div>

@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Werkplaatsen: Admin')
 @section('content')
-<x-titlebar title="Admin: Werkplek" color="FF7E7E" back=true/>
+<x-titlebar title="Admin: Werkplek" color="FF7E7E" back=true link="/admin"/>
 
 <div class="w-80 mx-auto mb-8 pt-20">
 

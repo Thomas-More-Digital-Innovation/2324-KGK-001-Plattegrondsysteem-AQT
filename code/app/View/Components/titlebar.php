@@ -11,11 +11,12 @@ class titlebar extends Component
     /**
      * Create a new component instance.
      */
-   public function __construct(
-      public string $title,
-      public string $color,
-      public bool $back = false,
-   ) {}
+    public function __construct(
+        public string $title,
+        public string $color,
+        public bool $back = false,
+        public string $link = '/home',
+    ) {}
 
     /**
      * Get the view / contents that represent the component.
