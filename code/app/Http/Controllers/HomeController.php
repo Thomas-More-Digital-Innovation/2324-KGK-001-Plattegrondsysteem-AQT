@@ -213,7 +213,18 @@ class HomeController extends Controller
         ]);
         return back();
     }
-
+    public function checkboxitemadd($id, $id2, $id3, $id4, $id5) {
+        $dierid = $id3;
+        $value = $id;
+        $type = $id2;
+        DB::table('checkitem')->insert([
+            'dierid'=>$dierid,
+            $type=>$value, 
+            'datetime'=>$id4,
+            'protocoldetailid'=>$id5
+        ]);
+        return back();
+    }
     // public function protocoldelete($id){
     //     if(Auth::id()){
     //         $roleID=Auth()->user()->roleid;
