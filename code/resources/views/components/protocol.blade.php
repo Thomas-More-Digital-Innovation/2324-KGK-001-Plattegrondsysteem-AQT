@@ -71,7 +71,7 @@ $checkboxitemsnm = DB::table('checkitem')
     ->get();
 ?>
 
-<div class="flex justify-end h-screen m-5">
+<div class="flex justify-end h-screen">
     <div class="flex flex-col items-center">
         <h3>Opvolging</h3>
         <form method="post" action="process_form.php"> <!-- Replace "process_form.php" with your actual server-side script -->
