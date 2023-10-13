@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title', 'Voederrichtlijnen')
 @section('content')
-   <x-titlebar title="Voederrichtlijnen" color="8DE300"/>
+   <x-titlebar title="Voederrichtlijnen" color="FFAD7E"/>
    @include('components.voedselsoorten')
 @endsection
