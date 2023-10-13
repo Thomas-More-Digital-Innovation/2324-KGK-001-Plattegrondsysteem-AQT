@@ -40,10 +40,13 @@ class LampController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
+            if (!DB::table('lampkant')->where('lampid', '=', $id)->exists()) {
                 $lamp = DB::table('lamp')->where('id', $id);
                 $lamp->delete();
-
                 return back();
+            } else {
+                return back()->with('error', 'Lamp kan niet worden verwijderd omdat deze nog aan een inventaris gekoppeld is.');
+            }
             }
             else{
                 abort(401);

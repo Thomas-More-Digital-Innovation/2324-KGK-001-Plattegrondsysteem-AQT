@@ -2,7 +2,7 @@
 @section('title', 'adminlampaanmaken')
 @section('content')
 <x-titlebar title="Admin: Lamp Aanmaken" color="FF7E7E" back=true link="/inventarisselect"/>
-
+<x-errorhandler />
 <div class="w-3/4 mx-auto mb-8 pt-20 text-center">
 
     <form method="POST" action="{{ route('lampadmin.make') }}">
