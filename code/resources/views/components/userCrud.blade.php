@@ -42,19 +42,13 @@
                     <td>{{$data->lastname}}</td>
                     <td>{{$data->username}}</td>
                     <td>{{$data->email}}</td>
-                    <td>
-                    <?php
-                        if($data->roleid == 2){
-                            echo 'student';
-                        }
-                        else if ($data->roleid == 3){
-                            echo 'dierenarts';
-                        }
-                        else if($data->roleid ==4){
-                            echo 'leerkracht';
-                        }
-                    ?>
-                    </td>
+                        @foreach($roles as $role)
+                            @if($role->id == $data->roleid)
+                            <td>{{$role->rolename}}</td>
+                            @endif
+                        @endforeach
+
+                    @if($data->id != $userID)
                     <td>
                         <a href="{{url('edituser/'.$data->id)}}">aanpassen</a>
                     </td>
@@ -62,6 +56,7 @@
                         <a href="{{url('deleteuser/'.$data->id)}}">verwijderen</a>
                     </td>
 
+                    @endif
                 </tr>
             @endforeach
         </table>

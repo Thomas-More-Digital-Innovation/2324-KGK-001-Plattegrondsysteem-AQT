@@ -20,7 +20,9 @@ class HomeController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 $users = DB::table('users')->get();
-                return view('AdminDashboard', ['users' => $users]);
+                $userID = Auth()->user()->id;
+                $roles = DB::table('role')->get();
+                return view('AdminDashboard', ['users' => $users, 'userID' => $userID, 'roles' => $roles]);
             }
             else{
                 abort(401);

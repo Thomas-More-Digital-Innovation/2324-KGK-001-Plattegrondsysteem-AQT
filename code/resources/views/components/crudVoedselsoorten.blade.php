@@ -30,9 +30,13 @@
             @foreach($voedingsType as $data)
                 <tr>
                     <td>{{$data->name}}</td>
-                    <td>
-                        {{$data->voedingsrichtlijnid}}
-                    </td>
+
+                    @foreach($voedingsRichtlijnen as $richtlijn)
+                        @if($richtlijn->id == $data->voedingsrichtlijnid)
+                        <td>{{$richtlijn->name}}</td>
+                        @endif
+                    @endforeach
+
                     <td>{{$data->icon}}</td>
                     <td>
                         <a href="{{url('editvoedselsoort/'.$data->id)}}">aanpassen</a>
