@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('comment')->nullable(false);
 
             $table->foreign('dierid')
-               ->references('id')
-               ->on('diersoort');
+                ->references('id')
+                ->on('dier');
         });
     }
 
