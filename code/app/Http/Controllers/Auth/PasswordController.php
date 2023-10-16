@@ -28,7 +28,7 @@ class PasswordController extends Controller
                 'password' => Hash::make($validated['password']),
             ]);
 
-            return back()->with('success', "Paswoord is aangepast");
+            return back()->with('succes', "Paswoord is aangepast");
         }
         else{
             return back()->with('error', "Paswoord is niet aangepast");
