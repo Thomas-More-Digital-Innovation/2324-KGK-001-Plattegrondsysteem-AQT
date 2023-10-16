@@ -217,12 +217,21 @@ class HomeController extends Controller
         $dierid = $id3;
         $value = $id;
         $type = $id2;
-        DB::table('checkitem')->insert([
-            'dierid'=>$dierid,
-            $type=>$value, 
-            'datetime'=>$id4,
-            'protocoldetailid'=>$id5
-        ]);
+        if ($value == 1){
+            DB::table('checkitem')->insert([
+                'dierid'=>$dierid,
+                $type=>$value, 
+                'datetime'=>$id4,
+                'protocoldetailid'=>$id5
+            ]);
+        }
+        elseif ($value == 0) {
+            // Verwijder de rij met dezelfde protocoldetailid
+            DB::table('checkitem')
+                ->where('protocoldetailid', $id5)
+                ->delete();
+            
+        };
         return back();
     }
     // public function protocoldelete($id){
