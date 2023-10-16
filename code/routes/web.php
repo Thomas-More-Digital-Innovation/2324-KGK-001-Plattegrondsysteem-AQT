@@ -185,10 +185,10 @@ Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin
 // admin - voederrichtlijnen
 // view pages
 Route::get('/voedingsrichtlijnenadmin', [voederrichtlijnenController::class , 'voederrichtlijnen'])->middleware('auth')->name('voederrichtlijnenadmin');
-Route::get('/editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
+// Route::get('/editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
 
 // data handlers
-Route::post('/addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoederrichtlijn']);
+Route::post('/addeditvoedingsrichtlijn', [voederrichtlijnenController::class, 'addeditVoederrichtlijn']);
 Route::put('/updatevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'updateVoederrichtlijn']);
 Route::get('/deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
 
