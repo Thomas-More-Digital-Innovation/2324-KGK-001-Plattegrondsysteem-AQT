@@ -4,9 +4,9 @@
 
 
 <?php
-setlocale(LC_TIME, 'nl_NL');
+setlocale(LC_TIME, 'nl_be');
 $currentDate = date('Y-m-d');
-$dayOfWeek = strftime('%A', strtotime($currentDate)); 
+$dayOfWeek = ucfirst(strftime('%A', strtotime($currentDate))); 
 $count = 0;
 
 $idtrim = trim($id, 'ds');
@@ -58,20 +58,20 @@ $checkitemtemperatuur = DB::table('checkitem')
 
 $checkboxitemsvm = DB::table('checkitem')
     ->where('dierid', '=', $idtrim)
-    ->where('checked', '!=', null)
+    ->where('protocoldetailid', '!=', null)
     ->whereRaw('DATE(datetime) = CURDATE()')
     ->whereRaw('TIME(datetime) < "12:00:00"') // Voormiddag is voor 12:00 uur
     ->get();
 
 $checkboxitemsnm = DB::table('checkitem')
     ->where('dierid', '=', $idtrim)
-    ->where('checked', '!=', null)
+    ->where('protocoldetailid', '!=', null)
     ->whereRaw('DATE(datetime) = CURDATE()')
     ->whereRaw('TIME(datetime) > "12:00:00"') // Namiddag is na 12:00 uur
     ->get();
 ?>
 
-<div class="flex justify-end h-screen">
+<div class="flex justify-end h-screen m-5">
     <div class="flex flex-col items-center">
         <h3>Opvolging</h3>
         <form method="post" action="process_form.php"> <!-- Replace "process_form.php" with your actual server-side script -->
@@ -89,18 +89,18 @@ $checkboxitemsnm = DB::table('checkitem')
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($protocolnames as $protocol): ?>
+                        <?php foreach ($protocolnames as $protocol):?>
                             <tr class="text-center">
                             <td class="border-2"><?php echo $protocol->name; ?></td>
                             <td class="border-2">
-                            <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}" name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
-                        <?php if($checkboxitemsvm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
+                                <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}" name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
+                                <?php if($checkboxitemsvm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
                             </td>
                             <td class="border-2">
                                 <input type="checkbox" id="checkboxnamiddag{{$protocol->id}}" name="checkboxnamiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
-                                    <?php if($checkboxitemsnm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
-                                </td>
-                                </tr>
+                                <?php if($checkboxitemsnm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
+                            </td>
+                            </tr>
                             <?php endforeach; ?>
 
                         <!-- New rows for weight and temperature -->
@@ -136,7 +136,7 @@ $checkboxitemsnm = DB::table('checkitem')
                         @if ($roleid !== 4)
                             readonly
                         @endif
-                    >{{$leerkrachtPlaceholder}}</textarea>
+                    >{{str_replace("%2F","/",$leerkrachtPlaceholder)}}</textarea>
                 </div>
                 <div class="w-full mt-1">
                     <label for="comment" class="block text-gray-700 font-bold">Opmerking leerling:</label>
@@ -146,7 +146,7 @@ $checkboxitemsnm = DB::table('checkitem')
                         name="opmerkingLeerling"
                         rows="2"
                         class="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                    >{{$leerlingPlaceholder}}</textarea>
+                    >{{str_replace("%2F","/",$leerlingPlaceholder)}}</textarea>
                 </div>
             </div>
         </form>
