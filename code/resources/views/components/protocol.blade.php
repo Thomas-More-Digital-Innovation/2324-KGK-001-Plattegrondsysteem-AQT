@@ -71,16 +71,6 @@ $checkboxitemsnm = DB::table('checkitem')
     ->get();
 ?>
 
-<script>
-<?php
-foreach ($checkboxitemsnm as $item) {
-    echo "console.log('Dier ID: " . $item->dierid . "');";
-    echo "console.log('Checked: " . $item->checked . "');";
-    echo "console.log('Datetime: " . $item->datetime . "');";
-}
-?>
-</script>
-
 <div class="flex justify-end h-screen m-5">
     <div class="flex flex-col items-center">
         <h3>Opvolging</h3>

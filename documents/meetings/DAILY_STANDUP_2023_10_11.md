@@ -2,7 +2,7 @@
 
 Meeting time: 20 minuten | 
 Aanwezigen: Matt, Wesley, Nathan, Seppe, Tom, Roel | 
-Geleid door: Hube
+Geleid door: Siebe
 
 ## Verloop
 * Wat heb je gisteren gedaan

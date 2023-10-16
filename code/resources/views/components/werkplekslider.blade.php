@@ -26,8 +26,13 @@ foreach ($dierSoortList as $dierSoort) {
     $dierSoortName = $dierSoort->name;
     $dierSoortLatinName = $dierSoort->latinname;
     $imagePath = $dierSoort->foto;
+    $quarantaine = $dierSoort->quarantaine;
 
-    echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "'>";
+    if ($quarantaine == 0) {
+        echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "'>";
+    } else {
+        echo "<div class='shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "' style='background-color: yellow;'>";
+    }
     echo '<h2 class="text-lg font-semibold mb-2">' . $dierSoortName . '</h2>';
     echo '<p class="text-gray-600 mb-2">Latin Name: ' . $dierSoortLatinName . '</p>';
     if ($imagePath !== false) {

@@ -30,6 +30,10 @@ class opvolginginfotabel extends Component
         ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
         ->get();
 
-        return view('components.opvolging.infotabel', ['protocoldetail' => $info, 'diersoort' => $info2]);
+        $infoProtocols = DB::table('protocoldetail')->get();
+        
+        $infoDiersoorten = DB::table('diersoort')->get();
+
+        return view('components.opvolging.infotabel', ['protocoldetail' => $info, 'diersoort' => $info2, "protocols" => $infoProtocols, "diersoorten" => $infoDiersoorten]);
     }
 }

@@ -7,5 +7,5 @@
 ?>
 
 <div class="flex grow">
-    <iframe src="{{$dierenfiche->file}}?page=hsn#toolbar=0" class="h-screen w-full" title="dierenfiche"></iframe>
+    <iframe src="{{$dierenfiche->file}}" class="h-screen w-full" title="dierenfiche"></iframe>
 </div>

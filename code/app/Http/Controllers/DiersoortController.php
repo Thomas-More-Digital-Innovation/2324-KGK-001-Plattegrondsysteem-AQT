@@ -66,7 +66,8 @@ class DiersoortController extends Controller
                 
                 $usedDier = DB::table('dier')->where('diersoortid', $id)->exists();
                 $usedDierprotocol = DB::table('dierprotocol')->where('diersoortid', $id)->exists();
-        
+                if (DB::table('checkitem')->where('dierid', $id)->exists()) {DB::table('checkitem')->where('dierid', $id)->delete();}
+                if (DB::table('comment')->where('dierid', $id)->exists()) {DB::table('comment')->where('dierid', $id)->delete();}
                 if ($usedDier && $usedDierprotocol) {
                     
                     DB::table('dier')->where('diersoortid', $id)->delete();
