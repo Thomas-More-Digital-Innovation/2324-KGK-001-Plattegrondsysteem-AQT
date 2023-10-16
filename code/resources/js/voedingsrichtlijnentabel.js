@@ -1,37 +1,34 @@
 const modal = document.getElementById('modal');
 const closeModal = document.getElementById('closeModal');
 const openModal = document.getElementById('openModal');
-const diersoortselect = document.getElementById('diersoortselect');
-const protocolselect = document.getElementById('protocolselect');
+const nameinput = document.getElementById('name');
+const iconinput = document.getElementById('icon');
+const colorinput = document.getElementById('color');
+const idhidden = document.getElementById('id');
 const submitModal = document.getElementById('submitModal');
 const modalTitle = document.getElementById('modalTitle');
 const typesubmit = document.getElementById('typesubmit');
-const editopvolgingen = document.querySelectorAll('[id^="editopvolging"]');
-const oldps = document.getElementById('oldps');
-const oldds = document.getElementById('oldds');
+const edit = document.querySelectorAll('[id^="edit"]');
 let menu = false;
+const items = [nameinput, iconinput];
 
-diersoortselect.addEventListener("change", function () {check()})
-protocolselect.addEventListener("change", function () {check()})
+items.forEach(i => {i.addEventListener("change", function () {check()})});
 closeModal.addEventListener("click", function () {close();});
 openModal.addEventListener("click", function () {open();});
 
-editopvolgingen.forEach(eo => {
+edit.forEach(eo => {
     eo.addEventListener("click", function() {
         const idfull = eo.getAttribute('id');
-        const [id, pid, did] = idfull.split('/');
-        open(pid, did);
+        const [_, id, name, icon, color] = idfull.split('/');
+        open(id, name, icon, color);
     });
 });
 
 function check() {
-    if (diersoortselect.value != 'default' && protocolselect.value != 'default') {enable();} 
-    else {disable();};
-};
-
-document.onkeydown = function(e) {
-    if (!menu) { return };
-    if (e.key == "Escape") { close() };
+    let empty = false;
+    items.forEach(i => {if (i.value == "") { empty = true; }; });
+    if (!empty) { return enable(); };
+    return disable();
 };
 
 function disable() {
@@ -50,29 +47,36 @@ function enable() {
     submitModal.classList.add('hover:bg-nav-hover');
 };
 
-function open(pid, did) {
+
+document.onkeydown = function(e) {
+    if (!menu) { return };
+    if (e.key == "Escape") { close() };
+};
+
+function open(id, name, icon, color) {
     modal.classList.add('flex');
     modal.classList.remove('hidden');
     menu = true;
-    if (!pid || !did) { return; };
+    if (!name || !icon || !color) { return; };
     enable();
-    oldps.value = pid;
-    oldds.value = did;
-    protocolselect.value = pid;
-    diersoortselect.value = did;
-    modalTitle.innerText  = 'Link aanpassen';
+    nameinput.value = name;
+    iconinput.value = icon;
+    colorinput.value = "#"+color;
+    colorinput.value = "#"+color;
+    idhidden.value = id;
+    modalTitle.innerText  = 'Voedingsrichtlijn aanpassen';
     submitModal.innerText = 'Aanpassen';
     typesubmit.value = 'edit';
 };
 
 function close() {
     disable();
-    modalTitle.innerText  = 'Protocol linken';
+    modalTitle.innerText  = 'Voedingsrichtlijn toevoegen';
     submitModal.innerText = 'Toevoegen';
     typesubmit.value = 'add';
     modal.classList.add('hidden');
     modal.classList.remove('flex');
-    diersoortselect.value = 'default';
-    protocolselect.value = 'default';
+    items.forEach(i => { i.value = ""; });
+    colorinput.value = '#000000';
     menu = false;
 };
