@@ -36,6 +36,9 @@
                     <td class="border border-black px-4 py-2 text-center">{{ $item->id }}</td>
                     <td class="border border-black px-4 py-2 text-center">{{ $item->name }}</td>
                     <td>
+                        <a href="{{url('lampedit/'.$item->id)}}">Aanpassen</a>
+                    </td>
+                    <td>
                         <a href="{{url('deletelamp/'.$item->id)}}">Verwijderen</a>
                     </td>
                 </tr>
