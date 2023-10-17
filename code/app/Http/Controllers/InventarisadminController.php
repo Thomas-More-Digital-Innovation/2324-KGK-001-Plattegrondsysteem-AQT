@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class InventarisadminController extends Controller
 {
@@ -93,21 +94,58 @@ public function makeInventaris(Request $request)
             }
         }
     }
-   public function deleteInventaris($id)
-   {
-      if (Auth::id()) {
-         $roleID = Auth::user()->roleid;
-         if ($roleID == 4) {
-            if (!DB::table('dier')->where('inventarisid', '=', $id)->exists()) {
-               DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
-               DB::table('inventaris')->where('id', '=', $id)->delete();
-               return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
-            } else {
-               return back()->with('error', 'Inventaris kan niet worden verwijderd omdat er nog dieren aan gekoppeld zijn.');
+    public function inventarisedit($id){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){
+                $inventaris = DB::table('inventaris')->where('id', $id)->first();
+                $lampkant = DB::table('lampkant')->where('inevtarisid', $id)->get();
+                $lampen = DB::table('lamp')->get();
+                return view('inventarisedit', ['inventaris' => $inventaris, 'lampkant'=> $lampkant, 'lampen' => $lampen]);
             }
-         } else {
-            abort(401);
-         }
-      }
-   }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function inventarisupdate($id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                try {
+                    $query = DB::table('protocoldetail')->where('id', $id)->update([
+                        'name'=>request('name'),
+                        'protocoltypeid'=>request('protocoltypeid'),
+                        'icon'=>request('icon'),
+                        'file'=>request('file')
+                    ]);
+                    return redirect('/admin/protocollen');
+                } catch (QueryException $e) {
+                    return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                }
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function deleteInventaris($id)
+    {
+        if (Auth::id()) {
+            $roleID = Auth::user()->roleid;
+            if ($roleID == 4) {
+                if (!DB::table('dier')->where('inventarisid', '=', $id)->exists()) {
+                    DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
+                    DB::table('inventaris')->where('id', '=', $id)->delete();
+                    return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
+                } else {
+                    return back()->with('error', 'Inventaris kan niet worden verwijderd omdat er nog dieren aan gekoppeld zijn.');
+                }
+            } else {
+                abort(401);
+            }
+        }
+    }
 }

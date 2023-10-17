@@ -159,7 +159,7 @@ Route::get('/inventarisselect', function(){
     return view('inventarisselect');
 })->name('inventarisselect');
 
-Route::get('/lampadmin', function(){
+Route::get('/lampadmin', function(){ // do we need this?
     return view('lampadmin');
 })->name('lampadmin');
 
@@ -170,14 +170,16 @@ Route::get('/plantadmin', function(){
 // admin - inventaris
 // view pages
 Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
-Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
+Route::get('/inventarisedit', [InventarisadminController::class, 'inventarisedit'])->name('inventarisedit');
 
 // data handlers
 Route::get('deleteinventaris/{id}', [InventarisadminController::class, 'deleteinventaris']);
 Route::post('/inventarisadmin/make', [InventarisadminController::class, 'makeInventaris'])->name('inventarisadmin.makeInventaris');
+Route::put('/inventarisadmin/update', [InventarisadminController::class, 'inventarisupdate'])->name('inventarisadmin.update');
 Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->name('inventarisadmin.post');
 
 // admin - lamp
+
 Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin');
 
 // data handlers
@@ -192,15 +194,20 @@ Route::post('/plantadmin/make', [PlantController::class, 'make'])->name('plantad
 Route::post('/plantadmin/koppel', [PlantController::class, 'koppel'])->name('plantadmin.koppel');
 Route::get('/deleteplant/{id}', [PlantController::class, 'deleteplant'])->middleware('auth');
 
+Route::get('/lampedit/{id}', [LampController::class, 'lampedit'])->name('lampedit');
+
+Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
+Route::post('/lampadmin/update/{id}', [LampController::class, 'lampupdate'])->name('lampupdate');
+Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
 
 
 // admin - voederrichtlijnen
 // view pages
 Route::get('/voedingsrichtlijnenadmin', [voederrichtlijnenController::class , 'voederrichtlijnen'])->middleware('auth')->name('voederrichtlijnenadmin');
-Route::get('/editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
+// Route::get('/editvoedingsrichtlijn/{id}', [voederrichtlijnenController::class,'editVoederrichtlijn']);
 
 // data handlers
-Route::post('/addvoedingsrichtlijn', [voederrichtlijnenController::class, 'addVoederrichtlijn']);
+Route::post('/addeditvoedingsrichtlijn', [voederrichtlijnenController::class, 'addeditVoederrichtlijn']);
 Route::put('/updatevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'updateVoederrichtlijn']);
 Route::get('/deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class, 'deleteVoederrichtlijn']);
 

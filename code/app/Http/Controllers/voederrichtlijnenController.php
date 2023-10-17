@@ -26,16 +26,38 @@ class voederrichtlijnenController extends Controller
         }
     }
 
-    public function addVoederrichtlijn(Request $request){
+    public function addeditVoederrichtlijn(Request $request){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 try {
-                    $query = DB::table('voedingsrichtlijnen')->insert([
-                        'name'=>$request->input('name'),
-                        'icon'=>$request->input('icon'),
-                        'color'=>$request->input('color'),
-                    ]);
+                    $c = strtoupper(trim($request->input('color'), "#"));
+                    $id = $request->input('id');
+                    $n = $request->input('name');
+                    $i = $request->input('icon');
+                    if (!DB::table('voedingsrichtlijnen')->where([
+                        ['name', '=', $n],
+                        ['icon', '=', $i],
+                        ['color', '=', $c],
+                    ])->exists()) {
+                        if ($request->input('typesubmit') == "add") {
+                            DB::table('voedingsrichtlijnen')->insert([
+                                'name'=>$n,
+                                'icon'=>$i,
+                                'color'=>$c,
+                            ]);
+                        } elseif ($request->input('typesubmit') == "edit") {
+                            DB::table('voedingsrichtlijnen')
+                            ->where('id', $id)
+                            ->update([
+                                "name"=>$n,
+                                "icon"=>$i,
+                                "color"=>$c,
+                            ]);
+                        }
+                    } else {
+                        return back()->with('error', 'Deze combinatie bestaat al!');;
+                    }
                     return back();
                 } catch (QueryException $e) {
                     return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
