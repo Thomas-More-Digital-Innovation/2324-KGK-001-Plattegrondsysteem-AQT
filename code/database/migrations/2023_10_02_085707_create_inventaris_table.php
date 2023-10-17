@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventaris', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('werkplekid')->nullable(true);
-
+            $table->foreignId('werkplekid')->nullable(false);
             $table->foreign('werkplekid')
                ->references('id')
                ->on('werkplek');

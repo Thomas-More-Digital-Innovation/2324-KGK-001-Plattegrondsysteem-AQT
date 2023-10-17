@@ -15,6 +15,11 @@
           'name' => 'Lamp Beheren',
           'url' => route('lampadmin'),
           'icon'=> 'lucide:lamp-desk',
+        ],
+        [
+          'name' => 'Plant Beheren',
+          'url' => route('plantadmin'),
+          'icon'=> 'ph:plant-bold',
        ]
        ];
     ?>
