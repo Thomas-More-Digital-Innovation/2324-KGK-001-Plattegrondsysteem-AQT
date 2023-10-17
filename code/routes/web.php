@@ -159,28 +159,29 @@ Route::get('/inventarisselect', function(){
     return view('inventarisselect');
 })->name('inventarisselect');
 
-Route::get('/lampadmin', function(){
+Route::get('/lampadmin', function(){ // do we need this?
     return view('lampadmin');
 })->name('lampadmin');
 
 // admin - inventaris
 // view pages
 Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
-Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
+Route::get('/inventarisedit', [InventarisadminController::class, 'inventarisedit'])->name('inventarisedit');
 
 // data handlers
 Route::get('deleteinventaris/{id}', [InventarisadminController::class, 'deleteinventaris']);
 Route::post('/inventarisadmin/make', [InventarisadminController::class, 'makeInventaris'])->name('inventarisadmin.makeInventaris');
+Route::put('/inventarisadmin/update', [InventarisadminController::class, 'inventarisupdate'])->name('inventarisadmin.update');
 Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->name('inventarisadmin.post');
 
 // admin - lamp
-Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin');
-
+Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin'); // because of this...
+Route::get('/lampedit/{id}', [LampController::class, 'lampedit'])->name('lampedit');
 
 // data handlers
 Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
-
-
+Route::post('/lampadmin/update/{id}', [LampController::class, 'lampupdate'])->name('lampupdate');
+Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
 
 // admin - voederrichtlijnen
 // view pages
