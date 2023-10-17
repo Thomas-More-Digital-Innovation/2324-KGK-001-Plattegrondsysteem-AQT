@@ -14,7 +14,7 @@ use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
 use App\Http\Controllers\InventarisadminController;
 use App\Http\Controllers\LampController;
-
+use App\Http\Controllers\PlantController;
 
 // required for login
 require __DIR__.'/auth.php';
@@ -163,6 +163,10 @@ Route::get('/lampadmin', function(){
     return view('lampadmin');
 })->name('lampadmin');
 
+Route::get('/plantadmin', function(){
+    return view('plantadmin');
+})->name('plantadmin');
+
 // admin - inventaris
 // view pages
 Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
@@ -176,9 +180,17 @@ Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->nam
 // admin - lamp
 Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin');
 
-
 // data handlers
 Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
+
+
+// admin - plant
+Route::get('/plantadmin', [PlantController::class, 'index'])->name('plantadmin');
+
+// data handlers
+Route::post('/plantadmin/make', [PlantController::class, 'make'])->name('plantadmin.make');
+Route::post('/plantadmin/koppel', [PlantController::class, 'koppel'])->name('plantadmin.koppel');
+Route::get('/deleteplant/{id}', [PlantController::class, 'deleteplant'])->middleware('auth');
 
 
 
