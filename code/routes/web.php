@@ -14,7 +14,7 @@ use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
 use App\Http\Controllers\InventarisadminController;
 use App\Http\Controllers\LampController;
-
+use App\Http\Controllers\PlantController;
 
 // required for login
 require __DIR__.'/auth.php';
@@ -164,6 +164,10 @@ Route::get('/lampadmin', function(){ // do we need this?
     return view('lampadmin');
 })->name('lampadmin');
 
+Route::get('/plantadmin', function(){
+    return view('plantadmin');
+})->name('plantadmin');
+
 // admin - inventaris
 // view pages
 Route::get('/inventarisadmin', [InventarisadminController::class, 'index'])->name('inventarisadmin');
@@ -176,13 +180,27 @@ Route::put('/inventarisadmin/update', [InventarisadminController::class, 'invent
 Route::post('/inventarisadmin', 'InventarisadminController@makeInventaris')->name('inventarisadmin.post');
 
 // admin - lamp
-Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin'); // because of this...
-Route::get('/lampedit/{id}', [LampController::class, 'lampedit'])->name('lampedit');
+
+Route::get('/lampadmin', [LampController::class, 'index'])->name('lampadmin');
 
 // data handlers
 Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
+
+
+// admin - plant
+Route::get('/plantadmin', [PlantController::class, 'index'])->name('plantadmin');
+
+// data handlers
+Route::post('/plantadmin/make', [PlantController::class, 'make'])->name('plantadmin.make');
+Route::post('/plantadmin/koppel', [PlantController::class, 'koppel'])->name('plantadmin.koppel');
+Route::get('/deleteplant/{id}', [PlantController::class, 'deleteplant'])->middleware('auth');
+
+Route::get('/lampedit/{id}', [LampController::class, 'lampedit'])->name('lampedit');
+
+Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
 Route::post('/lampadmin/update/{id}', [LampController::class, 'lampupdate'])->name('lampupdate');
 Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
+
 
 // admin - voederrichtlijnen
 // view pages

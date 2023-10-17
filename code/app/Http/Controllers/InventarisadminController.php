@@ -16,13 +16,17 @@ class InventarisadminController extends Controller
                 $inventaris = DB::table('inventaris')->get();
                 $lampkant = DB::table('lampkant')->get();
                 $lamp = DB::table('lamp')->get();
+                $plant = DB::table('plant')->get(); 
 
+                $planten = DB::table('plant')
+                ->join('inventaris', 'inventaris.id', '=', 'plant.id')
+                ->get();
+                
                 $inventarisJoined = DB::table('lamp')
                 ->join('lampkant', 'lampkant.lampid', '=', 'lamp.id')
                 ->join('inventaris', 'inventaris.id', 'lampkant.inventarisid')
                 ->orderBy('inventaris.id', 'desc')
                 ->get();
-
 
                 $rows = [];
 
@@ -48,7 +52,7 @@ class InventarisadminController extends Controller
                 }
 
 
-                return view('inventarisadmin', ['inventaris' => $inventaris, 'lampkant' => $lampkant, 'lamp' => $lamp, 'inventarisJoined' => $inventarisJoined, 'rows' => $rows]);
+                return view('inventarisadmin', ['planten' => $planten, 'plant' => $plant, 'inventaris' => $inventaris, 'lampkant' => $lampkant, 'lamp' => $lamp, 'inventarisJoined' => $inventarisJoined, 'rows' => $rows]);
             } else {
                 abort(401);
             }
@@ -62,7 +66,6 @@ public function makeInventaris(Request $request)
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
                 $inventarisId = DB::table('inventaris')->insertGetId([]);
-
                 // 'lampkant' data voor 'lamplinks'
                 if ($request->has('lamplinks')) {
                     foreach ($request->input('lamplinks') as $lampId) {
@@ -80,7 +83,7 @@ public function makeInventaris(Request $request)
                         DB::table('lampkant')->insert([
                             'inventarisid' => $inventarisId,
                             'lampid' => $lampId,
-                            'position' => 'rechts',
+                            'position' => 'rechts'
                         ]);
                     }
                 }

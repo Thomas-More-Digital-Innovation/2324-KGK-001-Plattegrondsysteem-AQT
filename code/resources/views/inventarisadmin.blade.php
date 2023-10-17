@@ -7,7 +7,7 @@
     <!-- Form for creating a new inventaris -->
     <form method="POST" action="{{ route('inventarisadmin.makeInventaris') }}">
         @csrf
-
+         
         <div class="flex justify-center">
             <div class="multiselect-list mr-8">
                 <label for="lamplinks" class="text-xl">Lampen links:</label>
@@ -19,7 +19,7 @@
                 @endforeach
             </div>
 
-            <div class="multiselect-list">
+            <div class="multiselect-list  mr-8">
                 <label for="lamprechts" class="text-xl">Lampen rechts:</label>
                 @foreach($lamp as $lampje)
                     <div>
@@ -28,6 +28,7 @@
                     </div>
                 @endforeach
             </div>
+
         </div>
 
         <div class="mb-4 flex justify-center pt-10">
