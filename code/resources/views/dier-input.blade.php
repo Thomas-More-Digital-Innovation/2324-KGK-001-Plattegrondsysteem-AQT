@@ -1,59 +1,58 @@
 @extends('layout')
 @section('title', 'Dier-input')
 @section('content')
-    <x-titlebar title="Admin: Dier" color="FF7E7E" back=true/>
-    <div  class="mb-8 pt-20">
-        <h1 class="text-2xl font-bold text-center mt-10 mb-2">Nieuw dier</h1>
+    <x-titlebar title="Admin: Dier Aanmaken" color="FF7E7E" back=true link="{{route('dier')}}"/>
+    <div class="pt-14">
         <form method="POST" action="/dier-submit" enctype="multipart/form-data">
             @csrf
             <div class="flex justify-center">
-                <div class="mt-10  grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-12 w-2/4">
-                            
-                    <div class="grid-cols-12 sm:grid-cols-12">
-                        <label for="dropdown">Selecteer een werkplek:</label>
-                        <select id="dropdown" name="werkplek">
-                            <!-- Stap 3: Voeg de opgehaalde gegevens toe aan de dropdown-menu -->
-                            @foreach($werkplek as $value)
-                                <option value="{{ $value->id }}">{{ $value->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="mt-10 flex justify-center flex-col items-center bg-slate-200 p-4 rounded-2xl">
+                    <div class="flex">
+                        <div class="flex flex-col">
+                            <label for="dropdown" class="text-lg">Werkplek <span class="text-red-500">*</span></label>
+                            <select id="dropdown" name="werkplek" required class="rounded-md">
+                                <!-- Stap 3: Voeg de opgehaalde gegevens toe aan de dropdown-menu -->
+                                @foreach($werkplek as $value)
+                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                    <div class="grid-cols-12">
-                    
-                        <label for="dropdown">Selecteer een diersoort:</label>
-                        <select id="dropdown" name="diersoort">
-                            <!-- Stap 3: Voeg de opgehaalde gegevens toe aan de dropdown-menu -->
-                            @foreach($diersoort as $value)
-                                <option value="{{ $value->id }}">{{ $value->name }}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-
-                    <div class="grid-cols-12">
-
-                        <label for="dropdown">Selecteer een quarantaine status:</label>
-                        <select id="dropdown" name="quarantaine">
-                            <option value="0">Nee</option>
-                            <option value="1">Ja</option>
-                        </select> 
-
-                    </div>
-
-                    <div class="grid-cols-12">
+                        <div class="flex flex-col pl-4">
                         
-                        <label for="dropdown">Selecteer een inventaris:</label>
-                        <select id="dropdown" name="inventaris">
-                            <!-- Stap 3: Voeg de opgehaalde gegevens toe aan de dropdown-menu -->
-                            @foreach($inventaris as $value)
-                                <option value="{{ $value->id }}">{{ $value->id }}</option>
-                            @endforeach
-                        </select>
+                            <label for="dropdown" class="text-lg">Diersoort <span class="text-red-500">*</span></label>
+                            <select id="dropdown" name="diersoort" required class="rounded-md">
+                                <!-- Stap 3: Voeg de opgehaalde gegevens toe aan de dropdown-menu -->
+                                @foreach($diersoort as $value)
+                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                @endforeach
+                            </select>
 
+                        </div>
                     </div>
+                    <div class="flex pt-4">
+                        <div class="flex flex-col">
 
-                    <button type="submit" class="mt-2 sm:col-span-4 rounded-md bg-nav px-3 py-2 text-sm font-semibold text-white shadow-sm">Aanmaken</button>
+                            <label for="dropdown" class="text-lg">Quarantaine <span class="text-red-500">*</span></label>
+                            <select id="dropdown" name="quarantaine" required class="rounded-md"> 
+                                <option value="0">Nee</option>
+                                <option value="1">Ja</option>
+                            </select> 
+
+                        </div>
+                        <div class="flex flex-col pl-4">
+                            
+                            <label for="dropdown" class="text-lg">Inventaris <span class="text-red-500">*</span></label>
+                            <select id="dropdown" name="inventaris" required class="rounded-md">
+                                <!-- Stap 3: Voeg de opgehaalde gegevens toe aan de dropdown-menu -->
+                                @foreach($inventaris as $value)
+                                    <option value="{{ $value->id }}">{{ $value->id }}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full rounded-md bg-nav px-3 py-2 text-sm font-semibold text-white shadow-sm">Aanmaken</button>
                 </div>
             </div>
         </form>
