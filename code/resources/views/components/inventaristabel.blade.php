@@ -82,4 +82,3 @@ foreach ($dierinventaris as $item) {
         </tbody>
     </table>
 </div>
-    

@@ -16,7 +16,13 @@ class PlantController extends Controller
             if ($roleID == 4) {
                 $plant = DB::table('plant')->get(); 
                 $inventaris = DB::table('inventaris')->get(); 
-                return view('plantadmin', ['plant' => $plant, 'inventaris' => $inventaris]);
+                $plantinventaris = DB::table('inventaris')
+                ->join('plantgroep', 'inventaris.id', '=', 'plantgroep.inventarisid')
+                ->join('plant', 'plantgroep.plantid', '=', 'plant.id')
+                ->get()
+                ->groupBy('inventarisid');
+
+                return view('plantadmin', ['plant' => $plant, 'inventaris' => $inventaris, 'plantinventaris' => $plantinventaris]);
             } else {
                 abort(401);
             }
@@ -67,7 +73,7 @@ class PlantController extends Controller
                 $selectedPlantIds = $request->input('plants');
                 $selectedInventarisId = $request->input('inventaris');
                 foreach ($selectedPlantIds as $plantId) {
-                    DB::table('plantgroep')->insert(['plantid' => $plantId, 'inventarisid' => $selectedInventarisId]);
+                    DB::table('plantgroep')->updateOrInsert(['plantid' => $plantId, 'inventarisid' => $selectedInventarisId]);
                 }
     
                 return redirect()->route('plantadmin')->with('success', 'Plants coupled to inventaris successfully');
@@ -77,4 +83,25 @@ class PlantController extends Controller
         }
     }
 
+
+    public function deletePlantkoppel($plantid, $inventarisid) {
+        if (Auth::id()) {
+            $roleID = Auth::user()->roleid;
+            if ($roleID == 4) {
+
+                if (!empty($inventarisid)) {
+                    $plant = DB::table('plantgroep')
+                        ->where('plantid', $plantid)
+                        ->where('inventarisid', $inventarisid)
+                        ->delete();
+                    
+                    return back();
+                } else {
+                    abort(400);
+                }
+            } else {
+                abort(401);
+            }
+        }
+    }
 }
