@@ -26,15 +26,41 @@ class voedselsoortenController extends Controller
         }
     }
 
-    public function addvoedselSoort(Request $request){
+    public function addeditvoedselSoort(Request $request){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $query = DB::table('voedingstype')->insert([
-                    'name'=>$request->input('name'),
-                    'voedingsrichtlijnid'=>$request->input('voeding'),
-                    'icon'=>$request->input('icon'),
-                ]);
+                $fotoname = $request->file('upload')->getClientOriginalName();
+                $foto = $request->file('upload')->storeAs('/images', $fotoname, 'public_uploads');
+                $vs = $request->input('voedselsoort');
+                $rn = $request->input('voedingsrichtlijn');
+                $type = $request->input('typesubmit');
+                if (!DB::table('voedingstype')->where([
+                    ['name', '=', $vs],
+                    ['voedingsrichtlijnid', '=', $rn],
+                    ['icon', '=', $foto],
+                ])->exists()) {
+                    if ($type == "add") {
+                        DB::table('voedingstype')->insert([
+                            'name'=> $vs,
+                            'voedingsrichtlijnid'=> $rn,
+                            'icon'=>$foto,
+                        ]);
+                    } elseif ($type == "edit") {
+                        DB::table('voedingstype')
+                        ->where([
+                            ["id", "=", $request->input('id')],
+                        ])
+                        ->update([
+                            "name"=>$vs,
+                            "voedingsrichtlijnid"=>$rn,
+                            'icon'=>$foto,
+                        ]);
+                    }
+                }
+                else {
+                    return back()->with('error', 'Deze combinatie bestaat al!');
+                }
                 return back();
             }
             else{
