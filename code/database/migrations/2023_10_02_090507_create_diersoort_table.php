@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable(false);
             $table->string('latinname')->nullable(false);
             $table->string('foto')->nullable(false);
-            $table->string('file')->nullable(   );
+            $table->string('file')->nullable(true);
          });
     }
 
