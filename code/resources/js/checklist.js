@@ -1,6 +1,7 @@
 const checklistItemsvm = document.querySelectorAll('input[type="checkbox"][name^="checkboxvoormiddag"]');
 const checklistItemsnm = document.querySelectorAll('input[type="checkbox"][name^="checkboxnamiddag"]');
 
+//doorsturen van de status van een bepaald protocol van de voormiddag
 checklistItemsvm.forEach(itemvm => {
     itemvm.addEventListener('click', function() {
         const checked = itemvm.checked ? 1 : 0;
@@ -20,7 +21,7 @@ checklistItemsvm.forEach(itemvm => {
     });
 });
 
-
+//doorsturen van de status van een bepaald protocol van de namiddag
 checklistItemsnm.forEach(itemnm => {
     itemnm.addEventListener('click', function() {
         const checked = itemnm.checked ? 1 : 0;
