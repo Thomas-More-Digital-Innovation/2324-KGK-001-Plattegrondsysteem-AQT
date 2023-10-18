@@ -14,6 +14,9 @@ use App\Http\Controllers\OpvolgingController;
 use App\Http\Controllers\ProtocollenController;
 use App\Http\Controllers\InventarisadminController;
 use App\Http\Controllers\LampController;
+use App\Http\Controllers\GewichtChartControler;
+use App\Http\Controllers\TemperatuurChartController;
+
 
 
 // required for login
@@ -37,7 +40,8 @@ Route::get('/werkplek', function () {
 // dierenfiche & checklist
 Route::get('/dierefiche', function () {
     $id = request('id');
-    return view('dierefiche', ['id' => $id]);
+    $gewicht = app('App\Http\Controllers\GewichtChartControler')->gewichtLineChart();
+    return view('dierefiche', ['id' => $id, 'gewicht' => $gewicht]);
 });
 Route::get('/comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
 
@@ -222,4 +226,6 @@ Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'del
 // data handlers
 
 
+Route::get('/gewichtlinechart', [GewichtChartControler::class,'gewichtLineChart']);
+Route::get('/temperatuurlinechart', [TemperatuurChartController::class,'temperatuurLineChart']);
 ?>

@@ -1,6 +1,7 @@
 const gewichtInput = document.getElementById('biomedisch-gewicht');
 const temperatuurInput = document.getElementById('biomedisch-temperatuur');
 
+//doorsturen van het gewicht van een dier
 gewichtInput.addEventListener("change", function() {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 19).replace("T", " ");
@@ -11,6 +12,7 @@ gewichtInput.addEventListener("change", function() {
     window.location.href = "checkitem/" + newValue + "/" + inputType + "/" + dierid + "/" + formattedDate; 
 });
 
+//doorsturen van de temperatuur van een dier
 temperatuurInput.addEventListener("change", function() {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 19).replace("T", " ");

@@ -1,7 +1,7 @@
 @vite(['resources/js/opmerking.js'])
 @vite(['resources/js/biomedisch.js'])
 @vite(['resources/js/checklist.js'])
-
+@vite(['resources/js/popup.js'])
 
 <?php
 setlocale(LC_TIME, 'nl_be');
@@ -21,52 +21,52 @@ $protocolnames = DB::table('protocoldetail')
 $roleid =Auth()->user()->roleid;
 
 
-$leerlingComment = DB::table('comment')
+$leerlingComment = DB::table('comment') //laatste comment van een leerling ophalen
     ->where('comment.dierid', '=', $idtrim)
     ->where('comment.leerkracht', '=', '0')
     ->get();
 
-$leerlingPlaceholder = "vul hier een opmerking in";
+$leerlingPlaceholder = "vul hier een opmerking in"; //placeholder maken voor een leerling
 if (count($leerlingComment) != 0){
     $leerlingPlaceholder = $leerlingComment[0]->comment;
 }
 
 
-$leerkrachtComment = DB::table('comment')
+$leerkrachtComment = DB::table('comment') //laatste comment van de leerkracht
     ->where('comment.dierid', '=', $idtrim)
     ->where('comment.leerkracht', '=', '1')
     ->get();
 
-$leerkrachtPlaceholder = "vul hier een opmerking in";
+$leerkrachtPlaceholder = "vul hier een opmerking in"; //placeholder maken voor een leerkracht
 if (count($leerkrachtComment) != 0){
-    $leerkrachtPlaceholder = $leerkrachtComment[0]->comment;
+    $leerkrachtPlaceholder = $leerkrachtComment[0]->comment; 
 }
 
-$checkitemgewicht = DB::table('checkitem')
+$checkitemgewicht = DB::table('checkitem') //ophalen van het laatste ingevoerde gewicht van een dier
     ->where('dierid', '=', $idtrim)
     ->where('gewicht', '!=', NULL)
     ->orderBy('datetime', 'desc')
     ->first();
 
     
-$checkitemtemperatuur = DB::table('checkitem')
+$checkitemtemperatuur = DB::table('checkitem') //ophalen van de laatst ingevoerde temperatuur van een bepaald dier
     ->where('dierid', '=', $idtrim)
     ->where('temperatuur', '!=', NULL)
     ->orderBy('datetime', 'desc')
     ->first();
 
 
-$checkboxitemsvm = DB::table('checkitem')
+$checkboxitemsvm = DB::table('checkitem') //ophalen van alle protocollen die al uitgevoerd zijn in de voormiddag
     ->where('dierid', '=', $idtrim)
     ->where('protocoldetailid', '!=', null)
     ->whereRaw('DATE(datetime) = CURDATE()')
     ->whereRaw('TIME(datetime) < "12:00:00"') // Voormiddag is voor 12:00 uur
     ->get();
 
-$checkboxitemsnm = DB::table('checkitem')
+$checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al uitgevoerd zijn in de namiddag
     ->where('dierid', '=', $idtrim)
     ->where('protocoldetailid', '!=', null)
-    ->whereRaw('DATE(datetime) = CURDATE()')
+    ->whereRaw('DATE(datetime) = CURDATE()') 
     ->whereRaw('TIME(datetime) > "12:00:00"') // Namiddag is na 12:00 uur
     ->get();
 ?>
@@ -74,7 +74,6 @@ $checkboxitemsnm = DB::table('checkitem')
 <div class="flex justify-end h-screen m-5">
     <div class="flex flex-col items-center">
         <h3>Opvolging</h3>
-        <form method="post" action="process_form.php"> <!-- Replace "process_form.php" with your actual server-side script -->
             <div class="p-1 height">
                 <table class="border-2">
                     <thead>
@@ -89,6 +88,7 @@ $checkboxitemsnm = DB::table('checkitem')
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Hier gaan we protocol uit $protocolophalen als het protocol op deze dag al uitgevoerd is wordt deze automatisch aangevinkt-->
                         <?php foreach ($protocolnames as $protocol):?>
                             <tr class="text-center">
                             <td class="border-2"><?php echo $protocol->name; ?></td>
@@ -103,7 +103,7 @@ $checkboxitemsnm = DB::table('checkitem')
                             </tr>
                             <?php endforeach; ?>
 
-                        <!-- New rows for weight and temperature -->
+                        <!-- Rijen voor gewicht en temperatuur -->
                         <tr class="text-center">
                             <td class="border-2">
                                 Gewicht
@@ -120,11 +120,10 @@ $checkboxitemsnm = DB::table('checkitem')
                                 <input type="text" id="biomedisch-temperatuur" name="temperatuur" placeholder="<?php echo empty($checkitemtemperatuur->temperatuur) ? 'temperatuur' : $checkitemtemperatuur->temperatuur; ?>" data-dierid = "{{$idtrim}}">
                             </td>
                         </tr>
-                        
                     </tbody>
                 </table>
         
-                <!-- Comment fields under the table -->
+                <!-- Opmerkingsveld van de leerkracht: hierin wordt eerst gekeken welke roleid aangemeld is om zo uit te maken of je iets mag type in dit veld -->
                 <div class="w-full mt-1">
                     <label for="comment" class="block text-gray-700 font-bold">Opmerking leerkracht:</label>
                     <textarea
@@ -133,10 +132,10 @@ $checkboxitemsnm = DB::table('checkitem')
                         name="opmerkingLeerkracht"
                         rows="2"
                         class="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                        @if ($roleid !== 4)
+                        @if ($roleid !== 4) 
                             readonly
                         @endif
-                    >{{str_replace("%2F","/",$leerkrachtPlaceholder)}}</textarea>
+                    >{{str_replace("%2F","/",$leerkrachtPlaceholder)}}</textarea> <!--replace is omdat er een fout was met het doorsturen van "/" naar de db -->
                 </div>
                 <div class="w-full mt-1">
                     <label for="comment" class="block text-gray-700 font-bold">Opmerking leerling:</label>
@@ -146,10 +145,18 @@ $checkboxitemsnm = DB::table('checkitem')
                         name="opmerkingLeerling"
                         rows="2"
                         class="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                    >{{str_replace("%2F","/",$leerlingPlaceholder)}}</textarea>
+                    >{{str_replace("%2F","/",$leerlingPlaceholder)}}</textarea> <!--replace is omdat er een fout was met het doorsturen van "/" naar de db -->
                 </div>
             </div>
-        </form>
-    </div>
+            <!--<div id="popupTrigger" class="cursor-pointer">
+    <iconify-icon icon="fa6-solid:weight-scale" width="100"></iconify-icon>
 </div>
+<div id="popup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg relative w-1600 h-1200 overflow-hidden"> 
+        <span id="closePopup" class="absolute top-2 right-2 text-gray-600 cursor-pointer">×</span>
+        <div id="curve_chart" class="w-full h-full"></div>
+    </div>
+</div> Werkt nog niet-->
 
+
+</div>
