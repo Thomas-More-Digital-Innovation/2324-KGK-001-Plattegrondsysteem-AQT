@@ -215,11 +215,9 @@ Route::get('/deletevoedingsrichtlijn/{id}', [voederrichtlijnenController::class,
 // admin - voedselsoorten
 // view pages
 Route::get('/voedselsoorten', [voedselsoortenController::class, 'voedselSoorten'])->middleware('auth')->name('voedselsoorten');
-Route::get('/editvoedselsoort/{id}', [voedselsoortenController::class, 'editvoedselSoort']);
 
 // data handlers
-Route::post('/addvoedselsoort', [voedselsoortenController::class, 'addvoedselSoort']);
-Route::put('/updatevoedselsoort/{id}', [voedselsoortenController::class, 'updatevoedselSoort']);
+Route::post('/addeditvoedselsoort', [voedselsoortenController::class, 'addeditvoedselSoort']);
 Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'deletevoedselSoort']);
 
 // admin - medische fiche

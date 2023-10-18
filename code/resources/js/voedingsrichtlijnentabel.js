@@ -62,7 +62,6 @@ function open(id, name, icon, color) {
     nameinput.value = name;
     iconinput.value = icon;
     colorinput.value = "#"+color;
-    colorinput.value = "#"+color;
     idhidden.value = id;
     modalTitle.innerText  = 'Voedingsrichtlijn aanpassen';
     submitModal.innerText = 'Aanpassen';
