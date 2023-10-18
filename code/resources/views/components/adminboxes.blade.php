@@ -43,7 +43,7 @@
          ],
          [
             'name' => 'Medischefiche',
-            'url' => '/admin',
+            'url' => route('medischeFiche'),
             'icon'=> 'game-icons:medicines',
          ], 
          [

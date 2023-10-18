@@ -17,6 +17,7 @@ use App\Http\Controllers\LampController;
 use App\Http\Controllers\GewichtChartControler;
 use App\Http\Controllers\TemperatuurChartController;
 use App\Http\Controllers\PlantController;
+use App\Http\Controllers\medischeFicheController;
 
 // required for login
 require __DIR__.'/auth.php';
@@ -226,8 +227,11 @@ Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'delete
 
 // admin - medische fiche
 // view pages
+Route::get('/medischefiche', [medischeFicheController::class, 'index'])->name('medischeFiche');
 
 // data handlers
+Route::post('/fichesubmit', [medischeFicheController::class, 'fichesubmit']);
+Route::get('/fichedelete/{id}', [medischeFicheController::class, 'fichedelete']);
 
 
 // admin - opvolging
