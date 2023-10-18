@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class InventarisadminController extends Controller
 {
@@ -15,13 +16,17 @@ class InventarisadminController extends Controller
                 $inventaris = DB::table('inventaris')->get();
                 $lampkant = DB::table('lampkant')->get();
                 $lamp = DB::table('lamp')->get();
+                $plant = DB::table('plant')->get(); 
 
+                $planten = DB::table('plant')
+                ->join('inventaris', 'inventaris.id', '=', 'plant.id')
+                ->get();
+                
                 $inventarisJoined = DB::table('lamp')
                 ->join('lampkant', 'lampkant.lampid', '=', 'lamp.id')
                 ->join('inventaris', 'inventaris.id', 'lampkant.inventarisid')
                 ->orderBy('inventaris.id', 'desc')
                 ->get();
-
 
                 $rows = [];
 
@@ -47,7 +52,7 @@ class InventarisadminController extends Controller
                 }
 
 
-                return view('inventarisadmin', ['inventaris' => $inventaris, 'lampkant' => $lampkant, 'lamp' => $lamp, 'inventarisJoined' => $inventarisJoined, 'rows' => $rows]);
+                return view('inventarisadmin', ['planten' => $planten, 'plant' => $plant, 'inventaris' => $inventaris, 'lampkant' => $lampkant, 'lamp' => $lamp, 'inventarisJoined' => $inventarisJoined, 'rows' => $rows]);
             } else {
                 abort(401);
             }
@@ -61,7 +66,6 @@ public function makeInventaris(Request $request)
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
                 $inventarisId = DB::table('inventaris')->insertGetId([]);
-
                 // 'lampkant' data voor 'lamplinks'
                 if ($request->has('lamplinks')) {
                     foreach ($request->input('lamplinks') as $lampId) {
@@ -79,7 +83,7 @@ public function makeInventaris(Request $request)
                         DB::table('lampkant')->insert([
                             'inventarisid' => $inventarisId,
                             'lampid' => $lampId,
-                            'position' => 'rechts',
+                            'position' => 'rechts'
                         ]);
                     }
                 }
@@ -90,21 +94,58 @@ public function makeInventaris(Request $request)
             }
         }
     }
-   public function deleteInventaris($id)
-   {
-      if (Auth::id()) {
-         $roleID = Auth::user()->roleid;
-         if ($roleID == 4) {
-            if (!DB::table('dier')->where('inventarisid', '=', $id)->exists()) {
-               DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
-               DB::table('inventaris')->where('id', '=', $id)->delete();
-               return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
-            } else {
-               return back()->with('error', 'Inventaris kan niet worden verwijderd omdat er nog dieren aan gekoppeld zijn.');
+    public function inventarisedit($id){
+        if(Auth::id()){
+            $roleID = Auth()->user()->roleid;
+            if($roleID==4){
+                $inventaris = DB::table('inventaris')->where('id', $id)->first();
+                $lampkant = DB::table('lampkant')->where('inevtarisid', $id)->get();
+                $lampen = DB::table('lamp')->get();
+                return view('inventarisedit', ['inventaris' => $inventaris, 'lampkant'=> $lampkant, 'lampen' => $lampen]);
             }
-         } else {
-            abort(401);
-         }
-      }
-   }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function inventarisupdate($id){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                try {
+                    $query = DB::table('protocoldetail')->where('id', $id)->update([
+                        'name'=>request('name'),
+                        'protocoltypeid'=>request('protocoltypeid'),
+                        'icon'=>request('icon'),
+                        'file'=>request('file')
+                    ]);
+                    return redirect('/admin/protocollen');
+                } catch (QueryException $e) {
+                    return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                }
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
+    public function deleteInventaris($id)
+    {
+        if (Auth::id()) {
+            $roleID = Auth::user()->roleid;
+            if ($roleID == 4) {
+                if (!DB::table('dier')->where('inventarisid', '=', $id)->exists()) {
+                    DB::table('lampkant')->where('inventarisid', '=', $id)->delete();
+                    DB::table('inventaris')->where('id', '=', $id)->delete();
+                    return redirect()->route('inventarisadmin')->with('success', 'Inventaris deleted successfully');
+                } else {
+                    return back()->with('error', 'Inventaris kan niet worden verwijderd omdat er nog dieren aan gekoppeld zijn.');
+                }
+            } else {
+                abort(401);
+            }
+        }
+    }
 }

@@ -48,7 +48,7 @@ class OpvolgingController extends Controller
                         ]);
                     }
                 } else {
-                    return back()->with('error', 'Deze combinatie bestaat al!');;
+                    return back()->with('error', 'Deze combinatie bestaat al!');
                 }
                 return back();
             }

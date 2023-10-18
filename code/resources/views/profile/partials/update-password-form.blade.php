@@ -11,17 +11,7 @@
             </p>
         </header>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-success">
-                {{ session('error') }}
-            </div>
-        @endif
+        
         <form method="post" action="{{ route('password.update') }}" class=" md:flex flex-col md:justify-center w-80">
             @csrf
             @method('put')
@@ -35,7 +25,7 @@
             <label for="password_confirmation" minlength="8" class="text-center">Bevestig nieuw wachtwoord:</label>
             <input id="password_confirmation" name="password_confirmation" type="password"  autocomplete="new-password" class="text-center"/>
 
-            <input type="submit" value="Bevestigen">
+            <button type="submit" class="btn my-3">Bevestigen</button>
         </form>
     </div>
 
