@@ -194,9 +194,10 @@ Route::get('/plantadmin', [PlantController::class, 'index'])->name('plantadmin')
 Route::post('/plantadmin/make', [PlantController::class, 'make'])->name('plantadmin.make');
 Route::post('/plantadmin/koppel', [PlantController::class, 'koppel'])->name('plantadmin.koppel');
 Route::get('/deleteplant/{id}', [PlantController::class, 'deleteplant'])->middleware('auth');
+Route::get('/deleteplantkoppel/{id}/{id2}', [PlantController::class, 'deletePlantkoppel'])->middleware('auth');
+
 
 Route::get('/lampedit/{id}', [LampController::class, 'lampedit'])->name('lampedit');
-
 Route::post('/lampadmin/make', [LampController::class, 'make'])->name('lampadmin.make');
 Route::post('/lampadmin/update/{id}', [LampController::class, 'lampupdate'])->name('lampupdate');
 Route::get('/deletelamp/{id}', [LampController::class, 'deleteLamp'])->middleware('auth');
@@ -238,6 +239,4 @@ Route::get('admin/deleteopvolging/{id}/{id2}', [OpvolgingController::class, 'del
 // view pages
 
 // data handlers
-
-
 ?>
