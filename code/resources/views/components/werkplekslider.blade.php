@@ -3,25 +3,17 @@
 <?php
 $clickedName = $id;
 
-// Remove the "x" from $clickedName
-if (strpos($clickedName, "x") !== false) {
-    $clickedName = str_replace("x", "", $clickedName);
-}
-// Remove the "y" from $clickedName
-if (strpos($clickedName, "y") !== false) {
-    $clickedName = str_replace("y", "", $clickedName);
-}
-
 $werkplek = DB::table('werkplek')->where('name', $clickedName)->first();
 $werkplekId = $werkplek->id;
     
-$dierSoortList = DB::table('dier')
-    ->join('diersoort', 'dier.diersoortid', '=', 'diersoort.id')
+$dierSoortList = DB::table('diersoort')
+    ->join('dier', 'dier.diersoortid', '=', 'diersoort.id')
     ->where('dier.werkplekid', $werkplekId)
     ->get();
 
 echo '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">';
 foreach ($dierSoortList as $dierSoort) {
+    $dierid = $dierSoort->id;
     $dierSoortId = $dierSoort->diersoortid;
     $dierSoortName = $dierSoort->name;
     $dierSoortLatinName = $dierSoort->latinname;
@@ -29,9 +21,9 @@ foreach ($dierSoortList as $dierSoort) {
     $quarantaine = $dierSoort->quarantaine;
 
     if ($quarantaine == 0) {
-        echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "'>";
+        echo "<div class='bg-white shadow-lg p-4 rounded-lg' id='ds" . $dierid . "'>";
     } else {
-        echo "<div class='shadow-lg p-4 rounded-lg' id='ds" . $dierSoortId . "' style='background-color: yellow;'>";
+        echo "<div class='shadow-lg p-4 rounded-lg' id='ds" . $dierid . "' style='background-color: yellow;'>";
     }
     echo '<h2 class="text-lg font-semibold mb-2">' . $dierSoortName . '</h2>';
     echo '<p class="text-gray-600 mb-2">Latin Name: ' . $dierSoortLatinName . '</p>';

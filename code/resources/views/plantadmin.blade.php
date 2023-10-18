@@ -29,6 +29,7 @@
                 <tr>
                     <th class="border border-black px-4 py-2 text-xl">ID</th>
                     <th class="border border-black px-4 py-2 text-xl">Name</th>
+                    <th class="border border-black px-4 py-2 text-xl"></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +37,7 @@
                     <tr>
                         <td class="border border-black px-4 py-2 text-center">{{ $item->id }}</td>
                         <td class="border border-black px-4 py-2 text-center">{{ $item->plantname }}</td>
-                        <td>
+                        <td class="border border-black px-4 py-2 text-xl">
                             <a href="{{url('deleteplant/'.$item->id)}}"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></a>
                         </td>
                     </tr>
@@ -80,6 +81,7 @@
                 <tr>
                     <th class="border border-black px-4 py-2 text-xl">Inventaris ID</th>
                     <th class="border border-black px-4 py-2 text-xl">Plant Name</th>
+                    <th class="border border-black px-4 py-2 text-xl"></th>
                 </tr>
             </thead>
             <tbody>
@@ -88,7 +90,7 @@
                         <tr>
                             <td class="border border-black px-4 py-2 text-center">{{ $item->inventarisid }}</td>
                             <td class="border border-black px-4 py-2 text-center">{{ $item->plantname }}</td>
-                            <td>
+                            <td class="border border-black px-4 py-2 text-xl">
                                 <a href="{{ url('deleteplantkoppel/' . $item->plantid . '/' . $item->inventarisid) }}"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
                             </td>
                         </tr>
