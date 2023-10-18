@@ -32,13 +32,5 @@
             </div>
          </a>
       </li>
-      <li class="flex grow">
-         {{-- <a href="{{ route('fiche') }}" class="flex grow hover:bg-nav-hover"> --}}
-            <div class="flex flex-col grow justify-center items-center">
-               <iconify-icon icon="solar:medical-kit-outline" height="70"></iconify-icon>
-               Medische fiche
-            </div>
-         {{-- </a> --}}
-      </li>
    </ul>
 </nav>

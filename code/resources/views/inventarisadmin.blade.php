@@ -42,14 +42,13 @@
             <th class="border border-black px-4 py-2 text-xl">Inventarisnummer</th>
             <th class="border border-black px-4 py-2 text-xl">Lampen Links</th>
             <th class="border border-black px-4 py-2 text-xl">Lampen Rechts</th>
-            <th class="border border-black px-4 py-2 text-xl" colspan="2"></th>
+            <th class="border border-black px-4 py-2 text-xl"></th>
         </tr>
         @foreach($rows as $row)
             <tr>
                 <td class="border border-black px-4 py-2 text-center">{{ $row['inventarisid'] }}</td>
                 <td class="border border-black px-4 py-2 text-center">{{ $row['left_lamps'] }}</td>
                 <td class="border border-black px-4 py-2 text-center">{{ $row['right_lamps'] }}</td>
-                <td class="border border-black px-4 py-2 text-center"><iconify-icon id="" class="cursor-pointer h-full flex grow justify-center items-center" icon="material-symbols:edit-outline" style="color: blue;" width="40" height="40"></iconify-icon></td>
                 <td class="border border-black px-4 py-2 text-center"><a href="deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
             </tr>
         @endforeach

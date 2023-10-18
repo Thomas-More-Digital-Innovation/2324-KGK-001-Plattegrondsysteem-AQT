@@ -66,6 +66,7 @@ public function makeInventaris(Request $request)
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
                 $inventarisId = DB::table('inventaris')->insertGetId([]);
+                
                 // 'lampkant' data voor 'lamplinks'
                 if ($request->has('lamplinks')) {
                     foreach ($request->input('lamplinks') as $lampId) {

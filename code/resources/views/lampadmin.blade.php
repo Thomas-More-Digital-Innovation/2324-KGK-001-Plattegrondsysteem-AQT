@@ -28,6 +28,7 @@
             <tr>
                 <th class="border border-black px-4 py-2 text-xl">ID</th>
                 <th class="border border-black px-4 py-2 text-xl">Name</th>
+                <th class="border border-black px-4 py-2 text-xl" colspan="2"></th>
             </tr>
         </thead>
         <tbody>
@@ -35,11 +36,11 @@
                 <tr>
                     <td class="border border-black px-4 py-2 text-center">{{ $item->id }}</td>
                     <td class="border border-black px-4 py-2 text-center">{{ $item->name }}</td>
-                    <td>
-                        <a href="{{url('lampedit/'.$item->id)}}">Aanpassen</a>
+                    <td class="border border-black px-4 py-2 text-center">
+                        <a href="{{url('lampedit/'.$item->id)}}"><iconify-icon id="" class="cursor-pointer h-full flex grow justify-center items-center" icon="material-symbols:edit-outline" style="color: blue;" width="40" height="40"></iconify-icon></a>
                     </td>
-                    <td>
-                        <a href="{{url('deletelamp/'.$item->id)}}">Verwijderen</a>
+                    <td class="border border-black px-4 py-2 text-center">
+                        <a href="{{url('deletelamp/'.$item->id)}}"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
                     </td>
                 </tr>
             @endforeach
