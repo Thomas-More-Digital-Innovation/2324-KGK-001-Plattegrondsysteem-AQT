@@ -6,6 +6,10 @@ use App\Models\ProtocolType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
 
 class HomeController extends Controller
 {
@@ -51,6 +55,20 @@ class HomeController extends Controller
                 abort(401);
             }
         }       
+    }
+
+    public function userImport(Request $request){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                Excel::import(new UsersImport, $request->file('file'), 'Xlsx');
+
+                return back();
+            }
+            else{
+                abort(401);
+            }
+        }
     }
 
     public function deleteUser($id){

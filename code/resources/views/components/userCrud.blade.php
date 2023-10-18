@@ -26,6 +26,15 @@
         </form> 
     </div>
 
+    <div class="md:flex md:justify-center">
+        <form action="generateuser" enctype="multipart/form-data" method="post" class="md:flex flex-col md:justify-center">
+            @csrf
+            <label for="file">Upload file</label>
+            <input type="file" name="file" id="file">
+            <button type="submit">Bevestigen</button>
+        </form>
+    </div>
+
     <h2 class="block text-center mt-20">Bestaande gebruikers</h2>
     <div class="md:flex md:justify-center">
         <table class="border-separate [border-spacing:10px]">

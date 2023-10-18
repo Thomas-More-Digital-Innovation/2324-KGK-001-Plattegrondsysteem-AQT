@@ -110,6 +110,7 @@ Route::get('/edituser/{id}', [HomeController::class, 'editUser'])->middleware('a
 
 // data handlers
 Route::post('/addUser', [HomeController::class, 'addUser'])->middleware('auth');
+Route::post('/generateuser', [HomeController::class, 'userImport'])->middleware('auth');
 Route::put('/updateuser/{id}', [HomeController::class, 'updateUser'])->middleware('auth');
 Route::get('/deleteuser/{id}', [HomeController::class, 'deleteUser'])->middleware('auth');
 

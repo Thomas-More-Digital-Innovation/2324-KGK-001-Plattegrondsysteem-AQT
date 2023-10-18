@@ -17,21 +17,26 @@ class PasswordController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $user = Auth()->user();
-        if($request->input('password') == $request->input('password_confirmation')
-        && Hash::check($request->input('current_password'), $user->password)){
-            $validated = $request->validateWithBag('updatePassword', [
-                'current_password' => ['required', 'current_password'],
-                'password' => ['required', Password::defaults(), 'confirmed'],
-            ]);
+        if(Hash::check($request->input('current_password'), $user->password)){
+            if($request->input('password') == $request->input('password_confirmation')){
+                $validated = $request->validateWithBag('updatePassword', [
+                    'current_password' => ['required', 'current_password'],
+                    'password' => ['required', Password::defaults(), 'confirmed'],
+                ]);
 
-            $request->user()->update([
-                'password' => Hash::make($validated['password']),
-            ]);
+                $request->user()->update([
+                    'password' => Hash::make($validated['password']),
+                ]);
 
-            return back()->with('succes', "Paswoord is aangepast");
+                return back()->with('succes', "Wachtwoord is aangepast");
+            }
+            else{
+                return back()->with('error', "Nieuw wachtwoord komt niet overeen met de bevestiging");
+            }
+
         }
         else{
-            return back()->with('error', "Paswoord is niet aangepast");
+            return back()->with('error', "Huidig wachtwoord is fout");
         }
     }
 }
