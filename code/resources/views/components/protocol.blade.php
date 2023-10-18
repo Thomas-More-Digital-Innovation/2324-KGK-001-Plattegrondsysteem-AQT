@@ -26,7 +26,6 @@ $protocolnames = DB::table('protocoldetail')
 
 $roleid =Auth()->user()->roleid;
 
-
 $leerlingComment = DB::table('comment') //laatste comment van een leerling ophalen
     ->where('comment.dierid', '=', $idtrim)
     ->where('comment.leerkracht', '=', '0')
