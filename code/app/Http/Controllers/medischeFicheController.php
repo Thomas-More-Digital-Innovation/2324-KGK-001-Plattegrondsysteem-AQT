@@ -27,7 +27,7 @@ class medischeFicheController extends Controller
                     'file' => $file,
                 ]);
             
-                return redirect('medischeFiche');
+                return redirect('medischefiche');
 
             }
             else{

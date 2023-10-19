@@ -6,12 +6,12 @@ $roleid =Auth()->user()->roleid;
 @section('title', 'Dierensoorten')
 @section('content')
 @vite(['resources/js/medischefiche.js'])
-<x-titlebar title="Medische Fiche" color="FF7E7E" back=False/>
+    <h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2" style="background-color:#FF7E7E;"> Medische Fiche </h1>
     <div>
         <div id="modal" class="hidden fixed z-10 w-full h-full bg-black bg-opacity-80 left-0 justify-center items-center">
             <div class="bg-white rounded-xl relative shadow-xl py-5 shadow-black">
                 <div class="flex justify-center items-center border-b-4 pb-2 border-slate-200">
-                    <h1 id="modalTitle" class="text-2xl font-bold text-center">Protocol linken</h1>
+                    <h1 id="modalTitle" class="text-2xl font-bold text-center">Fiche toevoegen</h1>
                     <iconify-icon icon="iconamoon:close" id="closeModal" style="color: red;" width="50" height="50" class="cursor-pointer absolute right-2"></iconify-icon>
                 </div>
                 <div class="px-4 pt-2">
@@ -35,7 +35,7 @@ $roleid =Auth()->user()->roleid;
                 </div>
             </div>
         </div>           
-        <div class="flex pt-14 flex-col">
+        <div class="flex flex-col">
             <table>
                 <tr class="border-b-4 border-black bg-nav bg-opacity-20">
                     <th class="text-xl">Datum bezoek</th>

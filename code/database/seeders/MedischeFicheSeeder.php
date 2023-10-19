@@ -16,12 +16,12 @@ class MedischeFicheSeeder extends Seeder
     public function run(): void
     {
         DB::table('medischefiche')->insert([
-            'date' => '17/10/2023',
-            'file' => 'files/Koningspython.pdf',
+            'date' => '19/04/2022',
+            'file' => 'files/Medische Fiche  19-04-2022.pdf',
         ]);
         DB::table('medischefiche')->insert([
-            'date' => '18/10/2023',
-            'file' => 'files/Plantenmeststoffen toevoegen aquarium.pdf',
+            'date' => '19/04/2023',
+            'file' => 'files/Medische Fiche  19-04-2023.pdf',
         ]);
     }
 }

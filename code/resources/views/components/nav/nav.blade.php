@@ -36,7 +36,7 @@
         <a href="{{ route('medischeFiche') }}" class="flex grow hover:bg-nav-hover">
            <div class="flex flex-col grow justify-center items-center">
               <iconify-icon icon="solar:medical-kit-linear" height="70"></iconify-icon>
-              Medischefiches
+              Medische Fiche
            </div>
         </a>
      </li>
