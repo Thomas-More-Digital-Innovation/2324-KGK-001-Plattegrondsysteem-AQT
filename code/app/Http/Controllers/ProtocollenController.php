@@ -51,7 +51,11 @@ class ProtocollenController extends Controller
                     $name = $request->input('name');
                     $protocoltypeid = $request->input('protocoltypeid');
                     $icon = $request->input('icon');
-                    $file = $request->input('file');
+                    
+                    $filename = $request->file('file')->getClientOriginalName();
+                    $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+            
+
                     DB::table('protocoldetail')->insert([
                         'name'=>$name,
                         'protocoltypeid'=>$protocoltypeid,
@@ -69,16 +73,27 @@ class ProtocollenController extends Controller
         }
     }
 
-    public function protocolupdate($id){
+    public function protocolupdate(Request $request, $id){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
+                
+                $name = $request->input('name');
+                $protocoltypeid = $request->input('protocoltypeid');
+                $icon = $request->input('icon');
+                $file = $request->input('fileOld');
+                
+                if ($request->hasFile('file')){ 
+                    $filename = $request->file('file')->getClientOriginalName();
+                    $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+                }
+
                 try {
                     $query = DB::table('protocoldetail')->where('id', $id)->update([
-                        'name'=>request('name'),
-                        'protocoltypeid'=>request('protocoltypeid'),
-                        'icon'=>request('icon'),
-                        'file'=>request('file')
+                        'name'=>$name,
+                        'protocoltypeid'=>$protocoltypeid,
+                        'icon'=>$icon,
+                        'file'=>$file
                     ]);
                     return redirect('/admin/protocollen');
                 } catch (QueryException $e) {
