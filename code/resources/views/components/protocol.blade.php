@@ -111,7 +111,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                         <!-- Rijen voor gewicht en temperatuur -->
                         <tr class="text-center">
                             <td class="border-2">
-                                Gewicht
+                                Gewicht in gram
                             </td>
                             <td class="border-2" colspan="2">
                                 <input type="text" id="biomedisch-gewicht" name="gewicht" placeholder="<?php echo empty($checkitemgewicht->gewicht) ? 'gewicht' : $checkitemgewicht->gewicht; ?>" data-dierid = "{{$idtrim}}">
@@ -119,7 +119,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                         </tr>
                         <tr class="text-center">
                             <td class="border-2">
-                                Temperatuur
+                                Temperatuur °C
                             </td>
                             <td class="border-2" colspan="2">
                                 <input type="text" id="biomedisch-temperatuur" name="temperatuur" placeholder="<?php echo empty($checkitemtemperatuur->temperatuur) ? 'temperatuur' : $checkitemtemperatuur->temperatuur; ?>" data-dierid = "{{$idtrim}}">
