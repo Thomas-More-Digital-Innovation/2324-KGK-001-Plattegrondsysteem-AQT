@@ -11,15 +11,20 @@ $count = 0;
 
 $idtrim = trim($id, 'ds');
 
-$protocolnames = DB::table('protocoldetail')
-    ->join('dierprotocol', 'protocoldetail.id', '=', 'dierprotocol.protocoldetailid')
-    ->where('dierprotocol.diersoortid', '=', $idtrim)
+$diersoort = DB::table('dier')
+    ->select('diersoortid')
+    ->join('diersoort', 'diersoort.id', '=', 'dier.diersoortid')
+    ->where('dier.id', '=', $idtrim)
     ->get();
 
+$diersoortId = $diersoort[0]->diersoortid;
 
+$protocolnames = DB::table('protocoldetail')
+    ->join('dierprotocol', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
+    ->where('dierprotocol.diersoortid', '=', $diersoortId)
+    ->get();
 
 $roleid =Auth()->user()->roleid;
-
 
 $leerlingComment = DB::table('comment') //laatste comment van een leerling ophalen
     ->where('comment.dierid', '=', $idtrim)
