@@ -42,7 +42,7 @@
             <th class="border border-black px-4 py-2 text-xl">Inventarisnummer</th>
             <th class="border border-black px-4 py-2 text-xl">Lampen Links</th>
             <th class="border border-black px-4 py-2 text-xl">Lampen Rechts</th>
-            <th class="border border-black px-4 py-2 text-xl"></th>
+            <th class="border border-black px-4 py-2 text-xl" colspan="2"></th>
         </tr>
         @foreach($rows as $row)
             <tr>

@@ -46,11 +46,11 @@
             'url' => route('opvolgingadmin'),
             'icon'=> 'mdi:todo-add',
          ],
-         [
+      /* [
             'name' => 'Logboek',
             'url' => '/admin',
             'icon'=> 'octicon:log-16',
-         ],
+         ], */
       ];
    ?>
       @foreach ($boxes as $v)

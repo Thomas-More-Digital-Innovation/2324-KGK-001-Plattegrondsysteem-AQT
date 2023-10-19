@@ -32,8 +32,10 @@
                                 <input type="text" id="file" name="file" required placeholder="file path" class="text-black">
                             </div>
                         </div>
-                        
-                        <input type="submit" value="toevoegen" class="w-full bg-nav text-white hover:bg-nav-hover rounded-lg p-2 text-lg mt-2">
+                        <div class="flex">
+                            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg p-2 text-lg mt-2" href="https://icon-sets.iconify.design/">Iconify</a>
+                            <input type="submit" value="toevoegen" class="w-full bg-nav text-white hover:bg-nav-hover rounded-lg p-2 text-lg mt-2 ml-2">
+                        </div>
                     </form>
                 </div>
             </div>
