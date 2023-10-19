@@ -10,7 +10,7 @@ Geleid door: Bryan
 * Alles van in doing af hebben tegen de test demo, als iedereen zijn kaartje af heeft samen werken aan de algemene styling
 * Demo/development branch maken
 * Demotest donderdag direct namiddag
-* Degene die het demo opvolgt moet nog bepaald worden
+* Degene die het project opvolgt moet nog bepaald worden
 
 ### Wat Gisteren Gedaan
 * gebruikers importen
