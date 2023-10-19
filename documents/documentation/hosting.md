@@ -190,6 +190,7 @@ DB_PASSWORD=password # The password you set up in the MySQL step
 BROADCAST_DRIVER=log
 CACHE_DRIVER=redis
 SESSION_DRIVER=redis
+QUEUE_CONNECTION=redis
 SESSION_LIFETIME=120
 
 MEMCACHED_HOST=127.0.0.1
@@ -223,6 +224,41 @@ And restart nginx:
 ```bash
 sudo systemctl restart nginx
 ```
+### Installing Npm & Dependencies
+Install npm:
+```bash
+sudo apt install npm
+```
+Install dependencies:
+```bash
+npm install
+```
+#### Node.js
+
+Download and import the Nodesource GPG key
+```bash
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+```
+
+Create deb repository
+```bash
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+```
+
+Run Update and Install
+```bash
+sudo apt update
+sudo apt install nodejs -y
+```
+
+If it gives a dpkg error, run the following commands:
+```bash
+sudo dpkg --remove --force-remove-reinstreq libnode-dev
+sudo dpkg --remove --force-remove-reinstreq libnode72:amd64
+```
 
 ### Installing Composer & Dependencies
 To install composer, you should run the following commands:
@@ -231,18 +267,42 @@ sudo apt install composer
 ```
 Because we use extensions in php we will have to install these:
 ```bash
-sudo apt install php-xml php-gd php-curl php-zip php-mysql
+sudo apt install php-xml php-gd php-curl php-zip php-mysql php-redis
 ```
 After installing composer, you can install the dependencies:
 ```bash
-composer install
+composer install --no-dev --optimize-autoloader
+composer update --no-dev --optimize-autoloader
 ```
 If this does not work, try sudo.
+
+Install redis:
+```bash
+sudo apt install redis-server
+sudo systemctl restart nginx
+composer require predis/predis
+```
 
 ### Artisan
 To set up the application, you should run the following commands:
 ```bash
 php artisan migrate
 php artisan db:seed
+php artisan config:clear
+php artisan config:cache
+php artisan queue:restart
 ```
 If this does not work, try sudo.
+
+During deployment, the user of www was changed to root, so if this happened to you as well you can revert this by executing the following command:
+```bash
+sudo chown -R www-data:www-data /var/www
+```
+
+### build
+To build the application, you should run the following commands:
+```bash
+npm run build
+```
+
+### Finishing up
