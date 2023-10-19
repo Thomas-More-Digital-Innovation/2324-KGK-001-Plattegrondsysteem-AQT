@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             VoedingstypeSeeder::class,
             LampSeeder::class,
             LampkantSeeder::class,
-            CommentSeeder::class
+            CommentSeeder::class,
+            MedischeFicheSeeder::class
         ]);
     }
 }
