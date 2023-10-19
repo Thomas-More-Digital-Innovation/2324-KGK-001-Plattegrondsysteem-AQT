@@ -118,7 +118,7 @@ class VoedingstypeSeeder extends Seeder
          [
             'name' => "Krulvlieg",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/krulvlief.jpeg"
+            'icon' => "images/krulvlieg.jpeg"
          ],
          [
             'name' => "Fruitvlieg",
