@@ -10,7 +10,7 @@ Geleid door: Syan
 * Zien of alle kaartjes in de sprint backlog haalbaar is voor donderdag
 * Alles van in doing vandaag af proberen te hebben, behalve algemene styling (tom)
 * Demotest donderdag direct namiddag
-* Degene die het demo opvolgt moet nog bepaald worden
+* Degene die het project opvolgt moet nog bepaald worden
 
 ### Wat Gisteren Gedaan
 * Stylen login

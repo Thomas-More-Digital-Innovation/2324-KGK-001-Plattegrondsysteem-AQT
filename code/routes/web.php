@@ -227,7 +227,7 @@ Route::get('/deletevoedselsoort/{id}', [voedselsoortenController::class, 'delete
 
 // admin - medische fiche
 // view pages
-Route::get('/medischefiche', [medischeFicheController::class, 'index'])->name('medischeFiche');
+Route::get('/medischefiche', [medischeFicheController::class, 'index'])->middleware('auth')->name('medischeFiche');
 
 // data handlers
 Route::post('/fichesubmit', [medischeFicheController::class, 'fichesubmit']);

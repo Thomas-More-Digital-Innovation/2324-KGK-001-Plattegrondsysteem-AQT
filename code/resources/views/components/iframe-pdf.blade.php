@@ -1,8 +1,11 @@
 <?php
     $idtrim = trim($id, 'ds');
     
+    
+
     $dierenfiche = DB::table('diersoort')
-    ->where("id",$idtrim)
+    ->join("dier", 'dier.diersoortid', '=', 'diersoort.id')
+    ->where("dier.id",$idtrim)
     ->get('file')->first();
 ?>
 

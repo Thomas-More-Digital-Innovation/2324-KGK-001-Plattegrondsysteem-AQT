@@ -31,7 +31,7 @@ class InventarisadminController extends Controller
                 $rows = [];
 
                 $groupedData = $inventarisJoined->groupBy('inventarisid');
-
+                
                 foreach ($groupedData as $inventarisid => $items) {
                     $leftLamps = [];
                     $rightLamps = [];

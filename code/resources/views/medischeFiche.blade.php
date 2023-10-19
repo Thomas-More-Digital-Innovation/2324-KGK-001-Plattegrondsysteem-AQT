@@ -27,7 +27,7 @@ $roleid =Auth()->user()->roleid;
                         </div>
                         <div class="pt-2 flex flex-col w-full"> 
                             <label for="dataselect">Bestand<span class="text-red-500">*</span></label>
-                            <input id="file" type="file" name="file">
+                            <input id="file" type="file" name="file" accept="application/pdf">
                         </div>
                         <button type="submit" id="submitModal" disabled class="cursor-pointer mt-2 rounded-md bg-red-500 hover:bg-red-400 px-3 py-2 text-white shadow-sm">Toevoegen</button>
                     </div>

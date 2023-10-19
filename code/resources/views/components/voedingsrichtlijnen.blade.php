@@ -65,7 +65,8 @@
                     <div class="pt-2 flex flex-col w-full">
                         <label for="icon">Icoon <span class="text-red-500">*</span></label>
                         <input type="text" name="icon" id="icon" required class="cursor-pointer rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset hover:bg-black hover:bg-opacity-5 ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-nav">
-                    </div>
+                        <a style="display: inline-block; padding: 6px 12px; background-color: #3498db; color: #fff; font-weight: bold; font-size: 14px; border-radius: 8px; text-decoration: none; margin-top: 10px;" href="https://icon-sets.iconify.design/">Iconify</a>
+                    </div>                    
                     <div class="pt-2 flex flex-col w-full">
                         <label for="color">Kleur <span class="text-red-500">*</span></label>
                         <input type="color" name="color" id="color" required class="w-full cursor-pointer rounded-md border-0 shadow-sm ring-1 ring-inset hover:bg-black hover:bg-opacity-5 ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-nav">

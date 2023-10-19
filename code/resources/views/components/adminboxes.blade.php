@@ -42,20 +42,15 @@
             'icon' => 'game-icons:steak',
          ],
          [
-            'name' => 'Medischefiche',
-            'url' => route('medischeFiche'),
-            'icon'=> 'game-icons:medicines',
-         ], 
-         [
             'name' => 'Opvolging',
             'url' => route('opvolgingadmin'),
             'icon'=> 'mdi:todo-add',
          ],
-         [
+      /* [
             'name' => 'Logboek',
             'url' => '/admin',
             'icon'=> 'octicon:log-16',
-         ],
+         ], */
       ];
    ?>
       @foreach ($boxes as $v)

@@ -30,7 +30,9 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-
+    'trusted_proxies' => [
+    '127.0.0.1', '10.0.30.201'  // Add your reverse proxy server's IP address here
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -55,7 +57,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://demo.node1.be'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -168,7 +170,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,6 +187,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];
