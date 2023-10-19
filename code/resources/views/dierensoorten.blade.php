@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Dierensoorten')
 @section('content')
-<x-titlebar title="Admin: Diersoort" color="FF7E7E" back=true/>
+<x-titlebar title="Admin: Diersoort" color="FF7E7E" back=true link="{{route('admin')}}"/>
     <div class="flex pt-14 flex-col">
         <table>
             <thead>
