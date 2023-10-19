@@ -42,11 +42,6 @@
             'icon' => 'game-icons:steak',
          ],
          [
-            'name' => 'Medischefiche',
-            'url' => route('medischeFiche'),
-            'icon'=> 'game-icons:medicines',
-         ], 
-         [
             'name' => 'Opvolging',
             'url' => route('opvolgingadmin'),
             'icon'=> 'mdi:todo-add',
