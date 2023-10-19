@@ -18,157 +18,157 @@ class VoedingstypeSeeder extends Seeder
          [
             'name' => "Rode muggenlarve",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/rodemuggenlarve.jpeg"
          ],
          [
             'name' => "Zwarte muggenlarve",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/zwartemuggenlarve.jpeg"
          ],
          [
             'name' => "Witte muggenlarve",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/wittemuggenlarve.jpeg"
          ],
          [
             'name' => "Artemia",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/artemia.jpeg"
          ],
          [
             'name' => "Tubifex",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/tubifex.jpeg"
          ],
          [
             'name' => "Spiering",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/spiering.jpeg"
          ],
          [
             'name' => "Muis",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/muis.jpeg"
          ],
          [
             'name' => "Kuiken",
             'voedingsrichtlijnid' => "1",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/kuiken.jpeg"
          ],
          [
             'name' => "Andijvie",
             'voedingsrichtlijnid' => "2",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/andijvie.jpeg"
          ],
          [
             'name' => "Sla",
             'voedingsrichtlijnid' => "2",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/sla.jpeg"
          ],
          [
             'name' => "komkommer",
             'voedingsrichtlijnid' => "2",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/komkommer.jpeg"
          ],
          [
             'name' => "Champignon",
             'voedingsrichtlijnid' => "2",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/champignon.jpeg"
          ],
          [
             'name' => "Witloof",
             'voedingsrichtlijnid' => "2",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/witloof.jpeg"
          ],
          [
             'name' => "Tomaat",
             'voedingsrichtlijnid' => "2",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/tomaat.jpeg"
          ],
          [
             'name' => "Banaan",
             'voedingsrichtlijnid' => "3",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/banaan.jpeg"
          ],
          [
             'name' => "Appel",
             'voedingsrichtlijnid' => "3",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/appel.jpeg"
          ],
          [
             'name' => "Peer",
             'voedingsrichtlijnid' => "3",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/peer.jpeg"
          ],
          [
             'name' => "Meloen",
             'voedingsrichtlijnid' => "3",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/watermeloen.jpeg"
          ],
          [
             'name' => "Galiameloen",
             'voedingsrichtlijnid' => "3",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/galiameloen.jpeg"
          ],
          [
             'name' => "Druif",
             'voedingsrichtlijnid' => "3",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/druif.jpeg"
          ],
          [
             'name' => "Krulvlieg",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/krulvlief.jpeg"
          ],
          [
             'name' => "Fruitvlieg",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/fruitvlieg.jpeg"
          ],
          [
             'name' => "Zwarte krekel",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/zwartekrekel.jpeg"
          ],
          [
             'name' => "Huiskrekel",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/huiskrekel.jpeg"
          ],
          [
             'name' => "Afrikaanse treksprinkhaan",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/afrikaansetreksprinkhaan.jpeg"
          ],
          [
             'name' => "Woestijnsprinkhaan",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/woestijnsprinkhaan.jpeg"
          ],
          [
             'name' => "Wasmotlarve",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/wasmotlarve.jpeg"
          ],
          [
             'name' => "Regenworm",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/regenworm.jpeg"
          ],
          [
             'name' => "Meelworm",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/meelworm.jpeg"
          ],
          [
             'name' => "Morioworm",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/morioworm.jpeg"
          ],
          [
             'name' => "Buffaloworm",
             'voedingsrichtlijnid' => "4",
-            'icon' => "images/koningspython.jpg"
+            'icon' => "images/buffaloworm.jpeg"
          ]
       ]);
    }
