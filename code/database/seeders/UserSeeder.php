@@ -30,6 +30,14 @@ class UserSeeder extends Seeder
             'email' => "admin@email.com",
             'password' => Hash::make('adminadmin'),
             'roleid' => "4"
+         ],
+         [
+            'firstname' => "Dierenarts",
+            'lastname' => "Dierenarts",
+            'username' => "dierenarts",
+            'email' => 'dierenarts@email.com',
+            'password' => Hash::make('dierenarts'),
+            'roleid' => "3"
          ]
       ]);
    }
