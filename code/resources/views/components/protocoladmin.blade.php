@@ -4,7 +4,7 @@
         <div class="bg-slate-200 p-2 px-4 rounded-lg m-2">
             <div class="flex justify-around">
                 <div class="flex justify-center">
-                    <form action="/admin/protocollen/add" method="post">
+                    <form action="/admin/protocollen/add" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="flex">
                             <div class="flex flex-col">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="flex flex-col pl-4">
                                 <label for="file" class="text-lg">File <span class="text-red-500">*</span></label>
-                                <input type="text" id="file" name="file" required placeholder="file path" class="text-black">
+                                <input type="file" id="file" name="file" required class="text-black">
                             </div>
                         </div>
                         <div class="flex">
@@ -45,7 +45,7 @@
     <div>
         <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Bestaande protcollen</h1>
     
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white overflow-hidden shadow-sm">
             <div class="flex flex-col">
                 <table>
                     <tr class="border-b-4 border-black bg-nav bg-opacity-20">

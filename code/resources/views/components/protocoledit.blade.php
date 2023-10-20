@@ -1,9 +1,15 @@
+<?php
+
+$fileTrim = substr($protocol->file, strlen('files/'));
+
+?>
+
 <div class="py-12">
     <div class="flex flex-col justify-center items-center py-2">
         <div class="bg-slate-200 p-2 px-4 rounded-lg m-2">
             <div class="flex justify-around">
                 <div class="flex justify-center">
-                    <form action="{{ url('admin/protocollen/update/'.$protocol->id) }}" method="post">
+                    <form action="{{ url('admin/protocollen/update/'.$protocol->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="flex">
@@ -28,12 +34,13 @@
                         </div>
                         <div class="flex">
                             <div class="flex flex-col">
-                                <label for="icon">Icon:</label>
+                                <label for="icon">Icon:<span class="text-red-500">*</span></label>
                                 <input type="text" id="icon" name="icon" value="{{$protocol->icon}}" class="text-black" required>
                             </div>
                             <div class="flex flex-col pl-4">
-                                <label for="file">File:</label>
-                                <input type="text" id="file" name="file" value="{{$protocol->file}}" class="text-black">
+                                <label for="file">File:<span class="text-red-500">*</span> (vorige protocol: {{ $fileTrim }})</label>
+                                <input type="hidden" name="fileOld" value="{{ $protocol->file }}">
+                                <input type="file" id="file" name="file" class="text-black">
                             </div>
                         </div>
                         <input type="submit" value="aanpassen" class="w-full bg-nav text-white hover:bg-nav-hover rounded-lg p-2 text-lg mt-2">
