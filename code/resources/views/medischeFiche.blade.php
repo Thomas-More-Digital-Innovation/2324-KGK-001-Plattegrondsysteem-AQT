@@ -40,7 +40,9 @@ $roleid =Auth()->user()->roleid;
                 <tr class="border-b-4 border-black bg-nav bg-opacity-20">
                     <th class="text-xl">Datum bezoek</th>
                     <th class="border-x-4 border-black text-xl">Bestand</th>
-                    <th></th>
+                    @if($roleid==4)
+                    <th></th>    
+                    @endif
                     <th>
                         @if($roleid==4 || $roleid==3)
                             <iconify-icon icon="gala:add" width="40" height="40" style="color: darkgreen;" id="openModal" class="cursor-pointer p-2 flex grow justify-center items-center"></iconify-icon>
@@ -51,11 +53,11 @@ $roleid =Auth()->user()->roleid;
                         <td class="p-6">{{ $fiche->date }}</td>
                         <td class="p-6">{{ $fiche->file }}</td>                    
                         <td ><a href="/{{ $fiche->file }}"><iconify-icon class="cursor-pointer h-full flex grow justify-center items-center" icon="mdi:eye" style="color: blue;" width="40" height="40"></iconify-icon></a></td>
+                        @if($roleid==4)
                         <td>
-                            @if($roleid==4)
-                                <a href="/fichedelete/{{$fiche->id}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
-                            @endif
+                            <a href="/fichedelete/{{$fiche->id}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
             </table>
