@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use App\Providers\AuthServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class LoginRequest extends FormRequest
 {
@@ -45,12 +46,20 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('username', 'password'))) {
+            $user = DB::table('users')->where('username', $this->input('username'))->first();
+            if ($user && $user->roleid >2) {
+                throw ValidationException::withMessages([
+                    'admin' => "De inlog gegevens zijn fout",
+                ]);
+            
+            }
+            else{
+                throw ValidationException::withMessages([
+                    'message' => "De inlog gegevens zijn fout",
+                ]);
+            }
 
             RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'message' => "De inlog gegevens zijn fout",
-            ]);
         }
 
         RateLimiter::hit($this->throttleKey());

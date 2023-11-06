@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,16 @@
         @if ($errors->has('message'))
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3 text-center" role="alert">
                 {{ $errors->first('message') }}
+                
+            </div>
+        @endif
+
+        @if ($errors->has('admin'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3 text-center" role="alert">
+                {{$errors->first('admin')}}
+            </div>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3 text-center" role="alert">
+                <a href="forgot-password" class="btn">Wachtwoord vergeten</a>
             </div>
         @endif
 
