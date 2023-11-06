@@ -18,6 +18,7 @@ use App\Http\Controllers\GewichtChartControler;
 use App\Http\Controllers\TemperatuurChartController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\medischeFicheController;
+use App\Http\Controllers\WerkplekController;
 
 // required for login
 require __DIR__.'/auth.php';
@@ -31,11 +32,8 @@ Route::get('/', function () {
 // main page
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
-// werkplek - home
-Route::get('/werkplek', function () {
-    $id = request('id'); // vraagt id op
-    return view('werkplek', ['id' => $id]); // geeft id mee aan de view
-});
+// werkplek
+Route::get('/werkplek', [WerkplekController::class, 'index'])->name('werkplek');
 
 // dierenfiche & checklist
 Route::get('/dierefiche', function () {
