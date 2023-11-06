@@ -10,7 +10,8 @@ class WerkplekController extends Controller
     {
         $id = request('id');
         $clickedName = $id;
-
+        $letters = ['x', 'y'];
+        foreach ($letters as $l) {if (str_contains($clickedName, $l)) {$clickedName = str_replace($l, '', $clickedName);};};
         $werkplek = DB::table('werkplek')->where('name', $clickedName)->first();
         $werkplekId = $werkplek->id;
             
