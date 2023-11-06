@@ -33,7 +33,8 @@
                             </div>
                         </div>
                         <div class="flex">
-                            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg p-2 text-lg mt-2" href="https://icon-sets.iconify.design/">Iconify</a>
+                            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg p-2 text-lg mt-2" target="_blank" href="https://icon-sets.iconify.design/">Iconify</a>
+                            <a class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg p-2 text-lg mt-2" target="_blank" href="https://youtu.be/kQrvlkKr4is?feature=shared">?</a>
                             <input type="submit" value="toevoegen" class="w-full bg-nav text-white hover:bg-nav-hover rounded-lg p-2 text-lg mt-2 ml-2">
                         </div>
                     </form>
