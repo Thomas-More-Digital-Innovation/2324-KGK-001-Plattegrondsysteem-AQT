@@ -1,9 +1,9 @@
 @extends('layout')
 @section('title', 'Account')
 @section('content')
-    <x-titlebar title="Account" color="FFAD7E"/>
+    <x-titlebar title="Account: Wachtwoord veranderen" color="FFAD7E"/>
     <x-errorhandler />
-    <div class="h-screen pt-14">
+    <div class="h-screen">
         <div >
             <div >
                 <div >
