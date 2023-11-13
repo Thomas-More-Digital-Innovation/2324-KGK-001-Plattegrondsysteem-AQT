@@ -72,7 +72,7 @@
                                 @endif
                             @endforeach
     
-                        @if($data->id != $userID)
+                        @if($data->id != $userID && $data->username != "admin")
                         <td>
                             <a href="{{url('edituser/'.$data->id)}}"><iconify-icon class="cursor-pointer h-full flex grow justify-center items-center" icon="material-symbols:edit-outline" style="color: blue;" width="40" height="40"></iconify-icon></a>
                         </td>
