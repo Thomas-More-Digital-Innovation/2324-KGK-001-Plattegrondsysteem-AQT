@@ -8,12 +8,21 @@
 </head>
 <body>
 
+    
+
     <div class="flex flex-col justify-center items-center h-screen w-screen">
         <div >
-            <p class="text-center">Wachtwoord vergeten? Geen probleem. <br>
+            <p class="text-center mb-3">Wachtwoord vergeten? Geen probleem. <br>
             Geef uw email adres in en wij sturen u een link om een nieuw wachtwoord te kiezen.</p>
         </div>
-        <form method="POST" action="{{ route('password.email') }}" class=" md:flex flex-col mt-6 md:justify-center w-1/3 bg-gray-300 pl-6 pr-6 rounded-lg">
+
+        @if ($errors->has('message'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-1/3 mb-3 text-center" role="alert">
+                {{ $errors->first('message') }}
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('password.email') }}" class=" md:flex flex-col md:justify-center w-1/3 bg-gray-300 pl-6 pr-6 rounded-lg">
             @csrf
             <!-- Email Address -->
                 <label for="email" class="text-center mt-6">Email:</label>
