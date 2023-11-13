@@ -1,3 +1,6 @@
+@if(Hash::check("1234", Auth()->user()->password) && Route::currentRouteName() != "profile.edit")
+   <x-changepass />
+@endif
 <nav class="fixed flex bg-nav w-40 top-0 bottom-0 text-white justify-center">
    <ul class="flex flex-col list-none grow">
       <li class="flex grow">
