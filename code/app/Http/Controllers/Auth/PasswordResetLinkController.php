@@ -39,12 +39,8 @@ class PasswordResetLinkController extends Controller
 
         $user = DB::table('users')->where('email', $request->email)->exists();
 
-        
         if($user){
-            return $status == Password::RESET_LINK_SENT
-                ? back()->with('status', __($status))
-                : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+            return back()->with('success', "Reset link is verstuurd");
         }
         else{
             return back()->withErrors(['message' => "Email niet gevonden"]);

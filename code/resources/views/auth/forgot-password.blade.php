@@ -16,6 +16,12 @@
             Geef uw email adres in en wij sturen u een link om een nieuw wachtwoord te kiezen.</p>
         </div>
 
+        @if (Session::has('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-1/3 mb-3 text-center" role="alert">
+                    {{ Session::get('success') }}
+            </div>
+        @endif
+
         @if ($errors->has('message'))
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-1/3 mb-3 text-center" role="alert">
                 {{ $errors->first('message') }}

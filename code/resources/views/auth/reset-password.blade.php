@@ -7,7 +7,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div class="flex justify-center items-center h-screen w-screen">
+    <div class="flex flex-col justify-center items-center h-screen w-screen">
+        @if ($errors->has('message'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-1/3 mb-3 text-center" role="alert">
+                {{ $errors->first('message') }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('password.store') }}" class=" md:flex flex-col md:justify-center w-1/3 bg-gray-300 pl-6 pr-6 rounded-lg">
         @csrf
 
@@ -20,12 +25,12 @@
 
             <!-- Password -->
             <label for="password" class="text-center mt-6">Nieuw wachtwoord</label>
-            <input id="password" class="text-center rounded-full border border-black" type="password" name="password"/>
+            <input id="password" minlength="8" class="text-center rounded-full border border-black" type="password" name="password" required/>
 
 
             <!-- Confirm Password -->
             <label for="password_confirmation" class="text-center mt-6">Herhaal wachtwoord</label>
-            <input id="password_confirmation" class="text-center rounded-full border border-black" type="password"name="password_confirmation" required/>
+            <input id="password_confirmation" minlength="8" class="text-center rounded-full border border-black" type="password"name="password_confirmation" required/>
 
 
             <input type="submit" value="Reset wachtwoord" class="btn py-3 rounded-full border border-black text-black bg-white my-6">
