@@ -3,48 +3,45 @@
 @section('content')
 <x-titlebar title="Admin: Lamp Aanmaken" color="FF7E7E" back=true link="/inventarisselect"/>
 <x-errorhandler />
-<div class="w-3/4 mx-auto mb-8 pt-20 text-center">
-
-    <form method="POST" action="{{ route('lampadmin.make') }}">
-        @csrf
-
-        <div class="flex flex-col items-center">
-        
-            
-            <label for="naam" class="text-xl px-10">naam nieuwe lamp: </label>
-            <div>
-                <input type="text" name="naam" id="naam">
+<div class="h-screen pt-14">
+    <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Nieuw lamp aanmaken</h1>
+    <div class="flex flex-col justify-center items-center py-2">
+        <div class="bg-slate-200 p-2 px-4 rounded-lg m-2">
+            <div class="flex justify-around">
+                <div class="flex justify-center">
+                    <form method="POST" action="{{ route('lampadmin.make') }}">
+                        @csrf
+                        <div class="flex flex-col">
+                            <label for="naam" class="text-lg">Naam lamp <span class="text-red-500">*</span></label>
+                            <input type="text" name="naam" class="rounded-lg" id="naam" required>
+                        </div>       
+                        <button type="submit" class="w-full bg-nav text-white hover:bg-nav-hover rounded-lg p-2 text-lg mt-2">Aanmaken</button>
+                    </form>
+                </div>
             </div>
-        </div>       
-
-        <div class="mb-4 flex justify-center pt-5 pb-10">
-            <button type="submit" class="btn btn-primary bg-blue-500 text-white rounded-full px-4 py-2 cursor-pointer">Nieuwe Lamp Aanmaken</button>
         </div>
-    </form>
+    </div>
 
-
-    <table class="inline-block">
-        <thead>
-            <tr>
-                <th class="border border-black px-4 py-2 text-xl">ID</th>
-                <th class="border border-black px-4 py-2 text-xl">Name</th>
-                <th class="border border-black px-4 py-2 text-xl" colspan="2"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($lamp->sortByDesc('id') as $item)
-                <tr>
-                    <td class="border border-black px-4 py-2 text-center">{{ $item->id }}</td>
-                    <td class="border border-black px-4 py-2 text-center">{{ $item->name }}</td>
-                    <td class="border border-black px-4 py-2 text-center">
-                        <a href="{{url('lampedit/'.$item->id)}}"><iconify-icon id="" class="cursor-pointer h-full flex grow justify-center items-center" icon="material-symbols:edit-outline" style="color: blue;" width="40" height="40"></iconify-icon></a>
-                    </td>
-                    <td class="border border-black px-4 py-2 text-center">
-                        <a href="{{url('deletelamp/'.$item->id)}}"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
-                    </td>
+    <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Bestaande lampen</h1>
+    <div class="bg-white overflow-hidden shadow-sm">
+        <div class="flex flex-col">
+            <table>
+                <tr class="border-b-4 border-black bg-nav bg-opacity-20">
+                    <th class="text-xl p-3">ID</th>
+                    <th class="border-x-4 border-black text-xl">Naam</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @foreach($lamp->sortByDesc('id') as $item)
+                    <tr class="border-y-4 border-slate-300 odd:bg-slate-100 hover:bg-slate-300">
+                        <td class="pl-2">{{ $item->id }}</td>
+                        <td class="px-6">{{ $item->name }}</td>
+                        <td><a href="{{url('lampedit/'.$item->id)}}"><iconify-icon id="" class="cursor-pointer h-full flex grow justify-center items-center" icon="material-symbols:edit-outline" style="color: blue;" width="40" height="40"></iconify-icon></a></td>
+                        <td><a href="{{url('deletelamp/'.$item->id)}}"><iconify-icon icon="mdi:trashcan-outline" class="flex grow justify-center items-center" style="color: red;" width="40" height="40"></iconify-icon></a></td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
 </div>
 @endsection

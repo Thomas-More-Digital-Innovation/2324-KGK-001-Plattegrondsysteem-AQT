@@ -3,55 +3,64 @@
 @section('content')
 <x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true link="/inventarisselect"/>
 <x-errorhandler />
-<div class="w-3/4 mx-auto mb-8 pt-20"> 
-    <!-- Form for creating a new inventaris -->
-    <form method="POST" action="{{ route('inventarisadmin.makeInventaris') }}">
-        @csrf
-         
-        <div class="flex justify-center">
-            <div class="multiselect-list mr-8">
-                <label for="lamplinks" class="text-xl">Lampen links:</label>
-                @foreach($lamp as $lampje)
-                    <div>
-                        <input type="checkbox" name="lamplinks[]" id="lamplinks_{{ $lampje->id }}" value="{{ $lampje->id }}">
-                        <label for="lamplinks_{{ $lampje->id }}">{{ $lampje->name }}</label>
-                    </div>
-                @endforeach
+<div class="h-screen pt-14"> 
+    <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Nieuw inventaris aanmaken</h1>
+    <div class="flex flex-col justify-center items-center py-2">
+        <div class="bg-slate-200 p-2 px-4 rounded-lg m-2">
+            <div class="flex justify-around">
+                <div class="flex justify-center">
+                    <!-- Form for creating a new inventaris -->
+                    <form method="POST" action="{{ route('inventarisadmin.makeInventaris') }}">
+                        @csrf
+                        <div class="flex justify-center">
+                            <div class="multiselect-list mr-8">
+                                <label for="lamplinks" class="text-xl">Lampen links:</label>
+                                @foreach($lamp as $lampje)
+                                    <div>
+                                        <input type="checkbox" name="lamplinks[]" id="lamplinks_{{ $lampje->id }}" value="{{ $lampje->id }}">
+                                        <label for="lamplinks_{{ $lampje->id }}">{{ $lampje->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div class="multiselect-list  mr-8">
+                                <label for="lamprechts" class="text-xl">Lampen rechts:</label>
+                                @foreach($lamp as $lampje)
+                                    <div>
+                                        <input type="checkbox" name="lamprechts[]" id="lamprechts_{{ $lampje->id }}" value="{{ $lampje->id }}">
+                                        <label for="lamprechts_{{ $lampje->id }}">{{ $lampje->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-nav text-white hover:bg-nav-hover rounded-lg p-2 text-lg mt-2">Inventaris Aanmaken</button>
+                    </form>
+                </div>
             </div>
+        </div>
+    </div>
+    <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Bestaande inventarisen</h1>
 
-            <div class="multiselect-list  mr-8">
-                <label for="lamprechts" class="text-xl">Lampen rechts:</label>
-                @foreach($lamp as $lampje)
-                    <div>
-                        <input type="checkbox" name="lamprechts[]" id="lamprechts_{{ $lampje->id }}" value="{{ $lampje->id }}">
-                        <label for="lamprechts_{{ $lampje->id }}">{{ $lampje->name }}</label>
-                    </div>
+    <div class="bg-white overflow-hidden shadow-sm">
+        <div class="flex flex-col">
+            <!-- Table of existing inventarissen -->
+            <table>
+                <tr class="border-b-4 border-black bg-nav bg-opacity-20">
+                    <th class="text-xl p-3">Inventarisnummer</th>
+                    <th class="border-x-4 border-black text-xl">Lampen Links</th>
+                    <th class="border-x-4 border-black text-xl">Lampen Rechts</th>
+                    <th></th>
+                </tr>
+                @foreach($rows as $row)
+                    <tr class="border-y-4 border-slate-300 odd:bg-slate-100 hover:bg-slate-300">
+                        <td class="pl-2">{{ $row['inventarisid'] }}</td>
+                        <td class="px-6">{{ $row['left_lamps'] }}</td>
+                        <td>{{ $row['right_lamps'] }}</td>
+                        <td><a href="deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
+                    </tr>
                 @endforeach
-            </div>
-
+            </table>
         </div>
-
-        <div class="mb-4 flex justify-center pt-10">
-            <button type="submit" class="btn btn-primary bg-blue-500 text-white rounded-full px-4 py-2 cursor-pointer">Inventaris Aanmaken</button>
-        </div>
-    </form>
-
-    <!-- Table of existing inventarissen -->
-    <table class="mx-auto mt-4">
-        <tr>
-            <th class="border border-black px-4 py-2 text-xl">Inventarisnummer</th>
-            <th class="border border-black px-4 py-2 text-xl">Lampen Links</th>
-            <th class="border border-black px-4 py-2 text-xl">Lampen Rechts</th>
-            <th class="border border-black px-4 py-2 text-xl" colspan="2"></th>
-        </tr>
-        @foreach($rows as $row)
-            <tr>
-                <td class="border border-black px-4 py-2 text-center">{{ $row['inventarisid'] }}</td>
-                <td class="border border-black px-4 py-2 text-center">{{ $row['left_lamps'] }}</td>
-                <td class="border border-black px-4 py-2 text-center">{{ $row['right_lamps'] }}</td>
-                <td class="border border-black px-4 py-2 text-center"><a href="deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
-            </tr>
-        @endforeach
-    </table>
+    </div>
 </div>
 @endsection
