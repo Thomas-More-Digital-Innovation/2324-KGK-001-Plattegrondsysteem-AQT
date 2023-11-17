@@ -47,7 +47,7 @@ class LoginRequest extends FormRequest
 
         if (! Auth::attempt($this->only('username', 'password'))) {
             $user = DB::table('users')->where('username', $this->input('username'))->first();
-            if ($user && $user->roleid >2) {
+            if ($user && $user->roleid == 4) {
                 throw ValidationException::withMessages([
                     'admin' => "De inlog gegevens zijn fout",
                 ]);
