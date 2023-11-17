@@ -18,35 +18,27 @@
         <iconify-icon icon="fluent-emoji-high-contrast:lizard" flip="vertical" width="200" height="200" class="absolute top-0 right-0 opacity-30"></iconify-icon>
 
 
-        @if ($errors->has('message'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3 text-center" role="alert">
-                {{ $errors->first('message') }}
-                
-            </div>
-        @endif
-
-        @if ($errors->has('admin'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3 text-center" role="alert">
-                {{$errors->first('admin')}}
-            </div>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3 text-center" role="alert">
-                <a href="forgot-password" class="btn">Wachtwoord vergeten</a>
-            </div>
-        @endif
-
-
         <form method="POST" action="{{ route('login') }}" class=" md:flex flex-col md:justify-center w-screen/3 bg-gray-300 pl-6 pr-6 rounded-lg">
             @csrf
-
+            @if ($errors->has('message'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 mt-2 py-3 rounded relative mb-3 text-center" role="alert">
+                    {{ $errors->first('message') }}
+                </div>
+            @endif
+            @if ($errors->has('admin'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 mt-2 py-3 rounded relative mb-3 text-center" role="alert">
+                    {{$errors->first('admin')}}
+                </div>
+            @endif
             <!-- username Address -->
-            <label for="username" class="text-center mt-6">Gebruikersnaam:</label>
+            <label for="username" class="text-center @if (!$errors->has('message') && !$errors->has('admin')) mt-6 @endif">Gebruikersnaam:</label>
             <input id="username" type="text" name="username" :value="old('username')" 
             required autofocus autocomplete="username"
             class="text-center rounded-full border border-black" />
             <!-- <input-error :messages="$errors->get('username')"/> -->
 
             <!-- Password -->
-            <label for="password" class="text-center mt-6">Wachtwoord:</label>
+            <label for="password" class="text-center mt-4">Wachtwoord:</label>
 
             <input id="password"
                             type="password"
@@ -55,8 +47,10 @@
                             class="text-center rounded-full border border-black"/>
 
             <!-- <input-error :messages="$errors->get('password')" /> -->
-
-            <button type="submit" class="btn py-3 rounded-full border border-black text-black bg-white my-6">Aanmelden</button>
+            @if ($errors->has('admin'))
+                <a href="forgot-password" class="bg-orange-100 border border-orange-400 text-orange-700 mt-3 py-1 rounded-full relative mb-3 text-center" role="alert">Wachtwoord vergeten</a>
+            @endif
+            <button type="submit" class="btn py-3 rounded-full border border-black text-black bg-white @if (!$errors->has('admin')) mt-6 @endif mb-6">Aanmelden</button>
         </form>
         <p class="mt-5">Made by Digital Innovation Thomas More Geel</p>
     </div>
