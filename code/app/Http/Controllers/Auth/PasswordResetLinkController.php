@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class PasswordResetLinkController extends Controller
 {
@@ -36,9 +37,13 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        $user = DB::table('users')->where('email', $request->email)->exists();
+
+        if($user){
+            return back()->with('success', "Reset link is verstuurd");
+        }
+        else{
+            return back()->withErrors(['message' => "Email niet gevonden"]);
+        }
     }
 }
