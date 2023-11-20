@@ -222,7 +222,18 @@ class HomeController extends Controller
             else {DB::table("comment")
                 ->insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
             };
+        
+
         return back();
+    }
+
+    public function dierenfiche(){
+
+        $id = request('id');
+        $date = request('date');
+        $idint = (int)ltrim($id, "ds");
+        $data = DB::table('checkitem')->where('dierid', $idint)->get();
+        return view('dierefiche', ['id' => $id, 'date' => $date, 'data' => $data]);
     }
 
     public function checkitemadd($id, $id2, $id3, $id4) {

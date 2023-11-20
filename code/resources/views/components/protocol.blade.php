@@ -3,6 +3,8 @@
 @vite(['resources/js/checklist.js'])
 @vite(['resources/js/popup.js'])
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <?php
 setlocale(LC_TIME, 'nl_be');
 $dayOfWeek = ucfirst(strftime('%A (%d/%m/%Y)', strtotime($date))); 
@@ -152,15 +154,47 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                     >{{str_replace("%2F","/",$leerlingPlaceholder)}}</textarea> <!--replace is omdat er een fout was met het doorsturen van "/" naar de db -->
                 </div>
             </div>
-            <!--<div id="popupTrigger" class="cursor-pointer">
+            <div id="popupTrigger" class="cursor-pointer">
     <iconify-icon icon="fa6-solid:weight-scale" width="100"></iconify-icon>
 </div>
 <div id="popup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white p-6 rounded-lg relative w-1600 h-1200 overflow-hidden"> 
         <span id="closePopup" class="absolute top-2 right-2 text-gray-600 cursor-pointer">×</span>
         <div id="curve_chart" class="w-full h-full"></div>
+        <canvas id="myChart" width="400" height="400"></canvas>
     </div>
-</div> Werkt nog niet-->
-
-
+ </div> 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var data = @json($data->pluck('gewicht'));
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @json($data->pluck('datetime')),
+            datasets: [{
+                label: 'Gewicht in gram',
+                data: data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
