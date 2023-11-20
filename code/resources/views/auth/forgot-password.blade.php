@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>
 <body>
 
@@ -12,7 +13,7 @@
 
     <div class="flex flex-col justify-center items-center h-screen w-screen">
         <div >
-            <p class="text-center mb-3">Wachtwoord vergeten? Geen probleem. <br>
+            <p class="text-center mb-3"><a href="/"><iconify-icon icon="mingcute:arrow-left-fill" width="25" heigth="25"></iconify-icon></a>Wachtwoord vergeten? Geen probleem. <br>
             Geef uw email adres in en wij sturen u een link om een nieuw wachtwoord te kiezen.</p>
         </div>
 
@@ -34,7 +35,7 @@
                 <label for="email" class="text-center mt-6">Email:</label>
                 <input id="email" type="email" name="email" class="text-center rounded-full border border-black"/>
 
-                <input type="submit" class="btn py-3 rounded-full border border-black text-black bg-white my-6" value="Stuur reset link">
+                <input type="submit" class="cursor-pointer bg-nav hover:bg-nav-hover btn py-3 rounded-full border border-black text-white my-6" value="Stuur reset link">
         </form>
     </div>
 </body>
