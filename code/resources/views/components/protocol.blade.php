@@ -5,8 +5,7 @@
 
 <?php
 setlocale(LC_TIME, 'nl_be');
-$currentDate = date('Y-m-d');
-$dayOfWeek = ucfirst(strftime('%A', strtotime($currentDate))); 
+$dayOfWeek = ucfirst(strftime('%A (%d/%m/%Y)', strtotime($date))); 
 $count = 0;
 
 $idtrim = trim($id, 'ds');
@@ -60,18 +59,17 @@ $checkitemtemperatuur = DB::table('checkitem') //ophalen van de laatst ingevoerd
     ->orderBy('datetime', 'desc')
     ->first();
 
-
 $checkboxitemsvm = DB::table('checkitem') //ophalen van alle protocollen die al uitgevoerd zijn in de voormiddag
     ->where('dierid', '=', $idtrim)
     ->where('protocoldetailid', '!=', null)
-    ->whereRaw('DATE(datetime) = CURDATE()')
+    ->whereRaw('DATE(datetime) = "'.$date.'"')
     ->whereRaw('TIME(datetime) < "12:00:00"') // Voormiddag is voor 12:00 uur
     ->get();
 
 $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al uitgevoerd zijn in de namiddag
     ->where('dierid', '=', $idtrim)
     ->where('protocoldetailid', '!=', null)
-    ->whereRaw('DATE(datetime) = CURDATE()') 
+    ->whereRaw('DATE(datetime) = "'.$date.'"')
     ->whereRaw('TIME(datetime) > "12:00:00"') // Namiddag is na 12:00 uur
     ->get();
 ?>
@@ -84,7 +82,8 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                     <thead>
                         <tr>
                             <th>To do</th>
-                            <th colspan="2"><?php echo $dayOfWeek; ?></th>
+                            <th colspan="2" class="cursor-pointer" id="datetitle"><?php echo $dayOfWeek; ?><iconify-icon icon="fluent-mdl2:date-time"></iconify-icon></th>
+                            <input type="date" hidden id="datepicker">
                         </tr>
                         <tr>
                             <th></th>
@@ -96,13 +95,13 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                         <!-- Hier gaan we protocol uit $protocolophalen als het protocol op deze dag al uitgevoerd is wordt deze automatisch aangevinkt-->
                         <?php foreach ($protocolnames as $protocol):?>
                             <tr class="text-center">
-                            <td class="border-2"><?php echo $protocol->name; ?></td>
+                            <td class="border-2 flex justify-center items-center"><a href="/protocolinfo?id={{$protocol->id}}&t={{$protocol->name}}&c=dddddd" target="_blank"><?php echo $protocol->name; ?> <iconify-icon icon="akar-icons:link-out"></iconify-icon></a></td>
                             <td class="border-2">
-                                <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}" name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
+                                <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}"  @if ($date != date("Y-m-d")) disabled class="text-red-500 bg-red-200" @endif name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
                                 <?php if($checkboxitemsvm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
                             </td>
                             <td class="border-2">
-                                <input type="checkbox" id="checkboxnamiddag{{$protocol->id}}" name="checkboxnamiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
+                                <input type="checkbox" id="checkboxnamiddag{{$protocol->id}}" @if ($date != date("Y-m-d")) disabled class="text-red-500 bg-red-200" @endif name="checkboxnamiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
                                 <?php if($checkboxitemsnm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
                             </td>
                             </tr>

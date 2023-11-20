@@ -15,8 +15,14 @@
             </div>
             <div class="flex flex-col">
                 <label for="username" class="text-lg">Gebruikersnaam <span class="text-red-500">*</span></label>
-                <input type="text" id="username" name="username" placeholder="JohnDoe" value="{{$user->username}}" class="text-black rounded-lg" required>
+                <input type="text" id="username" name="username" placeholder="john.doe@email.com" value="{{$user->username}}" class="text-black rounded-lg" required>
             </div>
+            @if($user->roleid > 2)
+                <div class="flex flex-col">
+                    <label for="email" class="text-lg">Email <span class="text-red-500">*</span></label>
+                    <input type="text" id="email" name="email" placeholder="JohnDoe" value="{{$user->email}}" class="text-black rounded-lg" required>
+                </div>
+            @endif
             <div class="flex justify-evenly py-4">
                 <div>
                     <input type="radio" id="student" name="role" class="w-6 h-6" value="2" @if($user->roleid === 2) checked @endif required>

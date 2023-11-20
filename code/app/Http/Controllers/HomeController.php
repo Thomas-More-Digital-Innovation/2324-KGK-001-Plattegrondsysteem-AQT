@@ -107,6 +107,9 @@ class HomeController extends Controller
                 $user->firstname = $request->input('firstname');
                 $user->lastname = $request->input('lastname');
                 $user->username = $request->input('username');
+                if($user->roleid == 4){
+                    $user->email = $request->input('email');
+                }
                 if($request->input('password') == true){
                     $user->password = Hash::make('1234');
                 }

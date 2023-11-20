@@ -1,5 +1,18 @@
 const checklistItemsvm = document.querySelectorAll('input[type="checkbox"][name^="checkboxvoormiddag"]');
 const checklistItemsnm = document.querySelectorAll('input[type="checkbox"][name^="checkboxnamiddag"]');
+const datepicker = document.getElementById('datepicker');
+const datetitle = document.getElementById('datetitle');
+
+datetitle.addEventListener('click', function() {
+    datepicker.showPicker();
+});
+
+datepicker.addEventListener('change', function() {
+    const date = datepicker.value;
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id')
+    window.location.href = `/dierefiche?id=${id}&date=${date}`;
+});
 
 //doorsturen van de status van een bepaald protocol van de voormiddag
 checklistItemsvm.forEach(itemvm => {

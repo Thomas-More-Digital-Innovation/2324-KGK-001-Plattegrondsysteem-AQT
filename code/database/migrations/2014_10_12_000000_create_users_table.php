@@ -18,6 +18,7 @@ return new class extends Migration
          $table->string('username')->unique()->nullable(false);
          $table->string('email')->unique()->nullable(false);
          $table->string('password')->nullable(false);
+         $table->string('remember_token')->nullable(true);
          $table->foreignId('roleid')->default(1)->nullable(false);
          
          $table->foreign('roleid')

@@ -1,39 +1,41 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+    <div class="flex flex-col justify-center items-center h-screen w-screen">
+        @if ($errors->has('message'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-1/3 mb-3 text-center" role="alert">
+                {{ $errors->first('message') }}
+            </div>
+        @endif
+        <form method="POST" action="{{ route('password.store') }}" class=" md:flex flex-col md:justify-center w-1/3 bg-gray-300 pl-6 pr-6 rounded-lg">
         @csrf
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+            <!-- Password Reset Token -->
+            <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <!-- Email Address -->
+            <label for="email" class="text-center mt-6">Email</label>
+            <input id="email" class="text-center rounded-full border border-black" type="email" name="email" required />
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Wachtwoord')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <!-- Password -->
+            <label for="password" class="text-center mt-6">Nieuw wachtwoord</label>
+            <input id="password" minlength="8" class="text-center rounded-full border border-black" type="password" name="password" required/>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Wachtwoord bevestigen')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+            <!-- Confirm Password -->
+            <label for="password_confirmation" class="text-center mt-6">Herhaal wachtwoord</label>
+            <input id="password_confirmation" minlength="8" class="text-center rounded-full border border-black" type="password"name="password_confirmation" required/>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset wachtwoord') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+            <input type="submit" value="Reset wachtwoord" class="btn py-3 rounded-full border border-black text-black bg-white my-6">
+        </form>
+    </div>
+
+</body>
+</html>
