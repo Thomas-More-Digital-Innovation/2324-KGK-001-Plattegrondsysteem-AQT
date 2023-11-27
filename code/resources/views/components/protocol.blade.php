@@ -84,8 +84,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                     <thead>
                         <tr>
                             <th>To do</th>
-                            <th colspan="2" class="cursor-pointer" id="datetitle"><?php echo $dayOfWeek; ?><iconify-icon icon="fluent-mdl2:date-time"></iconify-icon></th>
-                            <input type="date" hidden id="datepicker">
+                            <th colspan="2" class="cursor-pointer" id="datetitle"><input type="date" id="datepicker" class="absolute invisible"><?php echo $dayOfWeek; ?><iconify-icon icon="fluent-mdl2:date-time"></iconify-icon></th>
                         </tr>
                         <tr>
                             <th></th>
