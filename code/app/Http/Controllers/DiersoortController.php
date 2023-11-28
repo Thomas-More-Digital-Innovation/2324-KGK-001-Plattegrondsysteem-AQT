@@ -16,23 +16,26 @@ class DiersoortController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                
+            
+                // Haal de ingevoerde gegevens op
                 $name = $request->input('name');
                 $latinname = $request->input('latinname');
                 
+                // Verwerk de bestanden
                 $fotoname = $request->file('foto')->getClientOriginalName();
-                $foto = $request->file('foto')->storeAs('/images', $fotoname, 'public_uploads');
-                
+                $foto = $request->file('foto')->storeAs('../images', $fotoname, 'public_uploads');
+
                 $filename = $request->file('file')->getClientOriginalName();
-                $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
-            
+                $file = $request->file('file')->storeAs('../files', $filename, 'public_uploads');
+
+                // Voeg gegevens toe aan de database
                 DB::table('diersoort')->insert([
                     'name' => $name,
                     'latinname' => $latinname,
                     'foto' => $foto,
                     'file' => $file,
                 ]);
-            
+
                 return redirect('dierensoorten');
 
             }
@@ -121,28 +124,33 @@ class DiersoortController extends Controller
                 $foto = $request->input('fotoOld');
                 $file = $request->input('fileOld');
                 
-                if($request->hasFile('foto')){
-                    $fotoname = $request->file('foto')->getClientOriginalName();
-                    $foto = $request->file('foto')->storeAs('/images', $fotoname, 'public_uploads');          
+                if ($request->file('foto')->getSize() > 2097152 || $request->file('file')->getSize() > 2097152) {
+                    return redirect()->back()->with('error', 'Eén van de bestanden overschrijdt de limiet van 2 MB in bestandsgrootte.');
                 }
-                
-                
-                if ($request->hasFile('file')){ 
-                    $filename = $request->file('file')->getClientOriginalName();
-                    $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
-                }
-                
-                DB::table('diersoort') 
-                    ->where('id', $id)
-                    ->update([
-                        'name' => $name,
-                        'latinname' => $latinname,
-                        'foto' => $foto,
-                        'file' => $file,
-                    ]);
-        
-                return redirect('dierensoorten');
+                else {
 
+                    if($request->hasFile('foto')){
+                        $fotoname = $request->file('foto')->getClientOriginalName();
+                        $foto = $request->file('foto')->storeAs('/images', $fotoname, 'public_uploads');          
+                    }
+                    
+                    if ($request->hasFile('file')){ 
+                        $filename = $request->file('file')->getClientOriginalName();
+                        $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+                    }
+                    
+                    DB::table('diersoort') 
+                        ->where('id', $id)
+                        ->update([
+                            'name' => $name,
+                            'latinname' => $latinname,
+                            'foto' => $foto,
+                            'file' => $file,
+                        ]);
+            
+                    return redirect('dierensoorten');
+
+                }
             }
             else{
                 abort(401);
