@@ -1,8 +1,10 @@
 @extends('layout')
 @section('title', 'Diersoort-input')
 @section('content')
+    <x-errorhandler />
     <x-titlebar title="Admin: Diersoort Toevoegen" color="FF7E7E" back=true link="{{route('dierensoorten')}}"/>
     <div class="pt-14">
+              
         <form method="POST" action="/diersoort-submit" enctype="multipart/form-data">
             @csrf
             <div class="flex justify-center">
@@ -32,7 +34,7 @@
                     <div class="sm:col-span-12 pt-2">
                         <label for="file" class="block text-lg font-medium leading-6 text-gray-900">Dierenfiche (PDF) <span class="text-red-500">*</span></label>
                         <div class="mt-2">
-                            <input type="file" required name="file" accept="application/pdf">                    
+                            <input type="file" required name="file" accept="application/pdf">                       
                         </div>
                     </div>
                     <button type="submit" class="w-3/6 mt-2 sm:col-span-4 rounded-md bg-nav px-3 py-2 text-sm font-semibold text-white shadow-sm">Aanmaken</button>
