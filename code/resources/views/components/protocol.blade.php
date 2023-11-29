@@ -1,7 +1,7 @@
-@vite(['resources/js/opmerking.js'])
-@vite(['resources/js/biomedisch.js'])
-@vite(['resources/js/checklist.js'])
-@vite(['resources/js/popup.js'])
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/opmerking.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/biomedisch.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/checklist.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/popup.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

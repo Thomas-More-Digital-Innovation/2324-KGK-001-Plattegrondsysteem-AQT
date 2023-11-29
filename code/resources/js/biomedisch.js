@@ -9,7 +9,7 @@ gewichtInput.addEventListener("change", function() {
     const newValue = changedElement.value;
     const inputType = gewichtInput.getAttribute('name');
     const dierid = gewichtInput.getAttribute("data-dierid");
-    window.location.href = "checkitem/" + newValue + "/" + inputType + "/" + dierid + "/" + formattedDate; 
+    window.location.href = "./checkitem/" + newValue + "/" + inputType + "/" + dierid + "/" + formattedDate; 
 });
 
 //doorsturen van de temperatuur van een dier
@@ -20,5 +20,5 @@ temperatuurInput.addEventListener("change", function() {
     const newValue = changedElement.value;
     const inputType = temperatuurInput.getAttribute('name');
     const dierid = temperatuurInput.getAttribute("data-dierid");
-    window.location.href = "checkitem/" + newValue + "/" + inputType + "/" + dierid + "/" + formattedDate; 
+    window.location.href = "./checkitem/" + newValue + "/" + inputType + "/" + dierid + "/" + formattedDate; 
 });
