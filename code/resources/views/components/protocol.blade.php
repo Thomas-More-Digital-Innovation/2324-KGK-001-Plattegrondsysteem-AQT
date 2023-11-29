@@ -1,7 +1,7 @@
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/opmerking.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/biomedisch.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/checklist.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/popup.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opmerking.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/biomedisch.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/checklist.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/popup.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

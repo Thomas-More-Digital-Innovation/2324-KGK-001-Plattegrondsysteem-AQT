@@ -24,4 +24,4 @@
 </div>
 @endforeach
 </div>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT//code/resources/js/werkplek.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/werkplek.js"></script>
