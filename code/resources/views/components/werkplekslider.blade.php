@@ -1,4 +1,3 @@
-@vite(['resources/js/werkplek.js'])
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 @foreach ($dierSoortList as $dierSoort) 
     @php
@@ -25,3 +24,4 @@
 </div>
 @endforeach
 </div>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/werkplek.js"></script>

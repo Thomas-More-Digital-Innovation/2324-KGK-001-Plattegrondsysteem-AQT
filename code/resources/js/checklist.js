@@ -11,7 +11,7 @@ datepicker.addEventListener('change', function() {
     const date = datepicker.value;
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id')
-    window.location.href = `/dierefiche?id=${id}&date=${date}`;
+    window.location.href = `./dierefiche?id=${id}&date=${date}`;
 });
 
 //doorsturen van de status van een bepaald protocol van de voormiddag
@@ -26,7 +26,7 @@ checklistItemsvm.forEach(itemvm => {
         const dierid = itemvm.getAttribute("data-dierid");
         const protocol = itemvm.getAttribute('id');
         const protocolid = protocol.replace(/checkboxvoormiddag/, '');
-        window.location.href = "checkboxitem/" + checked + "/" + inputType + "/" + dierid + "/" + formattedDate + "/" + protocolid;
+        window.location.href = "./checkboxitem/" + checked + "/" + inputType + "/" + dierid + "/" + formattedDate + "/" + protocolid;
     });
 });
 
@@ -42,6 +42,6 @@ checklistItemsnm.forEach(itemnm => {
         const dierid = itemnm.getAttribute("data-dierid");
         const protocol = itemnm.getAttribute('id');
         const protocolid = protocol.replace(/checkboxnamiddag/, '');
-        window.location.href = "checkboxitem/" + checked + "/" + inputType + "/" + dierid + "/" + formattedDate + "/" + protocolid; 
+        window.location.href = "./checkboxitem/" + checked + "/" + inputType + "/" + dierid + "/" + formattedDate + "/" + protocolid; 
     });
 });

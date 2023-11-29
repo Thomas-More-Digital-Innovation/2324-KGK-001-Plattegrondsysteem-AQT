@@ -1,4 +1,4 @@
-@vite(['resources/js/voedselsoortentabel.js'])
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/voedselsoortentabel.js"></script>
 <div>
     <x-errorhandler />
 

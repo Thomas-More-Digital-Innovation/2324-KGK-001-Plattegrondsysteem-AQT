@@ -5,7 +5,7 @@ $roleid =Auth()->user()->roleid;
 @extends('layout')
 @section('title', 'Dierensoorten')
 @section('content')
-@vite(['resources/js/medischefiche.js'])
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/medischefiche.js"></script>
     <h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2" style="background-color:#FF7E7E;"> Medische Fiche </h1>
     <div>
         <div id="modal" class="hidden fixed z-10 w-full h-full bg-black bg-opacity-80 left-0 justify-center items-center">
