@@ -53,7 +53,7 @@ class ProtocollenController extends Controller
                     $icon = $request->input('icon');
                     
                     $filename = $request->file('file')->getClientOriginalName();
-                    $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+                    $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
             
 
                     DB::table('protocoldetail')->insert([
@@ -85,7 +85,7 @@ class ProtocollenController extends Controller
                 
                 if ($request->hasFile('file')){ 
                     $filename = $request->file('file')->getClientOriginalName();
-                    $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+                    $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
                 }
 
                 try {
@@ -95,7 +95,7 @@ class ProtocollenController extends Controller
                         'icon'=>$icon,
                         'file'=>$file
                     ]);
-                    return redirect('/admin/protocollen');
+                    return redirect('./admin/protocollen');
                 } catch (QueryException $e) {
                     return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
                 }

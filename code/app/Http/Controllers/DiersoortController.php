@@ -23,10 +23,10 @@ class DiersoortController extends Controller
                 
                 // Verwerk de bestanden
                 $fotoname = $request->file('foto')->getClientOriginalName();
-                $foto = $request->file('foto')->storeAs('../images', $fotoname, 'public_uploads');
+                $foto = $request->file('foto')->storeAs('./images', $fotoname, 'public_uploads');
 
                 $filename = $request->file('file')->getClientOriginalName();
-                $file = $request->file('file')->storeAs('../files', $filename, 'public_uploads');
+                $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
 
                 // Voeg gegevens toe aan de database
                 DB::table('diersoort')->insert([
