@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'adminlampaanmaken')
 @section('content')
-<x-titlebar title="Admin: Lamp Aanmaken" color="FF7E7E" back=true link="/inventarisselect"/>
+<x-titlebar title="Admin: Lamp Aanmaken" color="FF7E7E" back=true link="./inventarisselect"/>
 <x-errorhandler />
 <div class="h-screen pt-14">
     <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Nieuw lamp aanmaken</h1>

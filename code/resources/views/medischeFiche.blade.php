@@ -65,4 +65,3 @@ $roleid =Auth()->user()->roleid;
 @endsection
 
 <script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/medischefiche.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
