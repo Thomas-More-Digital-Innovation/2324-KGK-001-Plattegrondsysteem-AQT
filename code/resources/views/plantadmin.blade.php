@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'adminplantaanmaken')
 @section('content')
-<x-titlebar title="Admin: Plant Aanmaken" color="FF7E7E" back=true link="/inventarisselect"/>
+<x-titlebar title="Admin: Plant Aanmaken" color="FF7E7E" back=true link="./inventarisselect"/>
 <x-errorhandler />
 <div class="h-screen pt-14 flex flex-col">
    <div class="flex justify-between h-3/6 overflow-scroll">

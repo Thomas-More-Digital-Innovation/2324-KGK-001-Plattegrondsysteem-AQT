@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'inventarisadmin')
 @section('content')
-<x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true link="/inventarisselect"/>
+<x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true link="./inventarisselect"/>
 <x-errorhandler />
 <div class="h-screen pt-14"> 
     <h1 class="text-center text-2xl p-4 bg-slate-200 border-y-4 border-black">Nieuw inventaris aanmaken</h1>
@@ -56,7 +56,7 @@
                         <td class="pl-2">{{ $row['inventarisid'] }}</td>
                         <td class="px-6">{{ $row['left_lamps'] }}</td>
                         <td>{{ $row['right_lamps'] }}</td>
-                        <td><a href="deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
+                        <td><a href="./deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
                     </tr>
                 @endforeach
             </table>

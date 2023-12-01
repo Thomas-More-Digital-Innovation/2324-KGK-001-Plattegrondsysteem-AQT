@@ -10,7 +10,7 @@ $fileTrim = substr($diersoortEdit->file, strlen('files/'));
 ?>
 
     <div class="mb-8 pt-14">
-        <form method="POST" action="/diersoort-update/{{ $diersoortEdit->id }}" enctype="multipart/form-data">
+        <form method="POST" action="./diersoort-update/{{ $diersoortEdit->id }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="flex justify-center">
