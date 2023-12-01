@@ -26,7 +26,7 @@ class HomeController extends Controller
                 $users = DB::table('users')->get();
                 $userID = Auth()->user()->id;
                 $roles = DB::table('role')->get();
-                return view('AdminDashboard', ['users' => $users, 'userID' => $userID, 'roles' => $roles]);
+                return view('adminDashboard', ['users' => $users, 'userID' => $userID, 'roles' => $roles]);
             }
             else{
                 abort(401);
