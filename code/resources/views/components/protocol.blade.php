@@ -163,6 +163,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
 <script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/checklist.js"></script>
 <script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/popup.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -185,6 +186,12 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
             maintainAspectRatio: false,
             scales: {
                 x: {
+                    ticks: {
+                        callback: (value, index, ticks) => {
+                            const date = new Date(value);
+                            return date.toLocaleDateString('nl-BE');
+                        }
+                    },
                     beginAtZero: true
                 },
                 y: {
