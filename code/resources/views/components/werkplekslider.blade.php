@@ -1,4 +1,4 @@
-<h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2" style="background-color:#b9fbc0;"> Werkplek {{ $dierid }} </h1>
+<h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2" style="background-color:#b9fbc0;"> Werkplek {{ $werkplekId }} </h1>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 @foreach ($dierSoortList as $dierSoort) 
     @php

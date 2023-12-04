@@ -11,7 +11,7 @@
                     <th class="border-x-4 border-black text-xl">Quarantaine</th>
                     <th class="border-x-4 border-black text-xl">Inventaris</th>
                     <th></th>
-                    <th><a href="/dier/create"><iconify-icon icon="gala:add" width="40" height="40" style="color: darkgreen;" id="openModal" class="cursor-pointer p-2 flex grow justify-center items-center"></iconify-icon></a></th>
+                    <th><a href="./dier/create"><iconify-icon icon="gala:add" width="40" height="40" style="color: darkgreen;" id="openModal" class="cursor-pointer p-2 flex grow justify-center items-center"></iconify-icon></a></th>
                 </tr>
             </thead>
             <tbody>
