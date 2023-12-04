@@ -69,7 +69,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
     ->get();
 ?>
 
-<div class="flex justify-end h-screen m-5">
+<div class="flex justify-end m-5">
     <div class="flex flex-col items-center">
         <h3>Opvolging</h3>
             <div class="p-1 height">
