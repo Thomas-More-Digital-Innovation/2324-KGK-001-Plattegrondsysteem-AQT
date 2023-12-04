@@ -1,10 +1,3 @@
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opmerking.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/biomedisch.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/checklist.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/popup.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <?php
 setlocale(LC_TIME, 'nl_be');
 $dayOfWeek = ucfirst(strftime('%A (%d/%m/%Y)', strtotime($date))); 
@@ -165,6 +158,11 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
  </div> 
 </div>
 
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opmerking.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/biomedisch.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/checklist.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/popup.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     var ctx = document.getElementById('myChart').getContext('2d');
