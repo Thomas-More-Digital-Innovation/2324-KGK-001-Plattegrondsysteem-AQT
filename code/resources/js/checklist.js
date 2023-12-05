@@ -1,4 +1,3 @@
-let DateTime = luxon.DateTime;
 const checklistItemsvm = document.querySelectorAll('input[type="checkbox"][name^="checkboxvoormiddag"]');
 const checklistItemsnm = document.querySelectorAll('input[type="checkbox"][name^="checkboxnamiddag"]');
 const datepicker = document.getElementById('datepicker');

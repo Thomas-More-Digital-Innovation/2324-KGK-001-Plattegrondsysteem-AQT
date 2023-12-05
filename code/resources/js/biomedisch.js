@@ -1,6 +1,5 @@
 const gewichtInput = document.getElementById('biomedisch-gewicht');
 const temperatuurInput = document.getElementById('biomedisch-temperatuur');
-let DateTime = luxon.DateTime;
 //doorsturen van het gewicht van een dier
 gewichtInput.addEventListener("change", function() {
     const local = DateTime.now().setZone('Europe/Brussels');
