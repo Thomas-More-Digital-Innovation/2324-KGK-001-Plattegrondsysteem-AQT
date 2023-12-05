@@ -96,7 +96,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                         <!-- Hier gaan we protocol uit $protocolophalen als het protocol op deze dag al uitgevoerd is wordt deze automatisch aangevinkt-->
                         <?php foreach ($protocolnames as $protocol):?>
                             <tr class="text-center">
-                            <td class="border-2 flex justify-center items-center"><a href="/protocolinfo?id={{$protocol->id}}&t={{$protocol->name}}&c=dddddd" target="_blank"><?php echo $protocol->name; ?> <iconify-icon icon="akar-icons:link-out"></iconify-icon></a></td>
+                            <td class="border-2 flex justify-center items-center"><a href="./protocolinfo?id={{$protocol->id}}&t={{$protocol->name}}&c=dddddd" target="_blank"><?php echo $protocol->name; ?> <iconify-icon icon="akar-icons:link-out"></iconify-icon></a></td>
                             <td class="border-2">
                                 <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}"  @if ($date != date("Y-m-d")) disabled class="text-red-500 bg-red-200" @endif name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
                                 <?php if($checkboxitemsvm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
