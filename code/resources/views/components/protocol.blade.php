@@ -161,14 +161,11 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
  </div> 
 </div>
 
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opmerking.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/biomedisch.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/checklist.js"></script>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/popup.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
 
 <script>
+    let DateTime = luxon.DateTime;
     document.addEventListener('DOMContentLoaded', async function () {
         var ctx = document.getElementById('myChart').getContext('2d');
         var ctx2 = document.getElementById('myChart2').getContext('2d');
@@ -191,7 +188,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                 d2.push(data2[key]);
             }
         }
-
+        
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -217,32 +214,36 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                 }
             }
         });
-
+        
         var myChart2 = new Chart(ctx2, {
             type: 'line',
             data: {
                 labels: d2,
                 datasets: [
-                {
-                    label: 'Temperatuur in celcius',
-                    data: t,
-                    borderColor: 'rgba(255, 0, 0, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                }]
-            },
-            options: {
-                responsive: false,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
+                    {
+                        label: 'Temperatuur in celcius',
+                        data: t,
+                        borderColor: 'rgba(255, 0, 0, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
                 }
             }
         });
     });
 </script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opmerking.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/biomedisch.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/checklist.js"></script>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/popup.js"></script>
