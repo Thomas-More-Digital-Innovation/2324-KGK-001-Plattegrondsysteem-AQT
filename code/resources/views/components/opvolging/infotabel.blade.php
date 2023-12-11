@@ -64,4 +64,4 @@
         </table>
     </div>
 </div>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opvolgingtabel.js"></script>
+<script src="/resources/js/opvolgingtabel.js"></script>

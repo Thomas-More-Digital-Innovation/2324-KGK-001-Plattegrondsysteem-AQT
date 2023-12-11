@@ -62,5 +62,5 @@ $roleid =Auth()->user()->roleid;
             </table>
         </div>
     </div> 
-    <script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/medischefiche.js"></script>    
+    <script src="/resources/js/medischefiche.js"></script>    
 @endsection

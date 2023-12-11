@@ -73,4 +73,4 @@
         </table>
     </div>
 </div>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/voedselsoortentabel.js"></script>
+<script src="/resources/js/voedselsoortentabel.js"></script>
