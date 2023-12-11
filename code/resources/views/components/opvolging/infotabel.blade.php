@@ -1,4 +1,3 @@
-@vite(['resources/js/opvolgingtabel.js'])
 <div>
     <x-errorhandler />
     <div id="modal" class="hidden fixed z-10 w-full h-full bg-black bg-opacity-80 left-0 justify-center items-center">
@@ -65,3 +64,4 @@
         </table>
     </div>
 </div>
+<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/opvolgingtabel.js"></script>

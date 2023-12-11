@@ -5,7 +5,6 @@ $roleid =Auth()->user()->roleid;
 @extends('layout')
 @section('title', 'Dierensoorten')
 @section('content')
-@vite(['resources/js/medischefiche.js'])
     <h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2" style="background-color:#FF7E7E;"> Medische Fiche </h1>
     <div>
         <div id="modal" class="hidden fixed z-10 w-full h-full bg-black bg-opacity-80 left-0 justify-center items-center">
@@ -52,17 +51,16 @@ $roleid =Auth()->user()->roleid;
                     <tr class="border-y-4 border-slate-300 odd:bg-slate-100 hover:bg-slate-300">
                         <td class="p-6">{{ $fiche->date }}</td>
                         <td class="p-6">{{ $fiche->file }}</td>                    
-                        <td ><a href="/{{ $fiche->file }}"><iconify-icon class="cursor-pointer h-full flex grow justify-center items-center" icon="mdi:eye" style="color: blue;" width="40" height="40"></iconify-icon></a></td>
+                        <td ><a href="./{{ $fiche->file }}"><iconify-icon class="cursor-pointer h-full flex grow justify-center items-center" icon="mdi:eye" style="color: blue;" width="40" height="40"></iconify-icon></a></td>
                         @if($roleid==4)
                         <td>
-                            <a href="/fichedelete/{{$fiche->id}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
+                            <a href="./fichedelete/{{$fiche->id}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a>
                         </td>
                         @endif
                     </tr>
                     @endforeach
             </table>
         </div>
-    </div>     
+    </div> 
+    <script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/medischefiche.js"></script>    
 @endsection
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>

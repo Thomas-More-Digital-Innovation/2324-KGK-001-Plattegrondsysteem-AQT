@@ -1,9 +1,9 @@
 @extends('layout')
 @section('title', 'menuinventarisadmin')
 @section('content')
-<x-titlebar title="Admin: Inventaris Select" color="FF7E7E" back=true link="/admin"/>
+<x-titlebar title="Admin: Inventaris Select" color="FF7E7E" back=true link="./admin"/>
 
-<div class="w-3/4 mx-auto mb-8 pt-20 flex justify-center items-center space-x-10"> 
+<div class="w-3/4 mx-auto mb-8 flex justify-center items-center space-x-10"> 
     <?php 
     $boxes = [
        [

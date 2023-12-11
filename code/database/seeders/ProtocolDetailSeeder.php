@@ -59,37 +59,37 @@ class ProtocolDetailSeeder extends Seeder
          [
             'name' => 'Binnenkant poetsen',
             'protocoltypeid' => '2',
-            'file' => 'files/Aquariumruiten binnenkant poetsen.pdf',
+            'file' => './files/Aquariumruiten binnenkant poetsen.pdf',
             'icon' => 'mdi:cleaning',
          ],
          [
             'name' => 'Buitenkant poetsen',
             'protocoltypeid' => '2',
-            'file' => 'files/Aquariumruiten buitenkant poetsen.pdf',
+            'file' => './files/Aquariumruiten buitenkant poetsen.pdf',
             'icon' => 'mdi:cleaning',
          ],
          [
             'name' => 'Plantenmeststoffen toevoegen',
             'protocoltypeid' => '2',
-            'file' => 'files/Plantenmeststoffen toevoegen aquarium.pdf',
+            'file' => './files/Plantenmeststoffen toevoegen aquarium.pdf',
             'icon' => 'game-icons:plants-and-animals',
          ],
          [
             'name' => 'Diepvriesvoer geven',
             'protocoltypeid' => '2',
-            'file' => 'files/Vissen diepvriesvoer geven.pdf',
+            'file' => './files/Vissen diepvriesvoer geven.pdf',
             'icon' => 'arcticons:freezer',
          ],
          [
             'name' => 'Droogvoer geven',
             'protocoltypeid' => '2',
-            'file' => 'files/Vissen droogvoer geven.pdf',
+            'file' => './files/Vissen droogvoer geven.pdf',
             'icon' => 'mdi:fish-food',
          ],
          [
             'name' => 'Water verversen',
             'protocoltypeid' => '2',
-            'file' => 'files/Water verversen aquarium.pdf',
+            'file' => './files/Water verversen aquarium.pdf',
             'icon' => 'entypo:water',
          ],
       ]);

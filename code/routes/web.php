@@ -36,11 +36,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 Route::get('/werkplek', [WerkplekController::class, 'index'])->name('werkplek');
 
 // dierenfiche & checklist
-Route::get('/dierefiche', function () {
-    $id = request('id');
-    $gewicht = app('App\Http\Controllers\GewichtChartControler')->gewichtLineChart();
-    return view('dierefiche', ['id' => $id, 'gewicht' => $gewicht]);
-});
+Route::get('/dierefiche', [HomeController::class, 'dierenfiche']);
 Route::get('/comment/{id}/{id2}/{id3}', [HomeController::class, 'commentupdate']);
 
 // inventaris - home

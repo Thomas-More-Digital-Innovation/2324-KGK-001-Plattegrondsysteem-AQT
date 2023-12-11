@@ -10,7 +10,7 @@ $fileTrim = substr($diersoortEdit->file, strlen('files/'));
 ?>
 
     <div class="mb-8 pt-14">
-        <form method="POST" action="/diersoort-update/{{ $diersoortEdit->id }}" enctype="multipart/form-data">
+        <form method="POST" action="./diersoort-update/{{ $diersoortEdit->id }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="flex justify-center">
@@ -37,7 +37,7 @@ $fileTrim = substr($diersoortEdit->file, strlen('files/'));
                         <label for="foto" class="block text-lg font-medium leading-6 text-gray-900">Foto <span class="text-red-500">*</span> (vorige foto: {{ $fotoTrim }})</label>
                         <div class="mt-2">
                             <input type="hidden" name="fotoOld" value="{{ $diersoortEdit->foto }}">
-                            <input type="file" name="foto">                    
+                            <input type="file" name="foto" accept="image/*">                    
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@ $fileTrim = substr($diersoortEdit->file, strlen('files/'));
                         <label for="file" class="block text-lg font-medium leading-6 text-gray-900">Dierenfiche <span class="text-red-500">*</span> (vorige dierenfiche: {{ $fileTrim }})</label>
                         <div class="mt-2">
                             <input type="hidden" name="fileOld" value="{{ $diersoortEdit->file }}">
-                            <input type="file" name="file">                    
+                            <input type="file" name="file" accept="application/pdf">                
                         </div>
                     </div>
 

@@ -16,7 +16,7 @@ class voedselsoortenController extends Controller
             if($roleID==4){
                 $voedingsType = DB::table('voedingstype')->get();
                 $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
-                return view('voedselSoorten', 
+                return view('voedselsoorten', 
                 ['voedingsType' => $voedingsType,
                 'voedingsRichtlijnen' => $voedingsRichtlijnen]);
             }
@@ -106,7 +106,7 @@ class voedselsoortenController extends Controller
                     'icon'=>$request->input('icon'),
                 ]);
 
-                return redirect('/voedselsoorten');
+                return redirect('./voedselsoorten');
             }
             else{
                 abort(401);
