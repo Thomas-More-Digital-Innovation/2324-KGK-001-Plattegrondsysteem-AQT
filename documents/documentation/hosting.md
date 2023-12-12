@@ -8,9 +8,11 @@
  - [Installing MySQL](#mysql)  
  - [Editing .env](#env)  
  - [Setting up application](#application)  
+ - [Setting up Git Update](#scripts)  
+ - [Finishing up](#finished)  
 
 ## Prerequisites
-An up-to-date ubuntu server or VM with a static IP address and a domain name pointing to it.
+An up-to-date ubuntu server (in this installation version 22.04 was used) or VM with a static IP address and a domain name pointing to it, or a hosting service with a domain name pointing to it (our setup at the time of writing also worked on combell).
 
 ## PHP
 ### Installing Nginx
@@ -282,6 +284,7 @@ sudo apt install redis-server
 sudo systemctl restart nginx
 composer require predis/predis
 ```
+> note: When using combell, enable redis in the control panel under performance and caching, then add your credentials to the .env file
 
 ### Artisan
 To set up the application, you should run the following commands:
@@ -305,4 +308,18 @@ To build the application, you should run the following commands:
 npm run build
 ```
 
-### Finishing up
+## Scripts
+### First setup
+To set up the automatic updates using the script, you should firstly change all the variables in the script to match your server. Note that the download variable is set up for the dev environment in the included bash files.
+After changing the variables, you should run the `git-autopull-initial-setup.sh` script (after adding it to the server) using the following command:
+```bash
+bash git-autopull-initial-setup.sh
+```
+This will set up the server for the automatic update script. When you want to update the application from now on you can use the `git-autopull.sh` script. These variables should also be changed to match your server. It is recommended to replace the setup script with the update script after the initial setup.
+
+## Finished
+### Summary
+The application should now be fully functional. You can test this by visiting the domain or IP address of your server.
+
+> note: If the application doesnt behave correctly or you get a 500 error, in our experience we learned that the support of combell is very helpful and can help you fix the problem.  
+Further problems can be solved by contacting us.

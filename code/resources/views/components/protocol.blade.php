@@ -1,10 +1,3 @@
-<script src="/resources/js/opmerking.js"></script>
-<script src="/resources/js/biomedisch.js"></script>
-<script src="/resources/js/checklist.js"></script>
-<script src="/resources/js/popup.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <?php
 setlocale(LC_TIME, 'nl_be');
 $dayOfWeek = ucfirst(strftime('%A (%d/%m/%Y)', strtotime($date))); 
@@ -160,40 +153,96 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
     <div class="bg-white p-6 rounded-lg relative w-1600 h-1200 overflow-hidden"> 
         <span id="closePopup" class="absolute top-2 right-2 text-gray-600 cursor-pointer">×</span>
         <div id="curve_chart" class="w-full h-full"></div>
+        <div class="flex">
         <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
     </div>
  </div> 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+<script src="/resources/js/opmerking.js"></script>
+<script src="/resources/js/biomedisch.js"></script>
+<script src="/resources/js/checklist.js"></script>
+<script src="/resources/js/popup.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var data = @json($data->pluck('gewicht'));
-
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: @json($data->pluck('datetime')),
-            datasets: [{
-                label: 'Gewicht in gram',
-                data: data,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                fill: false,
-            }]
-        },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
-                }
+    let DateTime = luxon.DateTime;
+    document.addEventListener('DOMContentLoaded', async function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var data = @json($data->pluck('gewicht'));
+        var data2 = @json($data->pluck('datetime'));
+        var data3 = @json($data->pluck('temperatuur'));
+        var g = [];
+        var d = [];
+        var d2 = [];
+        var t = [];
+        for (const key in data) {
+            if (data[key] != null) {
+                g.push(data[key]);
+                d.push(data2[key]);
             }
         }
+        for (const key in data3) {
+            if (data3[key] != null) {
+                t.push(data3[key]);
+                d2.push(data2[key]);
+            }
+        }
+        
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: d,
+                datasets: [{
+                    label: 'Gewicht in gram',
+                    data: g,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        var myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: d2,
+                datasets: [
+                    {
+                        label: 'Temperatuur in celcius',
+                        data: t,
+                        borderColor: 'rgba(255, 0, 0, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                }
+            }
+        });
     });
-});
 </script>
