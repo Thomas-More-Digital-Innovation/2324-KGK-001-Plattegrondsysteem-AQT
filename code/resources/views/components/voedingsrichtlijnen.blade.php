@@ -101,4 +101,4 @@
         </table>
     </div>
 </div>
-<script src="/2324-KGK-001-Plattegrondsysteem-AQT/code/resources/js/voedingsrichtlijnentabel.js"></script>
+<script src="/resources/js/voedingsrichtlijnentabel.js"></script>
