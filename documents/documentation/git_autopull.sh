@@ -21,7 +21,7 @@ mkdir -p $BACKUP_SUB_DIR
 cp -r $PROJECT_DIR $BACKUP_SUB_DIR
 
 # Remove the previous gdownloaded folder
-rm -rf '$INCOMING_DIR/2324-KGK-001-Plattegrondsysteem-AQT/'
+rm -rf $INCOMING_DIR/2324-KGK-001-Plattegrondsysteem-AQT/
 
 # Download the latest version
 cd $INCOMING_DIR
