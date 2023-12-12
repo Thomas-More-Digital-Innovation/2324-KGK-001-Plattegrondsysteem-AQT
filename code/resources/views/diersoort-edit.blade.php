@@ -4,8 +4,8 @@
 <x-titlebar title="Admin: Aanpassen Diersoort" color="FF7E7E" back=true link="{{route('dierensoorten')}}"/>
 <?php
 
-$fotoTrim = substr($diersoortEdit->foto, strlen('images/'));
-$fileTrim = substr($diersoortEdit->file, strlen('files/'));
+$fotoTrim = substr($diersoortEdit->foto, strlen('./images/'));
+$fileTrim = substr($diersoortEdit->file, strlen('./files/'));
 
 ?>
 
