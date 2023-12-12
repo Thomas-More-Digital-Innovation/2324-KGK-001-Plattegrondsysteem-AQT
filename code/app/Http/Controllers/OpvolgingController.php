@@ -15,7 +15,20 @@ class OpvolgingController extends Controller
    public function opvolging(){
       if(Auth::id()){
          $roleID=Auth()->user()->roleid;
-         if( $roleID==4 ) { return view('components.opvolging.opvolginghome'); }
+         if( $roleID==4 ) { 
+            $info = DB::table('dierprotocol')
+            ->join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
+            ->get();
+            
+            $info2 = DB::table('dierprotocol')
+            ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
+            ->get();
+    
+            $infoProtocols = DB::table('protocoldetail')->get();
+            
+            $infoDiersoorten = DB::table('diersoort')->get();
+
+            return view('components.opvolging.opvolginghome', ['protocoldetail' => $info, 'diersoort' => $info2, "protocols" => $infoProtocols, "diersoorten" => $infoDiersoorten]); }
          else { abort(401); }
       }
    }
