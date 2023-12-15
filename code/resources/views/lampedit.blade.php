@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Admin: Lamp Aanpassen')
 @section('content')
-<x-titlebar title="Admin: Lamp Aanpassen" color="FF7E7E" back=true link="/lampadmin"/>
+<x-titlebar title="Admin: Lamp Aanpassen" color="FF7E7E" back=true link="../lampadmin"/>
 <x-errorhandler />
 <div class="h-screen pt-14">
     <div class="flex flex-col justify-center items-center py-2">

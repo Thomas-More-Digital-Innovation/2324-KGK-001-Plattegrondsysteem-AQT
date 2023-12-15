@@ -26,7 +26,7 @@ class HomeController extends Controller
                 $users = DB::table('users')->get();
                 $userID = Auth()->user()->id;
                 $roles = DB::table('role')->get();
-                return view('AdminDashboard', ['users' => $users, 'userID' => $userID, 'roles' => $roles]);
+                return view('adminDashboard', ['users' => $users, 'userID' => $userID, 'roles' => $roles]);
             }
             else{
                 abort(401);
@@ -222,7 +222,18 @@ class HomeController extends Controller
             else {DB::table("comment")
                 ->insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
             };
+        
+
         return back();
+    }
+
+    public function dierenfiche(){
+
+        $id = request('id');
+        $date = request('date');
+        $idint = (int)ltrim($id, "ds");
+        $data = DB::table('checkitem')->where('dierid', $idint)->get();
+        return view('dierefiche', ['id' => $id, 'date' => $date, 'data' => $data]);
     }
 
     public function checkitemadd($id, $id2, $id3, $id4) {

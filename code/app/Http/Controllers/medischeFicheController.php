@@ -20,7 +20,7 @@ class medischeFicheController extends Controller
                 $date = $request->input('date');
                                
                 $filename = $request->file('file')->getClientOriginalName();
-                $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
+                $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
             
                 DB::table('medischefiche')->insert([
                     'date' => $date,

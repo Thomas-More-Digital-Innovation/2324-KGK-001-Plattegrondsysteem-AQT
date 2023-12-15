@@ -42,7 +42,6 @@
     </div>
 </div> --}}
 
-@vite(['resources/js/voedingsrichtlijnentabel.js'])
 <div>
     <x-errorhandler />
 
@@ -102,3 +101,4 @@
         </table>
     </div>
 </div>
+<script src="/resources/js/voedingsrichtlijnentabel.js"></script>

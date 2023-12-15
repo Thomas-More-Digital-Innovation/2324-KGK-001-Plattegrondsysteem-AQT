@@ -1,8 +1,3 @@
-@vite(['resources/js/opmerking.js'])
-@vite(['resources/js/biomedisch.js'])
-@vite(['resources/js/checklist.js'])
-@vite(['resources/js/popup.js'])
-
 <?php
 setlocale(LC_TIME, 'nl_be');
 $dayOfWeek = ucfirst(strftime('%A (%d/%m/%Y)', strtotime($date))); 
@@ -74,7 +69,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
     ->get();
 ?>
 
-<div class="flex justify-end h-screen m-5">
+<div class="flex justify-end m-5">
     <div class="flex flex-col items-center">
         <h3>Opvolging</h3>
             <div class="p-1 height">
@@ -82,8 +77,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                     <thead>
                         <tr>
                             <th>To do</th>
-                            <th colspan="2" class="cursor-pointer" id="datetitle"><?php echo $dayOfWeek; ?><iconify-icon icon="fluent-mdl2:date-time"></iconify-icon></th>
-                            <input type="date" hidden id="datepicker">
+                            <th colspan="2" class="cursor-pointer" id="datetitle"><input type="date" id="datepicker" class="absolute invisible"><?php echo $dayOfWeek; ?><iconify-icon icon="fluent-mdl2:date-time"></iconify-icon></th>
                         </tr>
                         <tr>
                             <th></th>
@@ -95,7 +89,7 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                         <!-- Hier gaan we protocol uit $protocolophalen als het protocol op deze dag al uitgevoerd is wordt deze automatisch aangevinkt-->
                         <?php foreach ($protocolnames as $protocol):?>
                             <tr class="text-center">
-                            <td class="border-2 flex justify-center items-center"><a href="/protocolinfo?id={{$protocol->id}}&t={{$protocol->name}}&c=dddddd" target="_blank"><?php echo $protocol->name; ?> <iconify-icon icon="akar-icons:link-out"></iconify-icon></a></td>
+                            <td class="border-2 flex justify-center items-center"><a href="./protocolinfo?id={{$protocol->id}}&t={{$protocol->name}}&c=dddddd" target="_blank"><?php echo $protocol->name; ?> <iconify-icon icon="akar-icons:link-out"></iconify-icon></a></td>
                             <td class="border-2">
                                 <input type="checkbox" id="checkboxvoormiddag{{$protocol->id}}"  @if ($date != date("Y-m-d")) disabled class="text-red-500 bg-red-200" @endif name="checkboxvoormiddag{{$protocol->id}}" data-dierid="{{$idtrim}}" value="{{$protocol->id}}" 
                                 <?php if($checkboxitemsvm->contains('protocoldetailid', $protocol->id)) echo 'checked'; ?>>
@@ -152,15 +146,103 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
                     >{{str_replace("%2F","/",$leerlingPlaceholder)}}</textarea> <!--replace is omdat er een fout was met het doorsturen van "/" naar de db -->
                 </div>
             </div>
-            <!--<div id="popupTrigger" class="cursor-pointer">
+            <div id="popupTrigger" class="cursor-pointer">
     <iconify-icon icon="fa6-solid:weight-scale" width="100"></iconify-icon>
 </div>
 <div id="popup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white p-6 rounded-lg relative w-1600 h-1200 overflow-hidden"> 
         <span id="closePopup" class="absolute top-2 right-2 text-gray-600 cursor-pointer">×</span>
         <div id="curve_chart" class="w-full h-full"></div>
+        <div class="flex">
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
     </div>
-</div> Werkt nog niet-->
-
-
+ </div> 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+<script src="/resources/js/opmerking.js"></script>
+<script src="/resources/js/biomedisch.js"></script>
+<script src="/resources/js/checklist.js"></script>
+<script src="/resources/js/popup.js"></script>
+<script>
+    let DateTime = luxon.DateTime;
+    document.addEventListener('DOMContentLoaded', async function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var data = @json($data->pluck('gewicht'));
+        var data2 = @json($data->pluck('datetime'));
+        var data3 = @json($data->pluck('temperatuur'));
+        var g = [];
+        var d = [];
+        var d2 = [];
+        var t = [];
+        for (const key in data) {
+            if (data[key] != null) {
+                g.push(data[key]);
+                d.push(data2[key]);
+            }
+        }
+        for (const key in data3) {
+            if (data3[key] != null) {
+                t.push(data3[key]);
+                d2.push(data2[key]);
+            }
+        }
+        
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: d,
+                datasets: [{
+                    label: 'Gewicht in gram',
+                    data: g,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        var myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: d2,
+                datasets: [
+                    {
+                        label: 'Temperatuur in celcius',
+                        data: t,
+                        borderColor: 'rgba(255, 0, 0, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                }
+            }
+        });
+    });
+</script>

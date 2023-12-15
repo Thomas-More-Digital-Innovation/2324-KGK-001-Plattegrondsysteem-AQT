@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'inventarisadmin')
 @section('content')
-<x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true link="/inventarisselect"/>
+<x-titlebar title="Admin: Inventaris" color="FF7E7E" back=true link="./inventarisselect"/>
 <x-errorhandler />
 <div class="w-3/4 mx-auto mb-8 pt-20"> 
     <!-- Form for creating a new inventaris -->
@@ -49,7 +49,7 @@
                 <td class="border border-black px-4 py-2 text-center">{{ $row['left_lamps'] }}</td>
                 <td class="border border-black px-4 py-2 text-center">{{ $row['right_lamps'] }}</td>
                 <td class="border border-black px-4 py-2 text-center"><iconify-icon id="" class="cursor-pointer h-full flex grow justify-center items-center" icon="material-symbols:edit-outline" style="color: blue;" width="40" height="40"></iconify-icon></td>
-                <td class="border border-black px-4 py-2 text-center"><a href="deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
+                <td class="border border-black px-4 py-2 text-center"><a href="./deleteinventaris/{{$row['inventarisid']}}" class="flex grow justify-center items-center"><iconify-icon icon="mdi:trashcan-outline" style="color: red;" width="40" height="40"></iconify-icon></a></td>
             </tr>
         @endforeach
     </table>

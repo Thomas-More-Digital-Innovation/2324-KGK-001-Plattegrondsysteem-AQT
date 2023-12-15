@@ -9,6 +9,6 @@ cards.forEach(ds => {
         let day = addZ(date.getDate());
         let month = addZ(date.getMonth() + 1);
         let year = date.getFullYear();
-        window.location.href = `/dierefiche?id=${id}&date=${year}-${month}-${day}`;
+        window.location.href = `./dierefiche?id=${id}&date=${year}-${month}-${day}`;
     });
 });

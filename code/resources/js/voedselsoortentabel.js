@@ -22,7 +22,7 @@ openModal.addEventListener("click", function () {open();});
 edit.forEach(eo => {
     eo.addEventListener("click", function() {
         const idfull = eo.getAttribute('id');
-        const [_, id, vn, rn, icon, icon2] = idfull.split('/');
+        const [_, id, vn, rn, d, icon, icon2] = idfull.split('/');
         open(id, vn, rn, icon, icon2);
     });
 });

@@ -8,6 +8,6 @@
       $protocolid = $protocoltype->id;
       $protocolname = $protocoltype->name;
    ?>
-   <x-titlebar title={{$title}} color={{$color}} back=true link="/protocoltype?id={{$protocolid}}&t={{$protocolname}}&c={{$color}}"/>
+   <x-titlebar title={{$title}} color={{$color}} back=true link="./protocoltype?id={{$protocolid}}&t={{$protocolname}}&c={{$color}}"/>
    <x-protocolinfo id={{$id}} color={{$color}} />
 @endsection

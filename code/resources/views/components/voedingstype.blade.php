@@ -9,7 +9,7 @@ $voedingstype = DB::table('voedingstype')
     ->first();
 ?>
 
-<x-titlebar title='{{$voedingsname->name}}' color='{{$voedingsname->color}}' back=true link='/voederrichtlijnen'/>
+<x-titlebar title='{{$voedingsname->name}}' color='{{$voedingsname->color}}' back=true link='./voederrichtlijnen'/>
 <div class="flex items-center justify-center pt-14">
     <div class="flex flex-wrap justify-center h-48">
     @foreach ($voedingstype as $voeding)
