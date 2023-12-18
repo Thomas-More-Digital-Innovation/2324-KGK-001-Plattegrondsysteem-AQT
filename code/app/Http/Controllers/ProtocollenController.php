@@ -51,18 +51,25 @@ class ProtocollenController extends Controller
                     $name = $request->input('name');
                     $protocoltypeid = $request->input('protocoltypeid');
                     $icon = $request->input('icon');
-                    
-                    $filename = $request->file('file')->getClientOriginalName();
-                    $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
-            
 
-                    DB::table('protocoldetail')->insert([
-                        'name'=>$name,
-                        'protocoltypeid'=>$protocoltypeid,
-                        'icon'=>$icon,
-                        'file'=>$file
-                    ]);
-                    return back();
+                    if ($request->file('file')->getSize() > 3145728){
+                        return redirect()->back()->with('error', 'Het bestanden overschrijdt de limiet van 3 MB in bestandsgrootte.');
+                    }
+                    else {
+                        
+                        $filename = $request->file('file')->getClientOriginalName();
+                        $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
+                
+    
+                        DB::table('protocoldetail')->insert([
+                            'name'=>$name,
+                            'protocoltypeid'=>$protocoltypeid,
+                            'icon'=>$icon,
+                            'file'=>$file
+                        ]);
+                        return back();
+                    }
+
                 } catch (QueryException $e) {
                     return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
                 }
@@ -83,21 +90,28 @@ class ProtocollenController extends Controller
                 $icon = $request->input('icon');
                 $file = $request->input('fileOld');
                 
-                if ($request->hasFile('file')){ 
-                    $filename = $request->file('file')->getClientOriginalName();
-                    $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
+                if ($request->file('file')->getSize() > 3145728){
+                    return redirect()->back()->with('error', 'Het bestanden overschrijdt de limiet van 3 MB in bestandsgrootte.');
                 }
+                else {
 
-                try {
-                    $query = DB::table('protocoldetail')->where('id', $id)->update([
-                        'name'=>$name,
-                        'protocoltypeid'=>$protocoltypeid,
-                        'icon'=>$icon,
-                        'file'=>$file
-                    ]);
-                    return redirect('./admin/protocollen');
-                } catch (QueryException $e) {
-                    return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                    if ($request->hasFile('file')){ 
+                        $filename = $request->file('file')->getClientOriginalName();
+                        $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
+                    }
+    
+                    try {
+                        $query = DB::table('protocoldetail')->where('id', $id)->update([
+                            'name'=>$name,
+                            'protocoltypeid'=>$protocoltypeid,
+                            'icon'=>$icon,
+                            'file'=>$file
+                        ]);
+                        return redirect('./admin/protocollen');
+                    } catch (QueryException $e) {
+                        return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                    }
+                    
                 }
             }
             else{
