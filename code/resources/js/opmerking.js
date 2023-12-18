@@ -13,15 +13,11 @@ opmerkingen.forEach(opmerking => {
 
         const opmerkingtype = opmerking.getAttribute('id');
         const dierid = opmerking.getAttribute("data-dierid");
-        console.log(dierid);
-        console.log(opmerkingtype);
         const type = opmerkingtype.split("_")[1];
-        console.log(type);
 
         // "/" doormiddel "&2F" vervangen in DB --> wordt in het protocol.blade.php terug vervangen naar een "/" doormiddel van str_replace
         const escapedValue = encodeURIComponent(newValue.replace(/[/]/g, '%2F'));
 
         window.location.href = "./comment/" + escapedValue + "/" + type + "/" + dierid;
-        console.log(escapedValue);
     });
 });
