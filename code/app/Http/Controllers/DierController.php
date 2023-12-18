@@ -16,17 +16,17 @@ class DierController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
+                $werkplek = DB::table('werkplek')->get();
+                $diersoort = DB::table('diersoort')->get();
+                $inventaris = DB::table('inventaris')->get();
+                
+                return view('dier-input', compact('werkplek', 'diersoort', 'inventaris'));
+
             }
             else{
                 abort(401);
             }
         }
-
-        $werkplek = DB::table('werkplek')->get();
-        $diersoort = DB::table('diersoort')->get();
-        $inventaris = DB::table('inventaris')->get();
-        
-        return view('dier-input', compact('werkplek', 'diersoort', 'inventaris'));
     }
     
     public function diersubmit(Request $request)
@@ -35,25 +35,25 @@ class DierController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
+                $werkplek = $request->input('werkplek');
+                $diersoort = $request->input('diersoort');
+                $quarantaine = $request->input('quarantaine');
+                $inventaris = $request->input('inventaris');
+                    
+                DB::table('dier')->insert([
+                    'werkplekid' => $werkplek,
+                    'diersoortid' => $diersoort,
+                    'quarantaine' => $quarantaine,
+                    'inventarisid' => $inventaris,
+                ]);
+            
+                return redirect('dier');
+
             }
             else{
                 abort(401);
             }
         }
-
-        $werkplek = $request->input('werkplek');
-        $diersoort = $request->input('diersoort');
-        $quarantaine = $request->input('quarantaine');
-        $inventaris = $request->input('inventaris');
-            
-        DB::table('dier')->insert([
-            'werkplekid' => $werkplek,
-            'diersoortid' => $diersoort,
-            'quarantaine' => $quarantaine,
-            'inventarisid' => $inventaris,
-        ]);
-    
-        return redirect('dier');
     }
 
     public function index()
