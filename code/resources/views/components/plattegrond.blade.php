@@ -1,5 +1,9 @@
 <div class="h-screen max-h-screen flex justify-center items-center">
+<<<<<<< Updated upstream
    <svg class="scale-90" width="850" height="840" viewBox="0 0 850 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+=======
+   <svg class="scale-75" width="850" height="840" viewBox="0 0 850 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+>>>>>>> Stashed changes
    <rect id="background" width="850" height="840" x="1" y="0" fill="#a9d18e"/>
    <rect id="cover" width="426" height="490" x="0" y="350" fill="white"/>
    <rect id="bio1" x="475" y="781" width="374" height="58" fill="white" stroke="black" stroke-width="2"/>
