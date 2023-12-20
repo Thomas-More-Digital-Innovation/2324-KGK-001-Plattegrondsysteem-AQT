@@ -17,11 +17,11 @@ class MedischeFicheSeeder extends Seeder
     {
         DB::table('medischefiche')->insert([
             'date' => '19/04/2022',
-            'file' => './files/Medische Fiche  19-04-2022.pdf',
+            'file' => './dummy_files/files/Medische Fiche  19-04-2022.pdf',
         ]);
         DB::table('medischefiche')->insert([
             'date' => '19/04/2023',
-            'file' => './files/Medische Fiche  19-04-2023.pdf',
+            'file' => './dummy_files/files/Medische Fiche  19-04-2023.pdf',
         ]);
     }
 }
