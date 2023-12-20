@@ -6,7 +6,7 @@ BACKUP_DIR="/data/sites/web/wesleyvanlaerbe/backup-aquaterra/"
 INCOMING_DIR="/data/sites/web/wesleyvanlaerbe/incoming-aquaterra/"
 
 # Define the command to download the latest version
-DOWNLOAD_CMD="git clone -b dev https://github.com/Thomas-More-Digital-Innovation/2324-KGK-001-Plattegrondsysteem-AQT.git"
+DOWNLOAD_CMD="git clone https://github.com/Thomas-More-Digital-Innovation/2324-KGK-001-Plattegrondsysteem-AQT.git"
 
 # Get the current date and time
 DATE=$(date +"%Y-%m-%d-%H-%M-%S")
