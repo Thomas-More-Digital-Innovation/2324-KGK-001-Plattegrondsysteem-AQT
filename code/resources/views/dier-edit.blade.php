@@ -3,7 +3,7 @@
 @section('content')
 <x-titlebar title="Admin: Dier Aanpassen" color="FF7E7E" back=true link="{{route('dier')}}"/>
     <div class="pt-14">
-        <form method="POST" action="./dier-update/{{ $dierEdit->id }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('dier-update/'.$dierEdit->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="flex justify-center">
