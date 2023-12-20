@@ -2,15 +2,16 @@
 @section('title', 'Diersoort-edit')
 @section('content')
 <x-titlebar title="Admin: Aanpassen Diersoort" color="FF7E7E" back=true link="{{route('dierensoorten')}}"/>
+<x-errorhandler />
 <?php
 
-$fotoTrim = substr($diersoortEdit->foto, strlen('./images/'));
-$fileTrim = substr($diersoortEdit->file, strlen('./files/'));
+$fotoTrim = substr($diersoortEdit->foto, strlen('images/'));
+$fileTrim = substr($diersoortEdit->file, strlen('files/'));
 
 ?>
 
     <div class="mb-8 pt-14">
-        <form method="POST" action="./diersoort-update/{{ $diersoortEdit->id }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('diersoort-update/'.$diersoortEdit->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="flex justify-center">
