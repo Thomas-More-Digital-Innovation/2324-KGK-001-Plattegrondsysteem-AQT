@@ -22,11 +22,11 @@ class medischeFicheController extends Controller
                 if ($request->file('file')->getSize() > 3145728) {
                     return redirect()->back()->with('error', 'Het bestanden overschrijdt de limiet van 3 MB in bestandsgrootte.');
                 }
-                else {
-                  
+                else {                   
+
                     $filename = $request->file('file')->getClientOriginalName();
                     $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
-                    
+
                     DB::table('medischefiche')->insert([
                         'date' => $date,
                         'file' => $file,
