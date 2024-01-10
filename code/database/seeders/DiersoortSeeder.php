@@ -16,14 +16,14 @@ class DiersoortSeeder extends Seeder
         DB::table('diersoort')->insert([
             'name' => 'Koningspython',
             'latinname' => 'Python regius',
-            'foto' => './images/koningspython.jpg',
-            'file' => './files/Koningspython.pdf',
+            'foto' => './dummy_files/images/koningspython.jpg',
+            'file' => './dummy_files/files/Koningspython.pdf',
         ]);
         DB::table('diersoort')->insert([
             'name' => 'Vis',
             'latinname' => 'Viezevis',
-            'foto' => './images/koningspython.jpg',
-            'file' => './images/koningspython.jpg',
+            'foto' => './dummy_files/images/koningspython.jpg',
+            'file' => './dummy_files/images/koningspython.jpg',
         ]);
     }
 }

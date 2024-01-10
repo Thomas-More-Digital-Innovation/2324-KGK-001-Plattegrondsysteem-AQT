@@ -18,17 +18,22 @@ class medischeFicheController extends Controller
             if($roleID==4 || $roleID==3){
                 
                 $date = $request->input('date');
-                               
-                $filename = $request->file('file')->getClientOriginalName();
-                $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
-            
-                DB::table('medischefiche')->insert([
-                    'date' => $date,
-                    'file' => $file,
-                ]);
-            
-                return redirect('medischefiche');
 
+                if ($request->file('file')->getSize() > 3145728) {
+                    return redirect()->back()->with('error', 'Het bestanden overschrijdt de limiet van 3 MB in bestandsgrootte.');
+                }
+                else {                   
+
+                    $filename = $request->file('file')->getClientOriginalName();
+                    $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
+
+                    DB::table('medischefiche')->insert([
+                        'date' => $date,
+                        'file' => $file,
+                    ]);
+                
+                    return redirect('medischefiche');
+                }
             }
             else{
                 abort(401);

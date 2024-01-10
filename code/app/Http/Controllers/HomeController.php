@@ -201,11 +201,9 @@ class HomeController extends Controller
 
     public function commentupdate($id, $id2, $id3) {
         $bool = 0;
-        echo "<script>console.log('$id2')</script>";
         if ($id2 == "Leerkracht") {
             $bool = 1;
         }
-        echo "<script>console.log('$bool')</script>";
         if (DB::table('comment')
             ->where([
                 ["leerkracht", "=", $bool],

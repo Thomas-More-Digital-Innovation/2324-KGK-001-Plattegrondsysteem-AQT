@@ -5,7 +5,7 @@
     <x-titlebar title="Admin: Diersoort Toevoegen" color="FF7E7E" back=true link="{{route('dierensoorten')}}"/>
     <div class="pt-14">
               
-        <form method="POST" action="./diersoort-submit" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('diersoort-submit/') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex justify-center">
                 <div class="mt-10 flex justify-center flex-col items-center bg-slate-200 p-4 rounded-2xl">
