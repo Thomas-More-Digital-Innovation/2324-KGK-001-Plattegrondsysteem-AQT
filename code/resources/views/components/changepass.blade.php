@@ -7,7 +7,7 @@
             <div class="flex justify-center items-center flex-col">
                 <p>Je hebt het standaard wachtwoord nog niet gewijzigd</p>
                 <p>Wijzig deze voor dat je verder kunt!</p>
-                <a href="/account" class="cursor-pointer mt-2 rounded-md bg-nav hover:bg-nav-hover px-3 py-2 text-white shadow-sm">Wijzig wachtwoord</a>
+                <a href="./account" class="cursor-pointer mt-2 rounded-md bg-nav hover:bg-nav-hover px-3 py-2 text-white shadow-sm">Wijzig wachtwoord</a>
             </div>
         </div>
     </div>
