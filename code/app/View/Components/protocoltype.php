@@ -21,6 +21,6 @@ class protocoltype extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.protocollen.protocoltype');
+        return view('components.protocoltype');
     }
 }
