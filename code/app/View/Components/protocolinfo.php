@@ -21,6 +21,6 @@ class protocolinfo extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.protocollen.protocolinfo');
+        return view('components.protocolinfo');
     }
 }
