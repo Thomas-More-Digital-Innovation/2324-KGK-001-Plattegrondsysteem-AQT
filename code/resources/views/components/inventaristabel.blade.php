@@ -5,14 +5,14 @@ $dierinventaris = DB::table('dier')
     ->get();
 
 $inventaris = DB::table('inventaris')
-    ->join('lampkant', 'inventaris.id', '=', 'lampkant.inventarisid')
-    ->join('lamp', 'lampkant.lampid', '=', 'lamp.id')
+    ->join('lampkants', 'inventaris.id', '=', 'lampkants.inventarisid')
+    ->join('lamps', 'lampkants.lampid', '=', 'lamps.id')
     ->get();
 
 
 $planten = DB::table('inventaris')
-    ->join('plantgroep', 'inventaris.id', '=', 'plantgroep.inventarisid')
-    ->join('plant', 'plantgroep.plantid', '=', 'plant.id')
+    ->join('plantgroeps', 'inventaris.id', '=', 'plantgroeps.inventarisid')
+    ->join('plants', 'plantgroeps.plantid', '=', 'plants.id')
     ->get();
 $planten = $planten->groupBy('inventarisid');
     // groepering van gejoinde data op basis van position & inventarisid

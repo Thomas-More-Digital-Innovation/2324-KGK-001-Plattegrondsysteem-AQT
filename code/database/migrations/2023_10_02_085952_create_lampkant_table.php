@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lampkant', function (Blueprint $table) {
+        Schema::create('lampkants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('inventarisid')->nullable(false);
             $table->foreignId('lampid')->nullable(false);
@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->foreign('lampid')
                ->references('id')
-               ->on('lamp');
+               ->on('lamps');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lampkant');
+        Schema::dropIfExists('lampkants');
     }
 };
