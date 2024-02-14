@@ -77,18 +77,18 @@ class DiersoortController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
-                $usedDier = DB::table('dier')->where('diersoortid', $id)->exists();
+                $usedDier = DB::table('diers')->where('diersoortid', $id)->exists();
                 $usedDierprotocol = DB::table('dierprotocol')->where('diersoortid', $id)->exists();
                 if (DB::table('checkitem')->where('dierid', $id)->exists()) {DB::table('checkitem')->where('dierid', $id)->delete();}
                 if (DB::table('comment')->where('dierid', $id)->exists()) {DB::table('comment')->where('dierid', $id)->delete();}
                 if ($usedDier && $usedDierprotocol) {
                     
-                    DB::table('dier')->where('diersoortid', $id)->delete();
+                    DB::table('diers')->where('diersoortid', $id)->delete();
                     DB::table('dierprotocol')->where('diersoortid', $id)->delete();
                     DB::table('diersoort')->where('id', $id)->delete();
         
                 } elseif ($usedDier && $usedDierprotocol == False) {
-                    DB::table('dier')->where('diersoortid', $id)->delete();
+                    DB::table('diers')->where('diersoortid', $id)->delete();
                     DB::table('diersoort')->where('id', $id)->delete();
                 } elseif ($usedDier  == False && $usedDierprotocol) {
                     DB::table('diersoort')->where('id', $id)->delete();

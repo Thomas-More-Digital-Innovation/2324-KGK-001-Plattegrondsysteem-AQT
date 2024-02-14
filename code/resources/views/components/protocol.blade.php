@@ -5,7 +5,7 @@ $count = 0;
 
 $idtrim = trim($id, 'ds');
 
-$diersoort = DB::table('dier')
+$diersoort = DB::table('diers')
     ->select('diersoortid')
     ->join('diersoort', 'diersoort.id', '=', 'dier.diersoortid')
     ->where('dier.id', '=', $idtrim)
