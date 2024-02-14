@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Werkplek;
+use App\Models\Diersoort;
+
 class WerkplekController extends Controller
 {
     public function index()
@@ -12,15 +15,16 @@ class WerkplekController extends Controller
         $clickedName = $id;
         $letters = ['x', 'y'];
         foreach ($letters as $l) {if (str_contains($clickedName, $l)) {$clickedName = str_replace($l, '', $clickedName);};};
-        $werkplek = DB::table('werkplek')->where('name', $clickedName)->first();
+        
+        $werkplek = Werkplek::where('name', $clickedName)->first();
+
         $werkplekId = $werkplek->id;
             
-        $dierSoortList = DB::table('diersoort')
-            ->join('diers', 'diers.diersoortid', '=', 'diersoort.id')
-            ->where('diers.werkplekid', $werkplekId)
-            ->get();
+        $dierSoortList = Diersoort::join('diers','diers.diersoortid', '=', 'diersoort.id')
+        ->where('diers.werkplekid', $werkplekId)
+        ->get();
 
-        $werkplek = DB::table('werkplek')->get();
+        $werkplek = Werkplek::all();
         return view('werkplek', ['werkplek' => $werkplek, 'werkplekId' => $werkplekId, 'dierSoortList' => $dierSoortList]);
     }
 }
