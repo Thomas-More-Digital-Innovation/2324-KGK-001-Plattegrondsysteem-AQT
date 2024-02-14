@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Werkplek;
-use App\Models\Diersoort; 
+use App\Models\Diersoort;
 
 class WerkplekController extends Controller
 {

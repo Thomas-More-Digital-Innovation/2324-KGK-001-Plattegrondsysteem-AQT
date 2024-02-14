@@ -59,7 +59,6 @@ class PlantController extends Controller
             if ($roleID == 4) {
                 if (!Plantgroep::where('plantid', $id)->exists()) {
 
-                    //$plant = DB::table('plants')->where('id', $id);
                     $plant = Plant::find($id);
                     $plant->delete();
                     return back();
