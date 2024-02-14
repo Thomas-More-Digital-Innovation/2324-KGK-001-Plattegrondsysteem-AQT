@@ -22,5 +22,4 @@ class Inventaris extends Model
     }
 
     public $timestamps = false;
-
 }
