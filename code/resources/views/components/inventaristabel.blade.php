@@ -1,7 +1,7 @@
 <?php
-$dierinventaris = DB::table('dier')
-    ->join('diersoort', 'dier.diersoortid', '=', 'diersoort.id')
-    ->join('werkplek', 'werkplek.id', '=', 'dier.werkplekid')
+$dierinventaris = DB::table('diers')
+    ->join('diersoort', 'diers.diersoortid', '=', 'diersoort.id')
+    ->join('werkplek', 'werkplek.id', '=', 'diers.werkplekid')
     ->get();
 
 $inventaris = DB::table('inventaris')

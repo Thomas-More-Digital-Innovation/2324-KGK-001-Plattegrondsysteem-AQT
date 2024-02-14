@@ -16,8 +16,8 @@ class WerkplekController extends Controller
         $werkplekId = $werkplek->id;
             
         $dierSoortList = DB::table('diersoort')
-            ->join('dier', 'dier.diersoortid', '=', 'diersoort.id')
-            ->where('dier.werkplekid', $werkplekId)
+            ->join('diers', 'diers.diersoortid', '=', 'diersoort.id')
+            ->where('diers.werkplekid', $werkplekId)
             ->get();
 
         $werkplek = DB::table('werkplek')->get();

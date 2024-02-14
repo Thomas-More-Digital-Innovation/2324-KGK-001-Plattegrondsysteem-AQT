@@ -10,7 +10,7 @@ class DierSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('dier')->insert([[
+        DB::table('diers')->insert([[
                 'werkplekid' => 1,
                 'diersoortid' => 1,
                 'quarantaine' => 0,

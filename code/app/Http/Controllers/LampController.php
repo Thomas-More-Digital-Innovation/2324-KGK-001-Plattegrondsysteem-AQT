@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
 use App\Models\Lamp;
+use App\Models\Lampkant;
 
 class LampController extends Controller
 {
@@ -76,7 +77,7 @@ class LampController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-            if (!DB::table('lampkant')->where('lampid', '=', $id)->exists()) {
+            if (!Lampkant::where('lampid', $id)->exists()) {
                 Lamp::Destroy($id);
                 return back();
             } else {
