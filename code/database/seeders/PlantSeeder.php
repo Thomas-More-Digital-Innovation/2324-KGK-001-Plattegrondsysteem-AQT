@@ -13,7 +13,7 @@ class PlantSeeder extends Seeder {
     public function run(): void
     {
         //
-        DB::table('plant')->insert([
+        DB::table('plants')->insert([
          [
                'plantname' => 'groene plant'
          ],

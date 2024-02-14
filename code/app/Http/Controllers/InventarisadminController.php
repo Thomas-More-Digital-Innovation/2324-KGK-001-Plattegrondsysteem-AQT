@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
+use App\Models\Inventaris;
+use App\Models\Lampkant;
+use App\Models\Lamp;
+use App\Models\Plant;
+
 class InventarisadminController extends Controller
 {
     public function index()
@@ -13,18 +18,16 @@ class InventarisadminController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                $inventaris = DB::table('inventaris')->get();
-                $lampkant = DB::table('lampkant')->get();
-                $lamp = DB::table('lamp')->get();
-                $plant = DB::table('plant')->get(); 
+                $inventaris = Inventaris::all();
+                $lampkant = Lampkant::all();
+                $lamp = Lamp::all();
+                $plant = Plant::all();
 
-                $planten = DB::table('plant')
-                ->join('inventaris', 'inventaris.id', '=', 'plant.id')
-                ->get();
+                $planten = Plant::join('inventaris', 'inventaris.id', '=', 'plants.id')->get();
+
                 
-                $inventarisJoined = DB::table('lamp')
-                ->join('lampkant', 'lampkant.lampid', '=', 'lamp.id')
-                ->join('inventaris', 'inventaris.id', 'lampkant.inventarisid')
+                $inventarisJoined = Lamp::join('lampkants', 'lampkants.lampid', '=', 'lamps.id')
+                ->join('inventaris', 'inventaris.id', '=', 'lampkants.inventarisid')
                 ->orderBy('inventaris.id', 'desc')
                 ->get();
 
@@ -65,8 +68,8 @@ public function makeInventaris(Request $request)
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                $inventarisId = DB::table('inventaris')->insertGetId([]);
-                
+                $inventarisId = DB::table('')->insertGetId([]);
+                // placeholdernathanverderwerken
                 // 'lampkant' data voor 'lamplinks'
                 if ($request->has('lamplinks')) {
                     foreach ($request->input('lamplinks') as $lampId) {
@@ -100,8 +103,8 @@ public function makeInventaris(Request $request)
             $roleID = Auth()->user()->roleid;
             if($roleID==4){
                 $inventaris = DB::table('inventaris')->where('id', $id)->first();
-                $lampkant = DB::table('lampkant')->where('inevtarisid', $id)->get();
-                $lampen = DB::table('lamp')->get();
+                $lampkant = DB::table('lampkants')->where('inevtarisid', $id)->get();
+                $lampen = DB::table('lamps')->get();
                 return view('inventarisedit', ['inventaris' => $inventaris, 'lampkant'=> $lampkant, 'lampen' => $lampen]);
             }
             else{

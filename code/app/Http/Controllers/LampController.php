@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
+use App\Models\Lamp;
+
 class LampController extends Controller
 {
     public function index()
@@ -13,7 +15,7 @@ class LampController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                $lamp = DB::table('lamp')->get(); 
+                $lamp = Lamp::all();
                 return view('lampadmin', ['lamp' => $lamp]);
             } else {
                 abort(401);
@@ -26,9 +28,9 @@ class LampController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-
-                $lampName = $request->input('naam');
-                DB::table('lamp')->insert(['name' => $lampName]);
+                $lamp = new Lamp;
+                $lamp->name = $request->input('naam');
+                $lamp->save();
 
                 return redirect()->route('lampadmin')->with('success', 'Lamp added successfully');
             } else {
@@ -41,7 +43,7 @@ class LampController extends Controller
         if(Auth::id()){
             $roleID = Auth()->user()->roleid;
             if($roleID==4){
-                $lamp = DB::table('lamp')->where('id', $id)->first();
+                $lamp = Lamp::find($id);
                 return view('lampedit', ['lamp' => $lamp]);
             }
             else{
@@ -55,10 +57,11 @@ class LampController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 try {
-                    $query = DB::table('lamp')->where('id', $id)->update([
-                        'name'=>request('name')
-                    ]);
+                    $lamp = Lamp::find($id);
+                    $lamp->name = request('name');
+                    $lamp->save();
                     return redirect('/lampadmin');
+
                 } catch (QueryException $e) {
                     return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
                 }
@@ -74,8 +77,7 @@ class LampController extends Controller
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
             if (!DB::table('lampkant')->where('lampid', '=', $id)->exists()) {
-                $lamp = DB::table('lamp')->where('id', $id);
-                $lamp->delete();
+                Lamp::Destroy($id);
                 return back();
             } else {
                 return back()->with('error', 'Lamp kan niet worden verwijderd omdat deze nog aan een inventaris gekoppeld is.');

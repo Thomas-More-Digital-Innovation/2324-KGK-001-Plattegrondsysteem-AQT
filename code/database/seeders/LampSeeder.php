@@ -10,16 +10,16 @@ class LampSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('lamp')->insert([
+        DB::table('lamps')->insert([
             'name' => 'Exoterra intense gloeilamp 25W'
         ]);
-        DB::table('lamp')->insert([
+        DB::table('lamps')->insert([
             'name' => 'Lucky Reptile 50W spot'
         ]);
-        DB::table('lamp')->insert([
+        DB::table('lamps')->insert([
             'name' => 'lamp UV'
         ]);
-        DB::table('lamp')->insert([
+        DB::table('lamps')->insert([
             'name' => 'IR lamp'
         ]);
     }

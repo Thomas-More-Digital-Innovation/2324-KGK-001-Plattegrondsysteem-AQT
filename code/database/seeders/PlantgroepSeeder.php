@@ -10,7 +10,7 @@ class PlantgroepSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('plantgroep')->insert([[
+        DB::table('plantgroeps')->insert([[
             'inventarisid' => 1,
             'plantid' => 1,
         ],[
