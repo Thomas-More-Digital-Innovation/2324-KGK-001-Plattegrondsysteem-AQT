@@ -15,7 +15,7 @@ class LampController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                $lamp = Lamp::all();                 
+                $lamp = Lamp::all();
                 return view('lampadmin', ['lamp' => $lamp]);
             } else {
                 abort(401);
