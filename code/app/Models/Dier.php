@@ -14,7 +14,7 @@ class Dier extends Model
         'diersoortid',
         'quarantaine',
         'inventarisid',
-    ]; 
+    ];
 
 
     public function inventaris() {

@@ -107,7 +107,13 @@ class DierController extends Controller
                 $dierEdit = DB::table('diers')
                 ->join('werkplek', 'diers.werkplekid', '=', 'werkplek.id')
                 ->join('diersoort', 'diers.diersoortid', '=', 'diersoort.id')
-                ->select('diers.id as id', 'werkplek.id as werkplekId', 'diersoort.id as diersoortId', 'dier.quarantaine', 'dier.inventarisid')
+                ->select(
+                    'diers.id as id', 
+                    'werkplek.id as werkplekId', 
+                    'diersoort.id as diersoortId', 
+                    'diers.quarantaine', 
+                    'diers.inventarisid'
+                )
                 ->where('diers.id', $id)
                 ->first();
                 return view('dier-edit', compact('dierEdit', 'werkplek', 'diersoort', 'inventaris'));

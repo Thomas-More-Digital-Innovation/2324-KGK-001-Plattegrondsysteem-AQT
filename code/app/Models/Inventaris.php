@@ -18,7 +18,7 @@ class Inventaris extends Model
     }
 
     public function plantgroep() {
-        $this->hasMany(plantgroep::class);
+        return $this->hasMany(plantgroep::class);
     }
 
     public $timestamps = false;

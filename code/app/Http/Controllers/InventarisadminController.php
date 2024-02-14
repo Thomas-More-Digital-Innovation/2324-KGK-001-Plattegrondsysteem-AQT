@@ -123,18 +123,14 @@ class InventarisadminController extends Controller
         if(Auth::id()){
             $roleID = Auth()->user()->roleid;
             if($roleID == 4){
-                try {
-                    $inventaris = Inventaris::findOrFail($id);
-                    $inventaris->name = request('name');
-                    $inventaris->protocoltypeid = request('protocoltypeid');
-                    $inventaris->icon = request('icon');
-                    $inventaris->file = request('file');
-                    $inventaris->save();
-                    
-                    return redirect('/admin/protocollen');
-                } catch (Exception $e) {
-                    return back()->with('error', 'An error occurred ('. $e->getCode() .') while processing your request.');
-                }
+                $inventaris = Inventaris::findOrFail($id);
+                $inventaris->name = request('name');
+                $inventaris->protocoltypeid = request('protocoltypeid');
+                $inventaris->icon = request('icon');
+                $inventaris->file = request('file');
+                $inventaris->save();
+                
+                return redirect('/admin/protocollen');
             }
             else{
                 abort(401);
