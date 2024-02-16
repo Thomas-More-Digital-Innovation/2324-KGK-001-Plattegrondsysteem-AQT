@@ -42,13 +42,13 @@ class DiersoortController extends Controller
                     }
                     
                     // Voeg gegevens toe aan de database
-                    $newBook = new Diersoort();
-                    $newBook->name = $name;
-                    $newBook->latinname = $latinname;
-                    $newbook->foto = $foto;
-                    $newBook->file = $file;
+                    $newDiersoort = new Diersoort();
+                    $newDiersoort->name = $name;
+                    $newDiersoort->latinname = $latinname;
+                    $newDiersoort->foto = $foto;
+                    $newDiersoort->file = $file;
 
-                    $newBook->save();
+                    $newDiersoort->save();
             
                     return redirect('dierensoorten');
                 }
