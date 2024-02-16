@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Database\QueryException;
+use App\Models\VoedingsRichtlijnen;
 
 class voederrichtlijnenController extends Controller
 {
@@ -16,7 +14,7 @@ class voederrichtlijnenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
+                $voedingsRichtlijnen = VoedingsRichtlijnen::all();
                 return view('voedingsrichtlijnenAdmin', 
                 ['voedingsRichtlijnen' => $voedingsRichtlijnen]);
             }
@@ -35,25 +33,24 @@ class voederrichtlijnenController extends Controller
                     $id = $request->input('id');
                     $n = $request->input('name');
                     $i = $request->input('icon');
-                    if (!DB::table('voedingsrichtlijnen')->where([
+                    $type = $request->input('typesubmit');
+                    if (!DB::table('voedingsrichtlijnen') -> where([
                         ['name', '=', $n],
                         ['icon', '=', $i],
                         ['color', '=', $c],
                     ])->exists()) {
-                        if ($request->input('typesubmit') == "add") {
-                            DB::table('voedingsrichtlijnen')->insert([
-                                'name'=>$n,
-                                'icon'=>$i,
-                                'color'=>$c,
-                            ]);
-                        } elseif ($request->input('typesubmit') == "edit") {
-                            DB::table('voedingsrichtlijnen')
-                            ->where('id', $id)
-                            ->update([
-                                "name"=>$n,
-                                "icon"=>$i,
-                                "color"=>$c,
-                            ]);
+                        if ($type == "add") {
+                           $voedingsrichtlijn = new VoedingsRichtlijnen;
+                            $voedingsrichtlijn->name = $n;
+                            $voedingsrichtlijn->icon = $i;
+                            $voedingsrichtlijn->color = $c;
+                            $voedingsrichtlijn->save();
+                        } elseif ($type == "edit") {
+                            $voedingsrichtlijn = VoedingsRichtlijnen::find($id);
+                            $voedingsrichtlijn->name = $n;
+                            $voedingsrichtlijn->icon = $i;
+                            $voedingsrichtlijn->color = $c;
+                            $voedingsrichtlijn->save();
                         }
                     } else {
                         return back()->with('error', 'Deze combinatie bestaat al!');;
@@ -73,8 +70,7 @@ class voederrichtlijnenController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 try {
-                    $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->where('id', $id);
-                    $voedingsRichtlijnen->delete();
+                    VoedingsRichtlijnen::destroy($id);
                     return back();
                 } catch (QueryException $e) {
                     if ($e->errorInfo[1] === 1451) { // check for specific error code
@@ -93,7 +89,7 @@ class voederrichtlijnenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsRichtlijn = DB::table('voedingsrichtlijnen')->where('id', $id)->first();
+                $voedingsRichtlijn = VoedingsRichtlijnen::find($id);
                 return view('editVoedingsrichtlijnen', compact('voedingsRichtlijn'));
             }
             else{
@@ -106,12 +102,12 @@ class voederrichtlijnenController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 try {
-                    $query = DB::table('voedingsrichtlijnen')->where('id', $id)->update([
-                        'name'=>$request->input('name'),
-                        'icon'=>$request->input('icon'),
-                        'color'=>$request->input('color'),
-                    ]);
-                    return redirect('/voedingsrichtlijnenadmin');
+                    $voedingsrichtlijn = VoedingsRichtlijnen::find($id);
+                    $voedingsrichtlijn->name = $request('name');
+                    $voedingsrichtlijn->icon = $request('icon');
+                    $voedingsrichtlijn->color = $request('color');
+                    $voedingsrichtlijn->save();
+                    return redirect('./voedingsrichtlijnenadmin');
                 } catch (QueryException $e) {
                     return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
                 }

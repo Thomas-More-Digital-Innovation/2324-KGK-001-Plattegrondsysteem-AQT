@@ -163,10 +163,10 @@ $checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
-<script src="/resources/js/opmerking.js"></script>
-<script src="/resources/js/biomedisch.js"></script>
-<script src="/resources/js/checklist.js"></script>
-<script src="/resources/js/popup.js"></script>
+<script src="/js/opmerking.js"></script>
+<script src="/js/biomedisch.js"></script>
+<script src="/js/checklist.js"></script>
+<script src="/js/popup.js"></script>
 <script>
     let DateTime = luxon.DateTime;
     document.addEventListener('DOMContentLoaded', async function () {
