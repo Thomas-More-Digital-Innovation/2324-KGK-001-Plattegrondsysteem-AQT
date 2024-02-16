@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\models\Diersoort;
+use App\models\Dier;
+use App\models\DierProtocol;
+use App\models\Checkitem;
+use App\models\Comment;
 
 class DiersoortController extends Controller
 {
@@ -38,12 +42,13 @@ class DiersoortController extends Controller
                     }
                     
                     // Voeg gegevens toe aan de database
-                    DB::table('diersoort')->insert([
-                        'name' => $name,
-                        'latinname' => $latinname,
-                        'foto' => $foto,
-                        'file' => $file,
-                    ]);
+                    $newBook = new Diersoort();
+                    $newBook->name = $name;
+                    $newBook->latinname = $latinname;
+                    $newbook->foto = $foto;
+                    $newBook->file = $file;
+
+                    $newBook->save();
             
                     return redirect('dierensoorten');
                 }
@@ -60,8 +65,7 @@ class DiersoortController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                
-                $dierensoorten = DB::table('diersoort')->get();
+                $dierensoorten = Diersoort::all();
                 return view('dierensoorten', ['dierensoorten' => $dierensoorten]);
 
             }
@@ -77,24 +81,24 @@ class DiersoortController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
-                $usedDier = DB::table('diers')->where('diersoortid', $id)->exists();
-                $usedDierprotocol = DB::table('dierprotocol')->where('diersoortid', $id)->exists();
-                if (DB::table('checkitem')->where('dierid', $id)->exists()) {DB::table('checkitem')->where('dierid', $id)->delete();}
-                if (DB::table('comment')->where('dierid', $id)->exists()) {DB::table('comment')->where('dierid', $id)->delete();}
+                $usedDier = Dier::where('diersoortid', $id)->exists();
+                $usedDierprotocol = DierProtocol::where('diersoortid', $id)->exists();
+                if (Checkitem::where('dierid', $id)->exists()) {Checkitem::where('dierid', $id)->delete();}
+                if (Comment::where('dierid', $id)->exists()) {Comment::where('dierid', $id)->delete();}
                 if ($usedDier && $usedDierprotocol) {
                     
-                    DB::table('diers')->where('diersoortid', $id)->delete();
-                    DB::table('dierprotocol')->where('diersoortid', $id)->delete();
-                    DB::table('diersoort')->where('id', $id)->delete();
+                    Dier::where('diersoortid', $id)->delete();
+                    DierProtocol::where('diersoortid', $id)->delete();
+                    Diersoort::where('id', $id)->delete();
         
                 } elseif ($usedDier && $usedDierprotocol == False) {
-                    DB::table('diers')->where('diersoortid', $id)->delete();
-                    DB::table('diersoort')->where('id', $id)->delete();
+                    Dier::where('diersoortid', $id)->delete();
+                    Diersoort::where('id', $id)->delete();
                 } elseif ($usedDier  == False && $usedDierprotocol) {
-                    DB::table('diersoort')->where('id', $id)->delete();
-                    DB::table('dierprotocol')->where('diersoortid', $id)->delete();
+                    Diersoort::where('id', $id)->delete();
+                    DierProtocol::where('diersoortid', $id)->delete();
                 } else {
-                    DB::table('diersoort')->where('id', $id)->delete();
+                    Diersoort::where('id', $id)->delete();
                 }
         
                 return redirect('dierensoorten');
@@ -112,7 +116,7 @@ class DiersoortController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
-                $diersoortEdit = DB::table('diersoort')->where('id', $id)->first();
+                $diersoortEdit = Diersoort::where('id', $id)->first();
                 return view('diersoort-edit', compact('diersoortEdit'));
 
             }
@@ -163,8 +167,7 @@ class DiersoortController extends Controller
                     $file = $request->file('file')->storeAs('/files', $filename, 'public_uploads');
                 }
                 
-                DB::table('diersoort') 
-                    ->where('id', $id)
+                Diersoort::where('id', $id)
                     ->update([
                         'name' => $name,
                         'latinname' => $latinname,
