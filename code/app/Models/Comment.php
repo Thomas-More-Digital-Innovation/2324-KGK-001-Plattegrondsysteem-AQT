@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Checkitem extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'protocoldetailid',
+        'leerkracht',
         'dierid',
-        'datetime',
-        'checked',
-        'temperatuur',
-        'gewicht',
+        'comment',
     ];
 
-    protected $table = 'checkitem';
-
-    public function protocoldetails() { return $this->belongsTo(Protocoldetail::class)->withDefault(); }
+    protected $table = 'comment';
 
     public function dier() { return $this->belongsTo(Dier::class)->withDefault(); }
 
