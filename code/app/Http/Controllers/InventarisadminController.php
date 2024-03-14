@@ -10,7 +10,7 @@ use App\Models\Inventaris;
 use App\Models\Lampkant;
 use App\Models\Lamp;
 use App\Models\Plant;
-use App\models\Dier;
+use App\Models\Dier;
 
 class InventarisadminController extends Controller
 {
