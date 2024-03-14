@@ -3,9 +3,9 @@
 @section('content')
    @php
       $idint = (int)ltrim($id, "ds");
-      $diersoort = DB::table('dier')
-       ->join('diersoort', 'diersoort.id', '=', 'dier.diersoortid')
-       ->where('dier.id', '=', $idint)
+      $diersoort = DB::table('diers')
+       ->join('diersoort', 'diersoort.id', '=', 'diers.diersoortid')
+       ->where('diers.id', '=', $idint)
        ->first();
       $name = $diersoort-> name;
       $idwerkplek = $diersoort -> werkplekid;

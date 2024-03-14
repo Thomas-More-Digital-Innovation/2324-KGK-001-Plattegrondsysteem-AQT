@@ -4,8 +4,8 @@
     
 
     $dierenfiche = DB::table('diersoort')
-    ->join("dier", 'dier.diersoortid', '=', 'diersoort.id')
-    ->where("dier.id",$idtrim)
+    ->join("diers", 'diers.diersoortid', '=', 'diersoort.id')
+    ->where("diers.id",$idtrim)
     ->get('file')->first();
 ?>
 

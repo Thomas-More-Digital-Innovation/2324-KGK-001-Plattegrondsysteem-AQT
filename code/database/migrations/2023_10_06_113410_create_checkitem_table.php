@@ -26,7 +26,7 @@ return new class extends Migration
             
             $table->foreign('dierid')
                ->references('id')
-               ->on('dier');
+               ->on('diers');
         });
     }
 
