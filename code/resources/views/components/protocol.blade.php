@@ -1,27 +1,34 @@
 <?php
+// Assuming you have models for 'Dier', 'Diersoort', 'Werkplek', 'Inventaris', 'Lampkant', 'Lamp', 'Plantgroep', and 'Plant'
+
+use App\Models\Dier;
+use App\Models\ProtocolDetail;
+use App\Models\Comment;
+use App\Models\Checkitem;
+
 setlocale(LC_TIME, 'nl_be');
 $dayOfWeek = ucfirst(strftime('%A (%d/%m/%Y)', strtotime($date))); 
 $count = 0;
 
 $idtrim = trim($id, 'ds');
 
-$diersoort = DB::table('diers')
-    ->select('diersoortid')
-    ->join('diersoort', 'diersoort.id', '=', 'dier.diersoortid')
-    ->where('dier.id', '=', $idtrim)
+// Retrieve data for diers
+$diersoort = Dier::select('diersoortid')
+    ->join('diersoort', 'diersoort.id', '=', 'diers.diersoortid')
+    ->where('diers.id', '=', $idtrim)
     ->get();
 
 $diersoortId = $diersoort[0]->diersoortid;
 
-$protocolnames = DB::table('protocoldetail')
-    ->join('dierprotocol', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
+// Retrieve data for Protocoldetail
+$protocolnames = ProtocolDetail::join('dierprotocol', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
     ->where('dierprotocol.diersoortid', '=', $diersoortId)
     ->get();
 
 $roleid =Auth()->user()->roleid;
 
-$leerlingComment = DB::table('comment') //laatste comment van een leerling ophalen
-    ->where('comment.dierid', '=', $idtrim)
+//laatste comment van een leerling ophalen
+$leerlingComment = Comment::where('comment.dierid', '=', $idtrim)
     ->where('comment.leerkracht', '=', '0')
     ->get();
 
@@ -30,9 +37,8 @@ if (count($leerlingComment) != 0){
     $leerlingPlaceholder = $leerlingComment[0]->comment;
 }
 
-
-$leerkrachtComment = DB::table('comment') //laatste comment van de leerkracht
-    ->where('comment.dierid', '=', $idtrim)
+//laatste comment van de leerkracht
+$leerkrachtComment = Comment::where('comment.dierid', '=', $idtrim)
     ->where('comment.leerkracht', '=', '1')
     ->get();
 
@@ -41,28 +47,26 @@ if (count($leerkrachtComment) != 0){
     $leerkrachtPlaceholder = $leerkrachtComment[0]->comment; 
 }
 
-$checkitemgewicht = DB::table('checkitem') //ophalen van het laatste ingevoerde gewicht van een dier
-    ->where('dierid', '=', $idtrim)
+//ophalen van het laatste ingevoerde gewicht van een dier
+$checkitemgewicht = Checkitem::where('dierid', '=', $idtrim)
     ->where('gewicht', '!=', NULL)
     ->orderBy('datetime', 'desc')
     ->first();
 
-    
-$checkitemtemperatuur = DB::table('checkitem') //ophalen van de laatst ingevoerde temperatuur van een bepaald dier
-    ->where('dierid', '=', $idtrim)
+//ophalen van de laatst ingevoerde temperatuur van een bepaald dier    
+$checkitemtemperatuur = Checkitem::where('dierid', '=', $idtrim)
     ->where('temperatuur', '!=', NULL)
     ->orderBy('datetime', 'desc')
     ->first();
-
-$checkboxitemsvm = DB::table('checkitem') //ophalen van alle protocollen die al uitgevoerd zijn in de voormiddag
-    ->where('dierid', '=', $idtrim)
+//ophalen van alle protocollen die al uitgevoerd zijn in de voormiddag
+$checkboxitemsvm = Checkitem::where('dierid', '=', $idtrim)
     ->where('protocoldetailid', '!=', null)
     ->whereRaw('DATE(datetime) = "'.$date.'"')
     ->whereRaw('TIME(datetime) < "12:00:00"') // Voormiddag is voor 12:00 uur
     ->get();
 
-$checkboxitemsnm = DB::table('checkitem') //ophalen van alle protocollen die al uitgevoerd zijn in de namiddag
-    ->where('dierid', '=', $idtrim)
+//ophalen van alle protocollen die al uitgevoerd zijn in de namiddag
+$checkboxitemsnm = Checkitem::where('dierid', '=', $idtrim)
     ->where('protocoldetailid', '!=', null)
     ->whereRaw('DATE(datetime) = "'.$date.'"')
     ->whereRaw('TIME(datetime) > "12:00:00"') // Namiddag is na 12:00 uur
