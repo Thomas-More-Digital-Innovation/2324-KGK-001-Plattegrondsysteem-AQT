@@ -1,37 +1,50 @@
 <?php
-$dierinventaris = DB::table('diers')
-    ->join('diersoort', 'diers.diersoortid', '=', 'diersoort.id')
+// Assuming you have models for 'Dier', 'Diersoort', 'Werkplek', 'Inventaris', 'Lampkant', 'Lamp', 'Plantgroep', and 'Plant'
+
+use App\Models\Dier;
+use App\Models\Diersoort;
+use App\Models\Werkplek;
+use App\Models\Inventaris;
+use App\Models\Lampkant;
+use App\Models\Lamp;
+use App\Models\Plantgroep;
+use App\Models\Plant;
+
+// Retrieve data for dierinventaris
+$dierinventaris = Dier::join('diersoort', 'diers.diersoortid', '=', 'diersoort.id')
     ->join('werkplek', 'werkplek.id', '=', 'diers.werkplekid')
     ->get();
 
-$inventaris = DB::table('inventaris')
-    ->join('lampkants', 'inventaris.id', '=', 'lampkants.inventarisid')
+// Retrieve data for inventaris with lamps
+$inventaris = Inventaris::join('lampkants', 'inventaris.id', '=', 'lampkants.inventarisid')
     ->join('lamps', 'lampkants.lampid', '=', 'lamps.id')
     ->get();
 
-
-$planten = DB::table('inventaris')
-    ->join('plantgroeps', 'inventaris.id', '=', 'plantgroeps.inventarisid')
+// Retrieve data for inventaris with plants
+$planten = Inventaris::join('plantgroeps', 'inventaris.id', '=', 'plantgroeps.inventarisid')
     ->join('plants', 'plantgroeps.plantid', '=', 'plants.id')
     ->get();
+
+// Group plants by inventarisid
 $planten = $planten->groupBy('inventarisid');
-    // groepering van gejoinde data op basis van position & inventarisid
-    $groupedinventaris = $inventaris->mapToGroups(function ($item) {          //map to groups is een collectiemethode van laravel zelf om data te gaan groeperen
-        return [$item->inventarisid => $item];                
-    })->map(function ($group) {                                               // met map kunnen we data verder groeperen        
-        return $group->groupBy('position');
-    });
-// items groeperen per werkplek
+
+// Group inventaris by position and inventarisid
+$groupedinventaris = $inventaris->mapToGroups(function ($item) {
+    return [$item->inventarisid => $item];
+})->map(function ($group) {
+    return $group->groupBy('position');
+});
+
+// Group items per werkplek
 $groupedItems = [];
-// checken of werkplek al in array zit, anders aanmaken
 foreach ($dierinventaris as $item) {
     $werkplekid = $item->werkplekid;
 
     if (!isset($groupedItems[$werkplekid])) {
         $groupedItems[$werkplekid] = [];
     }
-    $groupedItems[$werkplekid][$item->latinname] = $item;
-}  
+    $groupedItems[$werkplekid][$item->diersoortid] = $item;
+}
 ?>
 
 <h1 class="font-bold text-3xl h-14 border-b-2 border-black flex justify-center items-center p-2" style="background-color:#FF7ECC;"> Inventaris </h1>
@@ -48,10 +61,18 @@ foreach ($dierinventaris as $item) {
         </thead>
         <tbody>
             @foreach ($groupedItems as $werkplekid => $items)
-                @foreach ($items as $latinname => $item)
+                @foreach ($items as $name => $item)
+
                     <tr>
-                        <td class="border border-black px-4 py-2 text-center">{{ $werkplekid }}</td>
-                        <td class="border border-black px-4 py-2 text-center">{{ $latinname }}</td>
+                        <td class="border border-black px-4 py-2 text-center">
+                            {{ $werkplekid }}
+                        </td>
+                        <td class="border border-black px-4 py-2 text-center">
+                            @php
+                                $diersoort = Diersoort::find($name);
+                            @endphp
+                            {{ $diersoort ? $diersoort->name : 'Unknown Diersoort' }}
+                        </td>
                         <td class="border border-black px-4 py-2 text-center">
                             @php
                                 $lampLinks = $groupedinventaris[$item->inventarisid]['links'] ?? [];
