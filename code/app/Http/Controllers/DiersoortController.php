@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use App\models\Diersoort;
-use App\models\Dier;
-use App\models\DierProtocol;
-use App\models\Checkitem;
-use App\models\Comment;
+use App\Models\Diersoort;
+use App\Models\Dier;
+use App\Models\DierProtocol;
+use App\Models\Checkitem;
+use App\Models\Comment;
 
 class DiersoortController extends Controller
 {
