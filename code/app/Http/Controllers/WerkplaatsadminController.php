@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Werkplek;
+
 class WerkplaatsadminController extends Controller
 {
     public function index()
@@ -12,7 +14,7 @@ class WerkplaatsadminController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                $werkplek = DB::table('werkplek')->get();
+                $werkplek = Werkplek::all();
                 return view('werkplaatsadmin', ['werkplek' => $werkplek]);
             } else {
                 abort(401);
@@ -31,11 +33,14 @@ class WerkplaatsadminController extends Controller
                     ->whereIn('id', $activeWorkplaces)
                     ->update(['active' => true]);
 
-                DB::table('werkplek')
-                    ->whereNotIn('id', $activeWorkplaces)
-                    ->update(['active' => false]);
+                Werkplek::where('id', $activeWorkplaces)
+                ->update(['active' => true]);
 
-                return redirect()->route('werkplaatsadmin.index')->with('success', 'Workplace status updated successfully');
+                Werkplek::whereNotIn('id', $activeWorkplaces)
+                ->update(['active' => false]);
+     
+                return redirect()->route('werkplaatsadmin.index')
+                ->with('success', 'Workplace status updated successfully');
             } else {
                 abort(401);
             }

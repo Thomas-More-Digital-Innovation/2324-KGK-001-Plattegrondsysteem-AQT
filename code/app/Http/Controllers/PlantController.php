@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
- 
+
+use App\Models\Plant;
+use App\Models\Inventaris;
+use App\Models\Plantgroep;
 
 class PlantController extends Controller
 {
@@ -14,11 +17,11 @@ class PlantController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                $plant = DB::table('plant')->get(); 
-                $inventaris = DB::table('inventaris')->get(); 
-                $plantinventaris = DB::table('inventaris')
-                ->join('plantgroep', 'inventaris.id', '=', 'plantgroep.inventarisid')
-                ->join('plant', 'plantgroep.plantid', '=', 'plant.id')
+                $plant = Plant::all();
+                $inventaris = Inventaris::all();
+
+                $plantinventaris = Inventaris::join('plantgroeps', 'inventaris.id', '=', 'plantgroeps.inventarisid')
+                ->join('plants', 'plantgroeps.plantid', '=', 'plants.id')
                 ->get()
                 ->groupBy('inventarisid');
 
@@ -36,7 +39,10 @@ class PlantController extends Controller
             if ($roleID == 4) {
 
                 $plantName = $request->input('naam');
-                DB::table('plant')->insert(['plantname' => $plantName]);
+                
+                $plant = new Plant;
+                $plant->plantname = $plantName;
+                $plant->save();
 
                 return redirect()->route('plantadmin')->with('success', 'plant added successfully');
             } else {
@@ -51,9 +57,9 @@ class PlantController extends Controller
         if (Auth::id()) {
             $roleID = Auth::user()->roleid;
             if ($roleID == 4) {
-                if (!DB::table('plantgroep')->where('plantgroep.plantid', '=', $id)->exists()) {
+                if (!Plantgroep::where('plantid', $id)->exists()) {
 
-                    $plant = DB::table('plant')->where('id', $id);
+                    $plant = Plant::find($id);
                     $plant->delete();
                     return back();
                 } else {
@@ -73,7 +79,7 @@ class PlantController extends Controller
                 $selectedPlantIds = $request->input('plants');
                 $selectedInventarisId = $request->input('inventaris');
                 foreach ($selectedPlantIds as $plantId) {
-                    DB::table('plantgroep')->updateOrInsert(['plantid' => $plantId, 'inventarisid' => $selectedInventarisId]);
+                    Plantgroep::updateOrInsert(['plantid' => $plantId, 'inventarisid' => $selectedInventarisId]);
                 }
     
                 return redirect()->route('plantadmin')->with('success', 'Plants coupled to inventaris successfully');
@@ -90,10 +96,8 @@ class PlantController extends Controller
             if ($roleID == 4) {
 
                 if (!empty($inventarisid)) {
-                    $plant = DB::table('plantgroep')
-                        ->where('plantid', $plantid)
-                        ->where('inventarisid', $inventarisid)
-                        ->delete();
+                    
+                    Plantgroep::where('plantid', $plantid)->where('inventarisid', $inventarisid)->delete();
                     
                     return back();
                 } else {

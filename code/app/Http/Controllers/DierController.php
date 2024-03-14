@@ -40,7 +40,7 @@ class DierController extends Controller
                 $quarantaine = $request->input('quarantaine');
                 $inventaris = $request->input('inventaris');
                     
-                DB::table('dier')->insert([
+                DB::table('diers')->insert([
                     'werkplekid' => $werkplek,
                     'diersoortid' => $diersoort,
                     'quarantaine' => $quarantaine,
@@ -62,11 +62,11 @@ class DierController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
-                $dieren = DB::table('dier')
-                ->join('werkplek', 'dier.werkplekid', '=', 'werkplek.id')
-                ->join('diersoort', 'dier.diersoortid', '=', 'diersoort.id')
-                ->select('dier.id', 'werkplek.name as werkplekName', 'diersoort.name as diersoortName', 'dier.quarantaine', 'dier.inventarisid')
-                ->orderBy('dier.id')
+                $dieren = DB::table('diers')
+                ->join('werkplek', 'diers.werkplekid', '=', 'werkplek.id')
+                ->join('diersoort', 'diers.diersoortid', '=', 'diersoort.id')
+                ->select('diers.id', 'werkplek.name as werkplekName', 'diersoort.name as diersoortName', 'diers.quarantaine', 'diers.inventarisid')
+                ->orderBy('diers.id')
                 ->get();
         
                 return view('dier', compact('dieren'));
@@ -85,7 +85,7 @@ class DierController extends Controller
             if($roleID==4){
                 if (DB::table('checkitem')->where('dierid', $id)->exists()) {DB::table('checkitem')->where('dierid', $id)->delete();}
                 if (DB::table('comment')->where('dierid', $id)->exists()) {DB::table('comment')->where('dierid', $id)->delete();}
-                DB::table('dier')->where('id', $id)->delete();
+                DB::table('diers')->where('id', $id)->delete();
                 return redirect('dier');
             }
             else{
@@ -104,11 +104,17 @@ class DierController extends Controller
                 $diersoort = DB::table('diersoort')->get();
                 $inventaris = DB::table('inventaris')->get();
                 
-                $dierEdit = DB::table('dier')
-                ->join('werkplek', 'dier.werkplekid', '=', 'werkplek.id')
-                ->join('diersoort', 'dier.diersoortid', '=', 'diersoort.id')
-                ->select('dier.id as id', 'werkplek.id as werkplekId', 'diersoort.id as diersoortId', 'dier.quarantaine', 'dier.inventarisid')
-                ->where('dier.id', $id)
+                $dierEdit = DB::table('diers')
+                ->join('werkplek', 'diers.werkplekid', '=', 'werkplek.id')
+                ->join('diersoort', 'diers.diersoortid', '=', 'diersoort.id')
+                ->select(
+                    'diers.id as id', 
+                    'werkplek.id as werkplekId', 
+                    'diersoort.id as diersoortId', 
+                    'diers.quarantaine', 
+                    'diers.inventarisid'
+                )
+                ->where('diers.id', $id)
                 ->first();
                 return view('dier-edit', compact('dierEdit', 'werkplek', 'diersoort', 'inventaris'));
 
@@ -130,7 +136,7 @@ class DierController extends Controller
                 $quarantaine = $request->input('quarantaine');
                 $inventaris = $request->input('inventaris');
                     
-                DB::table('dier')
+                DB::table('diers')
                     ->where('id', $id)
                     ->update([
                         'werkplekid' => $werkplek,

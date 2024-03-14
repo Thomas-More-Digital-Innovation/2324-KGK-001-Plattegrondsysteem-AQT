@@ -10,27 +10,27 @@ class LampkantSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('lampkant')->insert([
+        DB::table('lampkants')->insert([
             'inventarisid' => 1,
             'lampid' => 1,
             'position' => 'links', 
         ]);
-        DB::table('lampkant')->insert([
+        DB::table('lampkants')->insert([
             'inventarisid' => 1,
             'lampid' => 2,
             'position' => 'rechts'
         ]);
-        DB::table('lampkant')->insert([
+        DB::table('lampkants')->insert([
             'inventarisid' => 2,
             'lampid' => 3,
             'position' => 'links'
         ]);
-        DB::table('lampkant')->insert([
+        DB::table('lampkants')->insert([
             'inventarisid' => 2,
             'lampid' => 4,
             'position' => 'links'
         ]);
-        DB::table('lampkant')->insert([
+        DB::table('lampkants')->insert([
             'inventarisid' => 2,
             'lampid' => 1,
             'position' => 'rechts'

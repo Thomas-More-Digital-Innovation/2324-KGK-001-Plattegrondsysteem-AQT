@@ -4,7 +4,7 @@
         <div class="bg-slate-200 p-2 px-4 rounded-lg m-2">
             <div class="flex justify-around">
                 <div class="flex justify-center">
-                    <form action="/admin/protocollen/add" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('admin/protocollen/add')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="flex">
                             <div class="flex flex-col">
@@ -62,8 +62,13 @@
                             <td class="pl-2">{{$protocol->name}}</td>
                             <td class="px-6">
                                 <?php
-                                    $protocoltype = DB::table('protocoltype')->where('id', $protocol->protocoltypeid)->first();
-                                    echo $protocoltype->name;
+                                    foreach($protocoltypes as $protocoltype) {
+                                        if ($protocol->protocoltypeid == $protocoltype->id) {
+                                            echo $protocoltype->name;
+                                            break;
+                                        }
+
+                                    }                                    
                                 ?>
                             </td>
                             <td>{{$protocol->icon}}</td>
