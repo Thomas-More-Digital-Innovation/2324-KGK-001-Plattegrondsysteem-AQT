@@ -110,17 +110,17 @@ class voederrichtlijnenController extends Controller
     }
     public function updateVoederrichtlijn($id){
         if(Auth::id()){
-            $roleID=Auth()->user()->roleid;
-            if($roleID==4){
+            $roleID = Auth()->user()->roleid;
+            if($roleID == 4){
                 try {
                     $voedingsrichtlijn = VoedingsRichtlijnen::find($id);
-                    $voedingsrichtlijn->name = $id('name');
-                    $voedingsrichtlijn->icon = $id('icon');
-                    $voedingsrichtlijn->color = $id('color');
+                    $voedingsrichtlijn->name = request()->input('name'); // Using request() helper instead of accessing $id directly
+                    $voedingsrichtlijn->icon = request()->input('icon'); // Using request() helper instead of accessing $id directly
+                    $voedingsrichtlijn->color = request()->input('color'); // Using request() helper instead of accessing $id directly
                     $voedingsrichtlijn->save();
                     return redirect('./voedingsrichtlijnenadmin');
                 } catch (QueryException $e) {
-                    return back()->with('error', 'An error occurred (', $e->errorInfo[1] ,') while processing your request.');
+                    return back()->with('error', 'An error occurred ('. $e->errorInfo[1] .') while processing your request.'); // Fixing the error message concatenation
                 }
             }
             else{
