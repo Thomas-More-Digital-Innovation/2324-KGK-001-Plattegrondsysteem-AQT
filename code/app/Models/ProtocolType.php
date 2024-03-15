@@ -13,7 +13,9 @@ class ProtocolType extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'icon',
+        'color'
     ];
 
     /**
@@ -39,4 +41,18 @@ class ProtocolType extends Model
         'id' => 'integer',
         'name' => 'string'
     ];
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'protocoltype';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

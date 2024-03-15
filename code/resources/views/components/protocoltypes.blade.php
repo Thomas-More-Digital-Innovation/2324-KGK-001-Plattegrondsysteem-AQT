@@ -1,6 +1,8 @@
 <div class="flex justify-center items-center flex-wrap h-screen pt-14">
    <?php 
-      $types = json_decode(DB::table('protocoltype')->get());
+      use App\Models\ProtocolType;
+
+      $types = json_decode(ProtocolType::all()); 
       foreach ($types as $v) {
          ?>
          <a href="./protocoltype?id={{$v->id}}&t={{$v->name}}&c={{$v->color}}" class="hover:scale-105 transition duration-150 ease-out hover:ease-in my-5 mx-32 flex justify-center items-center flex-col">

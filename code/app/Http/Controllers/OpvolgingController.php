@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\ProtocolDetail;
+
 class OpvolgingController extends Controller
 {
    public function opvolging(){
@@ -24,7 +26,7 @@ class OpvolgingController extends Controller
             ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
             ->get();
     
-            $infoProtocols = DB::table('protocoldetail')->get();
+            $infoProtocols = ProtocolDetail::all();
             
             $infoDiersoorten = DB::table('diersoort')->get();
 
