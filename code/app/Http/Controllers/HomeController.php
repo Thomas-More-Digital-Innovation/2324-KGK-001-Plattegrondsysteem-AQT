@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-
+use App\Models\Comment;
 
 class HomeController extends Controller
 {
@@ -208,21 +208,23 @@ class HomeController extends Controller
         if ($id2 == "Leerkracht") {
             $bool = 1;
         }
-        if (DB::table('comment')
-            ->where([
+        if (Comment::where([
                 ["leerkracht", "=", $bool],
                 ["dierid", "=", $id3]
             ])
             ->exists()){
-                DB::table('comment')
-            ->where([
+                Comment::where([
                 ["leerkracht", "=", $bool],
                 ["dierid", "=", $id3]
             ])
             ->update(["comment"=>$id]);
             }
-            else {DB::table("comment")
-                ->insert(["leerkracht"=>$bool, "dierid"=>$id3, "comment"=>$id]);
+            else {
+                $comment = new Comment;
+                $comment->leerkracht = $bool;
+                $comment->dierid = $id3;
+                $comment->comment = $id;
+                $comment->save();
             };
         
 
@@ -234,7 +236,7 @@ class HomeController extends Controller
         $id = request('id');
         $date = request('date');
         $idint = (int)ltrim($id, "ds");
-        $data = DB::table('checkitem')->where('dierid', $idint)->get();
+        $data = Checkitem::where('dierid', $idint)->get();
         return view('dierefiche', ['id' => $id, 'date' => $date, 'data' => $data]);
     }
 
@@ -242,11 +244,11 @@ class HomeController extends Controller
         $dierid = $id3;
         $value = $id;
         $type = $id2;
-        DB::table('checkitem')->insert([
-            'dierid'=>$dierid,
-            $type=>$value, 
-            'datetime'=>$id4
-        ]);
+        $checkitem = new Checkitem;
+        $checkitem->dierid = $dierid;
+        $checkitem->$type = $value;
+        $checkitem->datetime = $id4;
+        $checkitem->save();
         return back();
     }
     public function checkboxitemadd($id, $id2, $id3, $id4, $id5) {
@@ -254,17 +256,16 @@ class HomeController extends Controller
         $value = $id;
         $type = $id2;
         if ($value == 1){
-            DB::table('checkitem')->insert([
-                'dierid'=>$dierid,
-                $type=>$value, 
-                'datetime'=>$id4,
-                'protocoldetailid'=>$id5
-            ]);
+            $checkitem = new Checkitem;
+            $checkitem->dierid = $dierid;
+            $checkitem->$type = $value;
+            $checkitem->datetime = $id4;
+            $checkitem->protocoldetailid = $id5;
+            $checkitem->save();
         }
         elseif ($value == 0) {
             // Verwijder de rij met dezelfde protocoldetailid
-            DB::table('checkitem')
-                ->where('protocoldetailid', $id5)
+            Checkitem::where('protocoldetailid', $id5)
                 ->delete();
             
         };

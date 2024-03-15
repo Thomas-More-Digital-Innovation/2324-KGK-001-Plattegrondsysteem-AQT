@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use App\Models\Checkitem;
 use Illuminate\Support\Facades\Auth;
 
 class DierController extends Controller
@@ -83,8 +84,9 @@ class DierController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                if (DB::table('checkitem')->where('dierid', $id)->exists()) {DB::table('checkitem')->where('dierid', $id)->delete();}
-                if (DB::table('comment')->where('dierid', $id)->exists()) {DB::table('comment')->where('dierid', $id)->delete();}
+                if (Checkitem::where('dierid', $id)->exists()) {Checkitem::where('dierid', $id)->delete();}
+                if (Comment::where('dierid', $id)->exists()) {Comment::where('dierid', $id)->delete();}
+
                 DB::table('diers')->where('id', $id)->delete();
                 return redirect('dier');
             }
