@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ProtocolType;
+use App\Models\ProtocolDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -145,7 +146,7 @@ class HomeController extends Controller
         if(Auth::id()){
             $roleID = Auth()->user()->roleid;
             if($roleID==4){
-                $protocollen = DB::table('protocoldetail')->get();
+                $protocollen = ProtocolDetail::all();
                 return view('components.pages.protocollenadmin', ['protocollen' => $protocollen]);
             }
             else{
@@ -173,12 +174,15 @@ class HomeController extends Controller
                 $protocoltypeid = $request->input('protocoltypeid');
                 $icon = $request->input('icon');
                 $file = $request->input('file');
-                DB::table('protocoldetail')->insert([
-                    'name'=>$name,
-                    'protocoltypeid'=>$protocoltypeid,
-                    'icon'=>$icon,
-                    'file'=>$file
-                ]);
+
+                $protocolDetail = new ProtocolDetail;
+                $protocolDetail->name = $name;
+                $protocolDetail->protocoltypeid = $protocoltypeid;
+                $protocolDetail->icon = $icon;
+                $protocolDetail->file = $file;
+
+                $protocolDetail->save();
+
                 return back();
             }
             else{
