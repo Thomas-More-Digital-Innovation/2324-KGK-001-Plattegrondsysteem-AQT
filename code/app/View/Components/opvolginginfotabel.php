@@ -24,12 +24,10 @@ class opvolginginfotabel extends Component
      */
     public function render(): View|Closure|string
     {
-        $info = DB::table('dierprotocol')
-        ->join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
+        $info = DierProtocol::join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
         ->get();
         
-        $info2 = DB::table('dierprotocol')
-        ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
+        $info2 = DierProtocol::join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
         ->get();
 
         $infoProtocols = ProtocolDetail::all();

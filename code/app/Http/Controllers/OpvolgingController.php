@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\DierProtocol;
 
 use App\Models\ProtocolDetail;
 
@@ -18,12 +19,10 @@ class OpvolgingController extends Controller
       if(Auth::id()){
          $roleID=Auth()->user()->roleid;
          if( $roleID==4 ) { 
-            $info = DB::table('dierprotocol')
-            ->join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
+            $info = DierProtocol::join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
             ->get();
             
-            $info2 = DB::table('dierprotocol')
-            ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
+            $info2 = DierProtocol::join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
             ->get();
     
             $infoProtocols = ProtocolDetail::all();
@@ -42,18 +41,17 @@ class OpvolgingController extends Controller
                 $ds = $request->input('diersoortselect');
                 $oldps = $request->input('oldps');
                 $oldds = $request->input('oldds');
-                if (!DB::table('dierprotocol')->where([
+                if (!DierProtocol::where([
                     ['protocoldetailid', '=', $ps],
                     ['diersoortid', '=', $ds],
                 ])->exists()) {
                     if ($request->input('typesubmit') == "add") {
-                        DB::table('dierprotocol')->insert([
+                        DierProtocol::create([
                             'protocoldetailid'=>$ps,
                             'diersoortid'=>$ds,
                         ]);
                     } elseif ($request->input('typesubmit') == "edit") {
-                        DB::table('dierprotocol')
-                        ->where([
+                        DierProtocol::where([
                             ["protocoldetailid", "=", $oldps],
                             ["diersoortid", "=", $oldds]
                         ])
@@ -74,7 +72,7 @@ class OpvolgingController extends Controller
       if(Auth::id()){
          $roleID=Auth()->user()->roleid;
          if( $roleID==4 ) { 
-            DB::table('dierprotocol')->where([
+            DierProtocol::where([
                ['protocoldetailid', '=', $protocoldetailid],
                ['diersoortid', '=', $diersoortid],
             ])->delete();
