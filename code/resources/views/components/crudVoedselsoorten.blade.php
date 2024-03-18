@@ -73,4 +73,4 @@
         </table>
     </div>
 </div>
-<script src="/resources/js/voedselsoortentabel.js"></script>
+<script src="/js/voedselsoortentabel.js"></script>
