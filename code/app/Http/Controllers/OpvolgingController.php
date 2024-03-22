@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use App\Models\DierProtocol;
 
 use App\Models\ProtocolDetail;
+use App\Models\Diersoort;
 
 class OpvolgingController extends Controller
 {
@@ -27,7 +28,7 @@ class OpvolgingController extends Controller
     
             $infoProtocols = ProtocolDetail::all();
             
-            $infoDiersoorten = DB::table('diersoort')->get();
+            $infoDiersoorten = Diersoort::all();
 
             return view('components.opvolging.opvolginghome', ['protocoldetail' => $info, 'diersoort' => $info2, "protocols" => $infoProtocols, "diersoorten" => $infoDiersoorten]); }
          else { abort(401); }

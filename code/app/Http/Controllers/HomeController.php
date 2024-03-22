@@ -11,6 +11,8 @@ use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Role;
+use App\Models\Checkitem;
 
 class HomeController extends Controller
 {
@@ -24,9 +26,9 @@ class HomeController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $users = DB::table('users')->get();
+                $users = User::get();
                 $userID = Auth()->user()->id;
-                $roles = DB::table('role')->get();
+                $roles = Role::get();
                 return view('adminDashboard', ['users' => $users, 'userID' => $userID, 'roles' => $roles]);
             }
             else{
@@ -42,14 +44,15 @@ class HomeController extends Controller
                 $username = array($request->input('firstname'), "." , $request->input('lastname'));
                 $email = array($request->input('firstname'),'.',$request->input('lastname'),'@email.com');
 
-                $query = DB::table('users')->insert([
-                    'firstname'=>$request->input('firstname'),
-                    'lastname'=>$request->input('lastname'),
-                    'username'=>str_replace(" ", "" ,join("", $username)),
-                    'email'=>str_replace(" ", "" ,join("", $email)),
-                    'password'=> Hash::make('1234'),
-                    'roleid'=>$request->input('role')
-                ]);
+                $newuser = New User;
+                $newuser->firstname = $request->input('firstname');
+                $newuser->lastname = $request->input('lastname');
+                $newuser->username = str_replace(" ", "" ,join("", $username));
+                $newuser->email = str_replace(" ", "" ,join("", $email));
+                $newuser->password = Hash::make('1234');
+                $newuser->roleid = $request->input('role');
+                $newuser->save();
+
                 return back();
             }
             else{

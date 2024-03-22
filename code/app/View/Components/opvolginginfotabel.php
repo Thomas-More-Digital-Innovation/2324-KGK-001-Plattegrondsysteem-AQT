@@ -7,6 +7,8 @@ use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\DierProtocol;
+use App\Models\Diersoort;
 use App\Models\ProtocolDetail;
 
 class opvolginginfotabel extends Component
@@ -32,7 +34,7 @@ class opvolginginfotabel extends Component
 
         $infoProtocols = ProtocolDetail::all();
         
-        $infoDiersoorten = DB::table('diersoort')->get();
+        $infoDiersoorten = Diersoort::get();
 
         return view('components.opvolging.infotabel', ['protocoldetail' => $info, 'diersoort' => $info2, "protocols" => $infoProtocols, "diersoorten" => $infoDiersoorten]);
     }

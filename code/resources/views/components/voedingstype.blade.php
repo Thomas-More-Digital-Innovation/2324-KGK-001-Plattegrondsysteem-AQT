@@ -1,12 +1,11 @@
 <?php
+use App\Models\VoedingsType;
+use App\Models\VoedingsRichtlijnen;
+
 $idtrim = trim($id, 'vt');
 
-$voedingstype = DB::table('voedingstype')
-    ->where('voedingstype.voedingsrichtlijnid', "=", $idtrim) //id binnenhalen 
-    ->get();
-    $voedingsname = DB::table('voedingsrichtlijnen')
-    ->where('id', $idtrim)
-    ->first();
+$voedingstype = VoedingsType::where('voedingstype.voedingsrichtlijnid', "=", $idtrim)->get();
+$voedingsname = VoedingsRichtlijnen::where('id', $idtrim)->first();
 ?>
 
 <x-titlebar title='{{$voedingsname->name}}' color='{{$voedingsname->color}}' back=true link='./voederrichtlijnen'/>

@@ -38,7 +38,7 @@ class voedselsoortenController extends Controller
                 $vs = $request->input('voedselsoort');
                 $rn = $request->input('voedingsrichtlijn');
                 $type = $request->input('typesubmit');
-                if (!DB::table('voedingstype')->where([
+                if (!VoedingsType::where([
                     ['name', '=', $vs],
                     ['voedingsrichtlijnid', '=', $rn],
                     ['icon', '=', $foto],

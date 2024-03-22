@@ -25,4 +25,4 @@
 </div>
 @endforeach
 </div>
-<script src="/js/werkplek.js"></script>
+<script src="/resources/js/werkplek.js"></script>
