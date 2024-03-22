@@ -101,4 +101,4 @@
         </table>
     </div>
 </div>
-<script src="/js/voedingsrichtlijnentabel.js"></script>
+<script src="/resources/js/voedingsrichtlijnentabel.js"></script>

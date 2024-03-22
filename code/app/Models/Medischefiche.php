@@ -14,5 +14,7 @@ class Medischefiche extends Model
         'file'
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
+
+    protected $table = 'medischefiche';
 }

@@ -1,10 +1,9 @@
 <?php
+    use App\Models\Diersoort;
+
     $idtrim = trim($id, 'ds');
     
-    
-
-    $dierenfiche = DB::table('diersoort')
-    ->join("diers", 'diers.diersoortid', '=', 'diersoort.id')
+    $dierenfiche = Diersoort::join("diers", 'diers.diersoortid', '=', 'diersoort.id')
     ->where("diers.id",$idtrim)
     ->get('file')->first();
 ?>

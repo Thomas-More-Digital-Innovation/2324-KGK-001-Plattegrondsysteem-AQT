@@ -24,6 +24,20 @@ class voederrichtlijnenController extends Controller
         }
     }
 
+    public function voedselsoorten(){
+        if(Auth::id()){
+            $roleID=Auth()->user()->roleid;
+            if($roleID==4){
+                $voedingsType = VoedingsRichtlijnen::all();
+                
+                return view('voederrichtlijnen', ['voedingsType' => $voedingsType]);
+            }
+            else{
+                abort(401);
+            }
+        }
+    }
+
     public function addeditVoederrichtlijn(Request $request){
         if(Auth::id()){
             $roleID = Auth::user()->roleid;

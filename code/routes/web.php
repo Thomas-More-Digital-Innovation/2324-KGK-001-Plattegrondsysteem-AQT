@@ -66,9 +66,8 @@ Route::get('/protocolinfo', function() {
 });
 
 // voederrichtlijnen - home
-Route::get('/voederrichtlijnen', function(){
-    return view('voederrichtlijnen');
-})->name('voederrichtlijnen');
+Route::get('/voederrichtlijnen', [voederrichtlijnenController::class, 'voedselsoorten'])->name('voederrichtlijnen');
+
 
 // voederrichtlijnen - type
 Route::get('/voedsel', function(){
