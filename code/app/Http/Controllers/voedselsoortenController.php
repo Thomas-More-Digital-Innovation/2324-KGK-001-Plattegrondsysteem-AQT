@@ -8,14 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Models\VoedingsRichtlijnen;
+use App\Models\VoedingsType;
+
 class voedselsoortenController extends Controller
 {
     public function voedselSoorten(){
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsType = DB::table('voedingstype')->get();
-                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
+                $voedingsType = VoedingsType::all();
+                $voedingsRichtlijnen = VoedingsRichtlijnen::all();
                 return view('voedselsoorten', 
                 ['voedingsType' => $voedingsType,
                 'voedingsRichtlijnen' => $voedingsRichtlijnen]);
@@ -35,27 +38,23 @@ class voedselsoortenController extends Controller
                 $vs = $request->input('voedselsoort');
                 $rn = $request->input('voedingsrichtlijn');
                 $type = $request->input('typesubmit');
-                if (!DB::table('voedingstype')->where([
+                if (!VoedingsType::where([
                     ['name', '=', $vs],
                     ['voedingsrichtlijnid', '=', $rn],
                     ['icon', '=', $foto],
                 ])->exists()) {
                     if ($type == "add") {
-                        DB::table('voedingstype')->insert([
-                            'name'=> $vs,
-                            'voedingsrichtlijnid'=> $rn,
-                            'icon'=>$foto,
-                        ]);
+                        $voedingsType = new VoedingsType;
+                        $voedingsType->name = $vs;
+                        $voedingsType->voedingsrichtlijnid = $rn;
+                        $voedingsType->icon = $foto;
+                        $voedingsType->save();
                     } elseif ($type == "edit") {
-                        DB::table('voedingstype')
-                        ->where([
-                            ["id", "=", $request->input('id')],
-                        ])
-                        ->update([
-                            "name"=>$vs,
-                            "voedingsrichtlijnid"=>$rn,
-                            'icon'=>$foto,
-                        ]);
+                        $voedingsType = VoedingsType::find($id = $request->input('id'));
+                        $voedingsType->name = $vs;
+                        $voedingsType->voedingsrichtlijnid = $rn;
+                        $voedingsType->icon = $foto;
+                        $voedingsType->save();
                     }
                 }
                 else {
@@ -72,8 +71,7 @@ class voedselsoortenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsoort = DB::table('voedingstype')->where('id', $id);
-                $voedingsoort->delete();
+                VoedingsType::Destroy($id);
                 return back();
             }
             else{
@@ -85,8 +83,7 @@ class voedselsoortenController extends Controller
         if(Auth::id()){
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
-                $voedingsoort = DB::table('voedingstype')->where('id', $id)->first();
-                $voedingsRichtlijnen = DB::table('voedingsrichtlijnen')->get();
+                $voedingsType = VoedingsType::find($id);
                 return view('editVoedselsoorten',
                 ['voedingsRichtlijnen' => $voedingsRichtlijnen], compact('voedingsoort'));
             }
@@ -100,12 +97,11 @@ class voedselsoortenController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
 
-                $query = DB::table('voedingstype')->where('id', $id)->update([
-                    'name'=>$request->input('name'),
-                    'voedingsrichtlijnid'=>$request->input('voeding'),
-                    'icon'=>$request->input('icon'),
-                ]);
-
+               $voedingsType = VoedingsType::find($id);
+               $voedingsType->name = $vs;
+                $voedingsType->voedingsrichtlijnid = $rn;
+                $voedingsType->icon = $foto;
+                $voedingsType->save();
                 return redirect('./voedselsoorten');
             }
             else{

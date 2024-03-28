@@ -46,7 +46,7 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('username', 'password'))) {
-            $user = DB::table('users')->where('username', $this->input('username'))->first();
+            $user = User::where('username', $this->input('username'))->first();
             if ($user && $user->roleid == 4) {
                 throw ValidationException::withMessages([
                     'admin' => "De inlog gegevens zijn fout",

@@ -29,8 +29,7 @@ class WerkplaatsadminController extends Controller
             if ($roleID == 4) {
                 $activeWorkplaces = $request->input('active', []);
 
-                DB::table('werkplek')
-                    ->whereIn('id', $activeWorkplaces)
+                Werkplek::whereIn('id', $activeWorkplaces)
                     ->update(['active' => true]);
 
                 Werkplek::where('id', $activeWorkplaces)

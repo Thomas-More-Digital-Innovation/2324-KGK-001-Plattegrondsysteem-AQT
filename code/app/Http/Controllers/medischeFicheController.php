@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Medischefiche;
+
 class medischeFicheController extends Controller
 {
     
@@ -27,11 +29,11 @@ class medischeFicheController extends Controller
                     $filename = $request->file('file')->getClientOriginalName();
                     $file = $request->file('file')->storeAs('./files', $filename, 'public_uploads');
 
-                    DB::table('medischefiche')->insert([
-                        'date' => $date,
-                        'file' => $file,
-                    ]);
-                
+                    $newMedischeFiche = new Medischefiche;
+                    $newMedischeFiche->date = $date;
+                    $newMedischeFiche->file = $file;
+                    $newMedischeFiche->save();
+                                    
                     return redirect('medischefiche');
                 }
             }
@@ -43,7 +45,7 @@ class medischeFicheController extends Controller
     
     public function index()
     {
-        $medischefiche = DB::table('medischefiche')->get();
+        $medischefiche = Medischefiche::all();
         return view('medischeFiche', ['medischefiche' => $medischefiche]);
     }
 
@@ -53,7 +55,7 @@ class medischeFicheController extends Controller
             $roleID=Auth()->user()->roleid;
             if($roleID==4){
                 
-                DB::table('medischefiche')->where('id', $id)->delete();
+                Medischefiche::where('id', $id)->delete();
         
                 return redirect('medischefiche');
 

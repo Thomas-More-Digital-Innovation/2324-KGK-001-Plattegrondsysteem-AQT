@@ -1,5 +1,7 @@
 <?php
-    $werkplek = DB::table('werkplek')->get();
+    use App\Models\Werkplek;
+    
+    $werkplek = Werkplek::get();
     $werkplekData = $werkplek->map(function ($item) {
         return [
             'name' => $item->name,

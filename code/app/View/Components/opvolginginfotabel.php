@@ -7,6 +7,10 @@ use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\DierProtocol;
+use App\Models\Diersoort;
+use App\Models\ProtocolDetail;
+
 class opvolginginfotabel extends Component
 {
     /**
@@ -22,17 +26,15 @@ class opvolginginfotabel extends Component
      */
     public function render(): View|Closure|string
     {
-        $info = DB::table('dierprotocol')
-        ->join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
+        $info = DierProtocol::join('protocoldetail', 'dierprotocol.protocoldetailid', '=', 'protocoldetail.id')
         ->get();
         
-        $info2 = DB::table('dierprotocol')
-        ->join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
+        $info2 = DierProtocol::join('diersoort', 'dierprotocol.diersoortid', '=', 'diersoort.id')
         ->get();
 
-        $infoProtocols = DB::table('protocoldetail')->get();
+        $infoProtocols = ProtocolDetail::all();
         
-        $infoDiersoorten = DB::table('diersoort')->get();
+        $infoDiersoorten = Diersoort::get();
 
         return view('components.opvolging.infotabel', ['protocoldetail' => $info, 'diersoort' => $info2, "protocols" => $infoProtocols, "diersoorten" => $infoDiersoorten]);
     }

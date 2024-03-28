@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class PasswordResetLinkController extends Controller
 {
@@ -39,7 +40,7 @@ class PasswordResetLinkController extends Controller
                 $request->only('email')
             );
     
-            $user = DB::table('users')->where('email', $request->email)->exists();
+            $user = User::where('email', $request->email)->exists();
     
             if($user){
                 return back()->with('success', "Reset link is verstuurd");

@@ -2,9 +2,12 @@
 @section('title', 'Protocollen')
 @section('content')
    <?php
-      $protocoldetail = DB::table('protocoldetail')->where([['id', '=', $id]])->first();
+      use App\Models\ProtocolDetail;
+      use App\Models\ProtocolType;
+
+      $protocoldetail = ProtocolDetail::where('id', $id)->first();
       $protocoltypeid = $protocoldetail->protocoltypeid;
-      $protocoltype = DB::table('protocoltype')->where([['id', '=', $protocoltypeid]])->first();
+      $protocoltype = ProtocolType::where('id', $protocoltypeid)->first();
       $protocolid = $protocoltype->id;
       $protocolname = $protocoltype->name;
    ?>

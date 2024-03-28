@@ -2,9 +2,10 @@
 @section('title', 'Dierefiche')
 @section('content')
    @php
+      use App\Models\Dier;
+
       $idint = (int)ltrim($id, "ds");
-      $diersoort = DB::table('diers')
-       ->join('diersoort', 'diersoort.id', '=', 'diers.diersoortid')
+      $diersoort = Dier::join('diersoort', 'diersoort.id', '=', 'diers.diersoortid')
        ->where('diers.id', '=', $idint)
        ->first();
       $name = $diersoort-> name;
