@@ -53,7 +53,10 @@
             @endif
             <button type="submit" class="btn py-3 rounded-full border border-black text-black bg-white @if (!$errors->has('admin')) mt-6 @endif mb-6">Aanmelden</button>
         </form>
-        <p class="mt-5">Made by Digital Innovation Thomas More Geel</p>
+
+        <p style="text-align: center; margin: 20px 0;">Made by Digital Innovation Thomas More Geel</p>
+        <img style="width: 25%; margin: auto;" src="\public\dummy_files\images\Thomas More-studentenlogo_oranje_WEB.png" alt="logo Thomas More">
+
     </div>
     <!-- Session Status -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
