@@ -4,7 +4,7 @@
         <div class="bg-slate-200 p-2 px-4 rounded-lg m-2">
             <div class="flex justify-around">
                 <div class="flex justify-center">
-                    <form action="{{ url('admin/protocollen/add')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('admin/protocollen/add') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="flex">
                             <div class="flex flex-col">
